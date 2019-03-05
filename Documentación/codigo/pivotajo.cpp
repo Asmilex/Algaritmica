@@ -147,7 +147,7 @@ using namespace std;
 void menea_el_vector(int * array, int tamano) {
     std::mt19937 rng;
     rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(1,500); // distribution in range [1, 6]
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1,1000);
 
     for (int i = 0; i < tamano; i++)
         array[i] = dist(rng);
@@ -169,7 +169,7 @@ int main(int argc, char const *argv[]) {
 
     auto t_antes = chrono::high_resolution_clock::now();
     //pivotar(array, 0, tamano);
-    auto t_despues   = chrono::high_resolution_clock::now();
+    auto t_despues = chrono::high_resolution_clock::now();
     unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
     cout << "Pivotaje: " << t_ejecucion << endl;
@@ -182,14 +182,14 @@ int main(int argc, char const *argv[]) {
     cout << "Heapsort: " << t_ejecucion << endl;
 
     t_antes = chrono::high_resolution_clock::now();
-    int err = Busqueda(array, tamano, array[tamano-3]);
+    int err = Busqueda(array, tamano, array[tamano - tamano/16 - 1]);
     t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
     cout << "Búsqueda: " << t_ejecucion << " -- " << err << endl;
 
     t_antes = chrono::high_resolution_clock::now();
-    err = BuscarBinario(array, 0, tamano-1, array[tamano-3]);
+    err = BuscarBinario(array, 0, tamano, array[tamano - tamano/2]);
     t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
@@ -200,7 +200,7 @@ int main(int argc, char const *argv[]) {
     t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
-    cout << "Elimina repetidos: " << t_ejecucion << endl;
+    cout << "Elimina repetidos: " << t_ejecucion << endl << endl;
 
     delete [] array;
 
