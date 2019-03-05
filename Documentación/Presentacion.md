@@ -32,3 +32,4 @@ int pivotar (double *v, const int ini, const int fin) {
 
     return j;
 }
+```
