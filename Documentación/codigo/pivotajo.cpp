@@ -1,3 +1,5 @@
+#include <chrono>
+#include <random>
 #include <iostream>
 using namespace std;
 
@@ -5,7 +7,7 @@ using namespace std;
 // ─── ALGORITMO 1 ────────────────────────────────────────────────────────────────
 //
 
-    int pivotar (double *v, const int ini, const int fin) {
+    int pivotar (int *v, const int ini, const int fin) {
         double pivote = v[ini], aux;
         int   i = ini + 1
             , j = fin;
@@ -60,7 +62,7 @@ using namespace std;
 // ─── ALGORITMO 3 ────────────────────────────────────────────────────────────────
 //
 
-    void EliminaRepetidos (double original[], int & nOriginal) {
+    void EliminaRepetidos (int original[], int & nOriginal) {
         int i, j, k;
 
         for (i = 0; i < nOriginal; i++) {
@@ -84,11 +86,11 @@ using namespace std;
 // ─── ALGORITMO 4 ────────────────────────────────────────────────────────────────
 //
 
-    int BuscarBinario (double *v, const int ini, const int fin, const double x) {
+    int BuscarBinario (int *v, const int ini, const int fin, const double x) {
         int centro;
 
         if (ini > fin)
-            return 1;
+            return -1;
 
         centro = (ini + fin)/2;
 
@@ -104,21 +106,6 @@ using namespace std;
 //
 // ─── ALGORITMO 5 ────────────────────────────────────────────────────────────────
 //
-
-    void heapsort (int T[], int num_elem) {
-        int i;
-
-        for (i = num_elem/2; i >= 0; i--)
-            reajustar(T, num_elem, i);
-
-        for (i = num_elem - 1; i >= 1; i--) {
-            int aux = T[0];
-
-            T[0] = T[i];
-            T[i] = aux;
-            reajustar(T, i, 0);
-        }
-    }
 
     void reajustar (int T[], int num_elem, int k) {
         int j, v;
@@ -141,3 +128,81 @@ using namespace std;
 
         T[k] = v;
     }
+
+    void heapsort (int T[], int num_elem) {
+        int i;
+
+        for (i = num_elem/2; i >= 0; i--)
+            reajustar(T, num_elem, i);
+
+        for (i = num_elem - 1; i >= 1; i--) {
+            int aux = T[0];
+
+            T[0] = T[i];
+            T[i] = aux;
+            reajustar(T, i, 0);
+        }
+    }
+
+void menea_el_vector(int * array, int tamano) {
+    std::mt19937 rng;
+    rng.seed(std::random_device()());
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1,500); // distribution in range [1, 6]
+
+    for (int i = 0; i < tamano; i++)
+        array[i] = dist(rng);
+}
+
+int main(int argc, char const *argv[]) {
+    if (argc < 2) {
+        cerr << "./programa tamaño";
+        return -1;
+    }
+
+    int tamano = atoi(argv[1]);
+    int * array = new int [tamano];
+
+    menea_el_vector(array, tamano);
+
+    cout << "Tamaño: " << tamano << endl;
+
+
+    auto t_antes = chrono::high_resolution_clock::now();
+    //pivotar(array, 0, tamano);
+    auto t_despues   = chrono::high_resolution_clock::now();
+    unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << "Pivotaje: " << t_ejecucion << endl;
+
+    t_antes = chrono::high_resolution_clock::now();
+    heapsort(array, tamano);
+    t_despues   = chrono::high_resolution_clock::now();
+    t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << "Heapsort: " << t_ejecucion << endl;
+
+    t_antes = chrono::high_resolution_clock::now();
+    int err = Busqueda(array, tamano, array[tamano-3]);
+    t_despues   = chrono::high_resolution_clock::now();
+    t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << "Búsqueda: " << t_ejecucion << " -- " << err << endl;
+
+    t_antes = chrono::high_resolution_clock::now();
+    err = BuscarBinario(array, 0, tamano-1, array[tamano-3]);
+    t_despues   = chrono::high_resolution_clock::now();
+    t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << "Buscar binario: " << t_ejecucion << " -- " << err << endl;
+
+    t_antes = chrono::high_resolution_clock::now();
+    EliminaRepetidos(array, tamano);
+    t_despues   = chrono::high_resolution_clock::now();
+    t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << "Elimina repetidos: " << t_ejecucion << endl;
+
+    delete [] array;
+
+    return 0;
+}
