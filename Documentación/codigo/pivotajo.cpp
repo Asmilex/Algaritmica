@@ -4,6 +4,24 @@
 using namespace std;
 
 //
+// ─── BURBUJA ────────────────────────────────────────────────────────────────────
+//
+
+    void burbuja (int T[], int inicial, int final) {
+        int i, j, aux;
+
+        for (i = inicial; i < final - 1; i++) {
+            for (j = final - 1; j > i; j--) {
+                if (T[j] < T[j-1]) {
+                    aux = T[j];
+                    T[j] = T[j-1];
+                    T[j-1] = aux;
+                }
+            }
+        }
+    }
+
+//
 // ─── ALGORITMO 1 ────────────────────────────────────────────────────────────────
 //
 
@@ -70,8 +88,8 @@ using namespace std;
 
             do {
                 if (original[j] == original[i]) {
-                  for (k = j+1; k < nOriginal; k++)
-                    original[k-1] = original[k];
+                    for (k = j+1; k < nOriginal; k++)
+                        original[k-1] = original[k];
 
                     nOriginal--;
                 }
@@ -153,6 +171,8 @@ void menea_el_vector(int * array, int tamano) {
         array[i] = dist(rng);
 }
 
+
+
 int main(int argc, char const *argv[]) {
     if (argc < 2) {
         cerr << "./programa tamaño";
@@ -180,6 +200,15 @@ int main(int argc, char const *argv[]) {
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
     cout << "Heapsort: " << t_ejecucion << endl;
+
+    menea_el_vector(array, tamano);
+
+    t_antes = chrono::high_resolution_clock::now();
+    burbuja(array, 0, tamano);
+    t_despues   = chrono::high_resolution_clock::now();
+    t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << "Burbuja: " << t_ejecucion << endl;
 
     t_antes = chrono::high_resolution_clock::now();
     int err = Busqueda(array, tamano, array[tamano - tamano/16 - 1]);
