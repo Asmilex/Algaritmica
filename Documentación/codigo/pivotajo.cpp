@@ -34,7 +34,7 @@ using namespace std;
             while (v[i] < pivote && i <= j)
                 i++;
 
-            while (v[j] <= pivote && j >= i)
+            while (v[j] >= pivote && j >= i)
                 j--;
 
             if (i < j) {
@@ -188,7 +188,7 @@ int main(int argc, char const *argv[]) {
 
 
     auto t_antes = chrono::high_resolution_clock::now();
-    //pivotar(array, 0, tamano);
+    pivotar(array, 0, tamano);
     auto t_despues = chrono::high_resolution_clock::now();
     unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
