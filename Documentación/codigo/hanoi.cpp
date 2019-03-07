@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 #include <ctime>
+#include <chrono>
 
 
 /**
@@ -30,15 +31,23 @@ void hanoi (int M, int i, int j) {
     }
 }
 
-int main() {
+int main(int argc, char const *argv[]) {
+    if (argc != 2) {
+        cout << "./hanoi tamaño";
+        return -1;
+    }
 
-    int M;
-    do {
-        cout << "N�mero de discos: ";
-        cin >> M;
-    } while (M <= 0);
+    int M = atoi(argv[1]);
 
+    if (M <= 0) {
+        cout << "El tamaño debe ser positivo";
+        return -1;
+    }
+
+    auto t_antes = chrono::high_resolution_clock::now();
     hanoi(M, 1, 2);
+    auto t_despues = chrono::high_resolution_clock::now();
+    unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
     return 0;
 }

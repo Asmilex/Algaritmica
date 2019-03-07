@@ -1,16 +1,4 @@
-# Presentación algorítmica
-
-## Algoritmo 1
-
-### Parte teórica
-
-Código:
-
-## Algoritmo 2
-
-
-## Algoritmo 3
-
+# Presentación
 
 ## Algoritmo 4
 
