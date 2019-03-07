@@ -26,7 +26,7 @@ una �nica columna auxiliar.
 void hanoi (int M, int i, int j) {
     if (M > 0) {
         hanoi(M-1, i, 6-i-j);
-        cout << i << " -> " << j << endl;
+        //cout << i << " -> " << j << endl;
         hanoi (M-1, 6-i-j, j);
     }
 }
@@ -49,5 +49,6 @@ int main(int argc, char const *argv[]) {
     auto t_despues = chrono::high_resolution_clock::now();
     unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
+    cout << M << " " << t_ejecucion << endl;
     return 0;
 }

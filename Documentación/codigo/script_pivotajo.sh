@@ -9,5 +9,5 @@ for j in {1..13}; do
     done
 done
 
-./pivotajo 500000 >> resultados.txt
-./pivotajo 1000000 >> resultados.txt
+#./pivotajo 500000 >> resultados.txt
+#./pivotajo 1000000 >> resultados.txt
