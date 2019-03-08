@@ -183,7 +183,48 @@ Podemos observar que el crecimiento es muy rápido conforme aumenta el tamaño d
 
 ### Eficiencia híbrida
 
-Teóricamente, sabemos que el algoritmo de burbuja es de tipo $O(n^2)$. Por tanto, ajustaremos los datos empíricos a una función de la forma $f(n) = a_2 \cdot x^2 + a_1 \cdot x + a_0$. Para ello, usaremos gnuplot de nuevo
+Teóricamente, sabemos que el algoritmo de burbuja es de tipo $O(n^2)$. Por tanto, ajustaremos los datos empíricos a una función de la forma $f(n) = a_2 \cdot x^2 + a_1 \cdot x + a_0$. Para ello, usaremos gnuplot de nuevo. Ponemos los comandos
+
+```bash
+f(x) = a2*x*x+a1*x+a0
+fit f(x) 'salida_burbuja.dat' via a2,a1,a0
+```
+
+lo cual arroja el resultado
+
+```txt
+iter      chisq       delta/lim  lambda   a2            a1            a0
+   0 1.0568015392e+24   0.00e+00  2.43e+11    1.000000e+00   1.000000e+00   1.000000e+00
+   1 2.9274287509e+21  -3.60e+07  2.43e+10    5.521995e-02   9.999990e-01   1.000000e+00
+   2 1.5687742596e+15  -1.87e+11  2.43e+09    2.761312e-03   9.999990e-01   1.000000e+00
+   3 6.6625014627e+14  -1.35e+05  2.43e+08    2.732168e-03   9.999999e-01   1.000000e+00
+   4 6.6624909340e+14  -1.58e-01  2.43e+07    2.732168e-03   1.000094e+00   1.000000e+00
+iter      chisq       delta/lim  lambda   a2            a1            a0
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 6.66249e+14
+rel. change during last iteration : -1.5803e-06
+
+degrees of freedom    (FIT_NDF)                        : 3
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.49025e+07
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.22083e+14
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a2              = 0.00273217       +/- 6.785e-05    (2.483%)
+a1              = 1.00009          +/- 66.63        (6662%)
+a0              = 1                +/- 8.119e+06    (8.119e+08%)
+
+correlation matrix of the fit parameters:
+                a2     a1     a0
+a2              1.000
+a1             -0.969  1.000
+a0              0.381 -0.502  1.000
+```
+
+Dibujamos el resultado junto a los puntos de antes y obtenemos
+
+![Curva ajustada del algoritmo de burbuja](./Burbuja_ajustada.png)
 
 ## Hanoi
 
