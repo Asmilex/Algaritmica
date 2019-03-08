@@ -3,10 +3,15 @@
 for j in {1..10}; do
     N=100
 
-    for i in {1..24}; do
+    for i in {1..15}; do
         ./pivotajo $N >> resultados.txt
         N=$(($N+20000))
     done
+done
+
+for i in {1...9}
+   ./pivotajo $N >> resultados.txt
+   N=$(($N+20000))
 done
 
 #./pivotajo 500000 >> resultados.txt
