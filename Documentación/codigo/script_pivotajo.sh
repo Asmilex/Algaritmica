@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for j in {1..10}; do
+for j in {1..3}; do
     N=100
 
     for i in {1..15}; do
@@ -9,10 +9,10 @@ for j in {1..10}; do
     done
 done
 
-for i in {1...9}; do
-   ./pivotajo $N >> resultados.txt
-   N=$(($N+20000))
-done
+#for i in {1...9}; do
+#   ./pivotajo $N >> resultados.txt
+#   N=$(($N+20000))
+#done
 
 #./pivotajo 500000 >> resultados.txt
 #./pivotajo 700000 >> resultados.txt
