@@ -2,6 +2,11 @@
 
 > Autor: Andrés Millán Muñoz
 
+#### Prestaciones del PC
+
+Los programas han sido ejecutados en el siguiente ordenador:
+![Specs](./neofetch.png)
+
 ## Pivotar
 
 Código del programa:
@@ -86,6 +91,15 @@ En este algoritmo, por cada iteración, consideraremos un subvector ordenado del
 - Se halla en el último subvector posible. Este tiene 1 sola componente
 - No se encuentra el elemento.
 
+```
+             |_|_|_|_|_|_|_|_|_|_|_|
+------|      ^         ^          ^
+Iter 1|  inicio       centro       final
+------|      ^    ^    ^
+Iter 2|  inicio   c    fin
+------|
+```
+
 Ambos casos pueden considerarse el mismo, pues solo los diferencia una iteración. Por tanto, tenemos que
 $$T(n) = n \cdot \Big( \frac{1}{2}\Big)^{k}  = 1$$
 donde $k$ es la iteración.
@@ -120,3 +134,126 @@ void EliminaRepetidos (int original[], int & nOriginal) {
 ```
 
 ### Análisis teórico
+
+TOD
+
+## Burbuja
+
+Código del programa:
+
+```c++
+void burbuja (int T[], int inicial, int final) {
+    int i, j, aux;
+
+    for (i = inicial; i < final - 1; i++) {
+        for (j = final - 1; j > i; j--) {
+            if (T[j] < T[j-1]) {
+                aux = T[j];
+                T[j] = T[j-1];
+                T[j-1] = aux;
+            }
+        }
+    }
+}
+```
+### Análisis teórico
+
+Esta parte se omitirá, puesto que está resuelto en las diapositivas.
+
+### Análisis empírico
+
+Tras tomar mediciones para problemas del tamaño $N \in \{100, 1000, 10000, 100000, 500000, 1000000\}$.
+
+Haciendo la media tras 13 repeticiones para los respectivos tamaños, hemos hayado los siguientes resultados:
+
+```
+100 22
+1000 2031
+10000 215831
+100000 21578628
+500000 707946706
+1000000 2727125261
+```
+
+Usando gnuplot, planteamos los resultados y obtenemos el siguiente resultado:
+
+![Gráfico para burbuja](./Burbuja.png)
+
+Podemos observar que el crecimiento es muy rápido conforme aumenta el tamaño del problema, reflejando su ineficiencia a gran escala.
+
+### Eficiencia híbrida
+
+Teóricamente, sabemos que el algoritmo de burbuja es de tipo $O(n^2)$. Por tanto, ajustaremos los datos empíricos a una función de la forma $f(n) = a_2 \cdot x^2 + a_1 \cdot x + a_0$. Para ello, usaremos gnuplot de nuevo
+
+## Hanoi
+
+Código del programa:
+
+```c++
+void hanoi (int M, int i, int j) {
+    if (M > 0) {
+        hanoi(M-1, i, 6-i-j);
+        //cout << i << " -> " << j << endl;
+        hanoi(M-1, 6-i-j, j);
+    }
+}
+```
+
+Hemos comentado la salida a pantalla puesto que es más cómodo a la hora de obtener los resultados. El main también ha sido modificado para mandarle el tamaño por parámetro:
+
+```c++
+int main(int argc, char const *argv[]) {
+    if (argc != 2) {
+        cout << "./hanoi tamaño";
+        return -1;
+    }
+
+    int M = atoi(argv[1]);
+
+    if (M <= 0) {
+        cout << "El tamaño debe ser positivo";
+        return -1;
+    }
+
+    auto t_antes = chrono::high_resolution_clock::now();
+    hanoi(M, 1, 2);
+    auto t_despues = chrono::high_resolution_clock::now();
+    unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+
+    cout << M << " " << t_ejecucion << endl;
+    return 0;
+}
+```
+
+### Análisis empírico
+
+Esta vez, hemos usado los tamaños $N \in \{2, 9, 16, 23, 30\}$. Son tan bajos debido a que el crecimiento es enorme: la función es $O(2^n)$
+
+De media, hemos obtenido estos valores tras 13 repeticiones:
+```
+2 0
+9 13
+16 513
+23 47642
+30 5951871
+```
+
+Se ha usado el siguiente script para ayudarnos:
+
+```bash
+#!/bin/bash
+
+for j in {1..13}; do
+    N=2
+
+    for i in {1..5}; do
+        ./hanoi $N >> resultados_hanoi.txt
+        N=$(($N+7))
+    done
+done
+```
+
+Usamos de nuevo gnuplot y obtenemos lo siguiente:
+
+![Gráfico para Hanoi](./Hanoi.png)
+

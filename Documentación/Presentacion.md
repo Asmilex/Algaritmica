@@ -6,11 +6,12 @@
 
 Observamos que llamamos recursivamente a la función. Nuestro problema decrece en $n/2$ por cada llamada que hacemos a la función:
 ```
-      |      |_|_|_|_|_|_|_|_|_|_|_|
+             |_|_|_|_|_|_|_|_|_|_|_|
 ------|      ^         ^          ^
 Iter 1|  inicio       centro       final
 ------|      ^    ^    ^
 Iter 2|  inicio   c    fin
+------|
 ```
 
 Definimos $T(n) = T(n/2)+a$, donde a es la constante asociada a las operaciones elementales.
