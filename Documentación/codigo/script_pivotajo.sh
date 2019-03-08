@@ -9,7 +9,7 @@ for j in {1..10}; do
     done
 done
 
-for i in {1...9}
+for i in {1...9}; do
    ./pivotajo $N >> resultados.txt
    N=$(($N+20000))
 done
