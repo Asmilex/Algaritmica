@@ -1,10 +1,12 @@
 #!/bin/bash
 
-for j in {1..13}; do
-    N=2
+N=2
 
-    for i in {1..5}; do
-        ./hanoi $N >> resultados_hanoi.txt
-        N=$(($N+7))
-    done
+for j in {1..5}; do
+	for i in {1..15}; do
+		./hanoi $N >> resultados_hanoi.dat
+	done
+
+	N=$(($N+7))
 done
+
