@@ -184,7 +184,7 @@ int main(int argc, char const *argv[]) {
 
     menea_el_vector(array, tamano);
 
-    cout << "Tamaño: " << tamano << endl;
+    cout << "Tamaño: " << tamano << "   ";
 
 
     auto t_antes = chrono::high_resolution_clock::now();
