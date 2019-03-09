@@ -2,7 +2,7 @@
 
 N=100
 
-for j in {1..5}; do
+for j in {1..28}; do
 
     for i in {1..15}; do
 	
