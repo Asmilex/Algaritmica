@@ -2,7 +2,7 @@
 
 ## Algoritmo 4
 
-### Teoría
+### Teórica
 
 Observamos que llamamos recursivamente a la función. Nuestro problema decrece en $n/2$ por cada llamada que hacemos a la función:
 ```
@@ -25,7 +25,16 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 Por tanto, concluimos que el algoritmo 4 es $O(log_2(n))$
 
+### Comparación empírica e híbrida
+
+
 ## Algoritmo 5
 
-### Teoría
+### Teórica
 
+### Comparación empírica e híbrida
+
+
+## Algoritmo 6
+
+### Teoría
