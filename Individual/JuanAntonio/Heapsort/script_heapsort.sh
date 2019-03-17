@@ -6,7 +6,7 @@ for j in {1..28}; do
 
     for i in {1..15}; do
 	
-        ./mergesort `date +%s` $N >> resultados_mergesort.dat
+        ./heapsort $N >> resultados_heapsort.dat
         
     done
 
