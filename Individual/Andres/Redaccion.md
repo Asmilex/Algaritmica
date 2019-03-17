@@ -164,7 +164,13 @@ void EliminaRepetidos (int original[], int & nOriginal) {
 
 Las operaciones más básicas están acotadas por una constante, la cual no afectará al cálculo de la eficiencia.
 
-El bucle for más profundo (`for (k = j+1; k < nOriginal; k++)`) tiene una eficiencia de $O(n)$. Combinado con el bucle `do {} while ()`, la cual también tiene una eficiencia de $O(n)$, hace que nuestro cuerpo central tenga una eficiencia de $O(n^2)$. Finalmente, esta parte central del código está envuelta en otro bucle for; el cual tiene también una eficiencia de $O(n)$. Concluimos que $EliminaRepetidos \in O(n^3)$
+Debemos distinguir dos casos: si todos están repetidos, o si no lo están. Esto facilitará los cálculos.
+
+Si todos están repetidos, tenemos que el bucle más profundo, el bucle `k` se ejecutará N veces. Por tanto, su eficiencia es $O(n)$. Y, por ello, el bucle `do while` n veces. Finalmente, el bucle `i` solo tendrá una iteración. Concluimos que `EliminaRepetidos` es $O(n^2)$.
+
+En el caso en el que ninguno esté repetido, el bucle `while` seguirá siendo $O(n)$, pero esta vez, no se entrará en el condicional. Por ello, el bucle `i` tendrá $n$ iteraciones. Multiplicando ambas, tenemos que la eficiencia del algoritmo es $O(n^2)$.
+
+Para casos intermedios, las iteraciones se irán compensando, resultando de nuevo en $O(n^2)$. Finaliza así el análisis de este algoritmo
 
 ## Burbuja
 
