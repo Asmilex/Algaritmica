@@ -14,3 +14,5 @@ for j in {1..28}; do
     N=$(($N+700))
 
 done
+
+rm resultados_mergesort.dat
