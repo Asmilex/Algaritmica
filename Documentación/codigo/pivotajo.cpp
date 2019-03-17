@@ -184,52 +184,52 @@ int main(int argc, char const *argv[]) {
 
     menea_el_vector(array, tamano);
 
-    cout << "Tamaño: " << tamano << "   ";
+    //cout << "Tamaño: " << tamano << "   ";
 
 
     auto t_antes = chrono::high_resolution_clock::now();
-    pivotar(array, 0, tamano);
+    //pivotar(array, 0, tamano);
     auto t_despues = chrono::high_resolution_clock::now();
     unsigned long t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
-    /*cout << "Pivotaje: " << t_ejecucion << endl;
+    //cout << "Pivotaje: " << t_ejecucion << endl;
 
     t_antes = chrono::high_resolution_clock::now();
-    heapsort(array, tamano);
-    t_despues   = chrono::high_resolution_clock::now();
+    //heapsort(array, tamano);
+    /*t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
     cout << "Heapsort: " << t_ejecucion << endl;
 
     menea_el_vector(array, tamano);
-    */
+
     t_antes = chrono::high_resolution_clock::now();
-    burbuja(array, 0, tamano);
+    */burbuja(array, 0, tamano);/*
     t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
     cout << "Burbuja: " << t_ejecucion << endl;
 
-    /* t_antes = chrono::high_resolution_clock::now();
+    t_antes = chrono::high_resolution_clock::now();
     int err = Busqueda(array, tamano, array[tamano - tamano/16 - 1]);
     t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
-    cout << "Búsqueda: " << t_ejecucion << " -- " << err << endl;
+    cout << "Búsqueda: " << t_ejecucion << " -- " << err << endl;*/
 
     t_antes = chrono::high_resolution_clock::now();
-    err = BuscarBinario(array, 0, tamano, array[tamano - tamano/2]);
+    BuscarBinario(array, 0, tamano, -1);
     t_despues   = chrono::high_resolution_clock::now();
-    t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
+    t_ejecucion = chrono::duration_cast<chrono::nanoseconds>(t_despues - t_antes).count();
 
-    cout << "Buscar binario: " << t_ejecucion << " -- " << err << endl;
+    cout << tamano << " " << t_ejecucion << endl;
 
-    t_antes = chrono::high_resolution_clock::now();
+    /*t_antes = chrono::high_resolution_clock::now();
     EliminaRepetidos(array, tamano);
     t_despues   = chrono::high_resolution_clock::now();
     t_ejecucion = chrono::duration_cast<chrono::microseconds>(t_despues - t_antes).count();
 
-    cout << "Elimina repetidos: " << t_ejecucion << endl << endl; */
+    cout << "Elimina repetidos: " << t_ejecucion << endl << endl;*/
 
     delete [] array;
 

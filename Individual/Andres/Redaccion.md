@@ -2,6 +2,33 @@
 
 > Autor: Andrés Millán Muñoz
 
+
+## Tabla de contenidos
+
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+* [Parte individual](#parte-individual)
+	* [Tabla de contenidos](#tabla-de-contenidos)
+			* [Prestaciones del PC](#prestaciones-del-pc)
+	* [Pivotar](#pivotar)
+		* [Análisis teórico](#análisis-teórico)
+	* [Búsqueda](#búsqueda)
+		* [Análisis teórico](#análisis-teórico-1)
+	* [Elimina repetidos](#elimina-repetidos)
+		* [Análisis teórico](#análisis-teórico-2)
+	* [Burbuja](#burbuja)
+		* [Análisis teórico](#análisis-teórico-3)
+		* [Análisis empírico](#análisis-empírico)
+		* [Eficiencia híbrida](#eficiencia-híbrida)
+	* [Hanoi](#hanoi)
+		* [Análisis empírico](#análisis-empírico-1)
+
+<!-- /code_chunk_output -->
+
+
 #### Prestaciones del PC
 
 Los programas han sido ejecutados en el siguiente ordenador:
@@ -135,7 +162,9 @@ void EliminaRepetidos (int original[], int & nOriginal) {
 
 ### Análisis teórico
 
-TOD
+Las operaciones más básicas están acotadas por una constante, la cual no afectará al cálculo de la eficiencia.
+
+El bucle for más profundo (`for (k = j+1; k < nOriginal; k++)`) tiene una eficiencia de $O(n)$. Combinado con el bucle `do {} while ()`, la cual también tiene una eficiencia de $O(n)$, hace que nuestro cuerpo central tenga una eficiencia de $O(n^2)$. Finalmente, esta parte central del código está envuelta en otro bucle for; el cual tiene también una eficiencia de $O(n)$. Concluimos que $EliminaRepetidos \in O(n^3)$
 
 ## Burbuja
 
@@ -162,20 +191,24 @@ Esta parte se omitirá, puesto que está resuelto en las diapositivas.
 
 ### Análisis empírico
 
-Tras tomar mediciones para problemas del tamaño $N \in \{100, 1000, 10000, 100000, 500000, 1000000\}$.
+Tras tomar mediciones para problemas del tamaño $N \in \{100, 800, 1500,...,19700\}$.
 
-Haciendo la media tras 13 repeticiones para los respectivos tamaños, hemos hayado los siguientes resultados:
+Haciendo la media tras 15 repeticiones para los respectivos tamaños, hemos hayado los siguientes resultados:
 
 ```
-100 22
-1000 2031
-10000 215831
-100000 21578628
-500000 707946706
-1000000 2727125261
+[3.26000000e+01 1.69213333e+03 5.68093333e+03 1.14388667e+04
+ 1.81502000e+04 2.63586667e+04 3.82041333e+04 4.46769333e+04
+ 6.64974667e+04 8.72912667e+04 1.02747867e+05 1.16345133e+05
+ 1.39302000e+05 1.64991267e+05 2.00004267e+05 2.25991933e+05
+ 2.64059933e+05 3.07806200e+05 3.24278800e+05 3.72669067e+05
+ 4.04209267e+05 4.75893467e+05 5.48431667e+05 5.77857867e+05
+ 6.27130733e+05 6.84090267e+05 7.41154000e+05 7.45778267e+05]
+[  100   800  1500  2200  2900  3600  4300  5000  5700  6400  7100  7800
+  8500  9200  9900 10600 11300 12000 12700 13400 14100 14800 15500 16200
+ 16900 17600 18300 19000]
 ```
 
-Usando gnuplot, planteamos los resultados y obtenemos el siguiente resultado:
+Usando Jupyter con el núcleo python, planteamos los resultados y obtenemos el siguiente resultado:
 
 ![Gráfico para burbuja](./Burbuja.png)
 
@@ -183,43 +216,17 @@ Podemos observar que el crecimiento es muy rápido conforme aumenta el tamaño d
 
 ### Eficiencia híbrida
 
-Teóricamente, sabemos que el algoritmo de burbuja es de tipo $O(n^2)$. Por tanto, ajustaremos los datos empíricos a una función de la forma $f(n) = a_2 \cdot x^2 + a_1 \cdot x + a_0$. Para ello, usaremos gnuplot de nuevo. Ponemos los comandos
+Teóricamente, sabemos que el algoritmo de burbuja es de tipo $O(n^2)$. Por tanto, ajustaremos los datos empíricos a una función de la forma $f(n) = a_2 \cdot x^2 + a_1 \cdot x + a_0$. Para ello, usaremos de nuevo Jupyter. Ponemos los comandos
 
 ```bash
-f(x) = a2*x*x+a1*x+a0
-fit f(x) 'salida_burbuja.dat' via a2,a1,a0
+coefs = np.polyfit(datos[:], medias[:], 2)
+print(coefs)
 ```
 
 lo cual arroja el resultado
 
 ```txt
-iter      chisq       delta/lim  lambda   a2            a1            a0
-   0 1.0568015392e+24   0.00e+00  2.43e+11    1.000000e+00   1.000000e+00   1.000000e+00
-   1 2.9274287509e+21  -3.60e+07  2.43e+10    5.521995e-02   9.999990e-01   1.000000e+00
-   2 1.5687742596e+15  -1.87e+11  2.43e+09    2.761312e-03   9.999990e-01   1.000000e+00
-   3 6.6625014627e+14  -1.35e+05  2.43e+08    2.732168e-03   9.999999e-01   1.000000e+00
-   4 6.6624909340e+14  -1.58e-01  2.43e+07    2.732168e-03   1.000094e+00   1.000000e+00
-iter      chisq       delta/lim  lambda   a2            a1            a0
-
-After 4 iterations the fit converged.
-final sum of squares of residuals : 6.66249e+14
-rel. change during last iteration : -1.5803e-06
-
-degrees of freedom    (FIT_NDF)                        : 3
-rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.49025e+07
-variance of residuals (reduced chisquare) = WSSR/ndf   : 2.22083e+14
-
-Final set of parameters            Asymptotic Standard Error
-=======================            ==========================
-a2              = 0.00273217       +/- 6.785e-05    (2.483%)
-a1              = 1.00009          +/- 66.63        (6662%)
-a0              = 1                +/- 8.119e+06    (8.119e+08%)
-
-correlation matrix of the fit parameters:
-                a2     a1     a0
-a2              1.000
-a1             -0.969  1.000
-a0              0.381 -0.502  1.000
+[ 2.34036701e-03 -3.30863708e+00  4.85010651e+03]
 ```
 
 Dibujamos el resultado junto a los puntos de antes y obtenemos
@@ -268,15 +275,19 @@ int main(int argc, char const *argv[]) {
 
 ### Análisis empírico
 
-Esta vez, hemos usado los tamaños $N \in \{2, 9, 16, 23, 30\}$. Son tan bajos debido a que el crecimiento es enorme: la función es $O(2^n)$
+Esta vez, hemos usado los tamaños $N \in \{2, 3, 4, ..., 29\}$. Son tan bajos debido a que el crecimiento es enorme: la función es $O(2^n)$
 
 De media, hemos obtenido estos valores tras 13 repeticiones:
 ```
-2 0
-9 13
-16 513
-23 47642
-30 5951871
+[0.00000000e+00 6.66666667e-02 0.00000000e+00 0.00000000e+00
+ 9.33333333e-01 1.00000000e+00 2.13333333e+00 4.33333333e+00
+ 8.46666667e+00 1.66000000e+01 3.31333333e+01 6.61333333e+01
+ 1.32133333e+02 2.70800000e+02 5.44933333e+02 1.05693333e+03
+ 2.09346667e+03 4.16673333e+03 7.29393333e+03 1.47295333e+04
+ 2.69240667e+04 4.96691333e+04 9.37312667e+04 1.85862267e+05
+ 3.71657933e+05 7.40968333e+05 1.47997447e+06 2.95945560e+06]
+[ 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
+ 26 27 28 29]
 ```
 
 Se ha usado el siguiente script para ayudarnos:
@@ -284,17 +295,18 @@ Se ha usado el siguiente script para ayudarnos:
 ```bash
 #!/bin/bash
 
-for j in {1..13}; do
-    N=2
+N=2
 
-    for i in {1..5}; do
-        ./hanoi $N >> resultados_hanoi.txt
-        N=$(($N+7))
-    done
+for j in {1..28}; do
+	for i in {1..15}; do
+		./hanoi $N >> resultados_hanoi.dat
+	done
+
+	N=$(($N+1))
 done
 ```
 
-Usamos de nuevo gnuplot y obtenemos lo siguiente:
+Esta es la gráfica que generan dichos valores:
 
 ![Gráfico para Hanoi](./Hanoi.png)
 

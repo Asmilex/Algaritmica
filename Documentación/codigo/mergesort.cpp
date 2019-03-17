@@ -197,7 +197,7 @@ int main(int argc, char * argv[]) {
 
   	srandom(atoi(argv[2]));
 
-  	fsalida.open(argv[1]);
+  	fsalida.open(argv[1], std::ios::in | std::ios::out | std::ios::ate);
 
     if (!fsalida.is_open()) {
 		cerr<<"Error: No se pudo abrir fichero para escritura "<<argv[1]<<"\n\n";
@@ -214,13 +214,13 @@ int main(int argc, char * argv[]) {
       		T[i] = random();
     	};
 
-		cerr << "Ejecutando Mergesort para tam. caso: " << n << endl;
 		chrono::high_resolution_clock::time_point t_antes = chrono::high_resolution_clock::now();
   		mergesort(T, n);
   		chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
   		unsigned long t_ejecucion = chrono::duration_cast<std::chrono::microseconds>(t_despues - t_antes).count();
-  		cerr << "\tTiempo de ejec. (us): " << t_ejecucion << " para tam. caso "<< n<<endl;
-  		fsalida<<n<<" "<<t_ejecucion<<"\n";
+  		cerr << "Tiempo de ejec. (us): " << t_ejecucion << " para tam. caso "<< n<<endl;
+
+        fsalida<<n<<" "<<t_ejecucion<<"\n";
   		delete [] T;
 	}
 
