@@ -4,7 +4,7 @@ N=100
 
 for j in {1..28}; do
 
-    for i in {1..40}; do
+    for i in {1..60}; do
 	
         ./BuscarBinario $N >> resultados_buscarBinario.dat
         
