@@ -68,7 +68,7 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica BuscarBinario
 
 ![Gráficas](./graficas/BuscarBinario_grupo_datos.png)
 
@@ -89,7 +89,7 @@ $$\Downarrow$$
 
 ---
 
-##### Análisis teórico
+#### Análisis teórico
 
 - Bucle central se ejecuta $n-1$ veces
 
@@ -103,7 +103,7 @@ $$\Downarrow$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica heapsort
 
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
@@ -113,7 +113,7 @@ $$\Downarrow$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica Hanoi
 
 ![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
 
@@ -123,13 +123,13 @@ $$\Downarrow$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica burbuja
 
 ![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
 
 ---
 
-#### Comparativa híbrida
+##### Comparativa híbrida burbuja
 ![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
 
 ---
@@ -144,7 +144,7 @@ $$\Downarrow$$
 
 ---
 
-#### Comparativa empírica
+###### Comparativa empírica burbuja y mergesort
 
 ![Gráfica comparativa](./graficas/comparacion_algoritmos_ordenacion.png)
 
