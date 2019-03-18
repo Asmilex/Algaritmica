@@ -17,7 +17,7 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
 
 ## Algoritmo 4 - BuscarBinario
 
-Código del programa
+#### Código del programa
 
 ```c++
     int BuscarBinario (int *v, const int ini, const int fin, const double x) {
@@ -57,22 +57,41 @@ Hacemos un cambio de variable $n = 2^k$. Se tiene entonces
 $$T(2^k) = a + T(2^{k-1}) \\ T(2^{k-1}) = a + T(2^{k-2})
 \\...\\
 T(2^k) = a \cdot k + 1$$
-Desaciendo el cambio de variable, obtenemos
-$$T(n) = a \cdot log_2(n) + 1$$
+Deshaciendo el cambio de variable, obtenemos
+$$T(n) = a \cdot \log_2(n) + 1$$
 
-Por tanto, concluimos que el algoritmo 4 es $O(log_2(n))$
+Por tanto, concluimos que el algoritmo 4 es $O(\log_2(n))$
 
 ### Comparación empírica e híbrida
+
+Para calcular las eficiencias empíricas, cada miembro del grupo ha ejecutado el siguiente script en su ordenador:
+
+```bash
+#!/bin/bash
+N=100
+for j in {1..28}; do
+    for i in {1..1000}; do
+        ./BuscarBinario $N >> resultados_buscarBinario.dat
+    done
+    N=$(($N+30000))
+done
+```
+
+Es decir, hemos ejecutado el algoritmo para 28 tamaños diferentes, ejecutando el algoritmo 1000 veces para cada tamaño. El script producía un fichero de datos con el cual para cada tamaño se calculaba la media de los tiempos de ejecución, obteniendo así un tiempo medio de ejecución para cada tamaño.
+
+Los vectores estaban compuestos por números aleatorios positivos y en todos los casos se buscaba un número negativo, por lo que siempre se ejecutaba el peor de los casos. 
 
 Tras los diferentes tests en nuestras respectivas máquinas, estos son los resultados que hemos obtenido:
 
 ![Gráficas](./graficas/BuscarBinario_grupo_datos.png)
 
-Podemos ver que el PC más rápido es el de Andrés en media, tardando 350ns como máximo.
+Cabe destacar que en este caso las medidas están en nanosegundos (ns).
+
+Comprobamos que la nube de puntos de cada uno se asemeja a una curva logarítmica y que el PC más rápido con este algoritmo es el de Andrés en, tardando unos 380ns como máximo.
 
 ## Algoritmo 5 - Heapsort
 
-Código del programa:
+#### Código del programa:
 
 ```c++
 void reajustar (int T[], int num_elem, int k) {
@@ -120,17 +139,33 @@ Primero estudiaremos la eficiencia de `Reajustar`. En cada iteración, la variab
 
 En el peor de los casos, en la función reajustar, el número debe ser llevado desde lo alto del heap hasta las hojas más bajas. Así, la cantidad de datos movidos no es más grande que
 
-$$\sum_{N \geq i \geq 1}{log_2(N/i)} + \sum_{N \geq i \geq 1}{log_2(i)} = N * log_2(N) + O(N)$$
+$$\sum_{N \geq i \geq 1}{\log_2(N/i)} + \sum_{N \geq i \geq 1}{\log_2(i)} = N \cdot \log_2(N) + O(N)$$
 
 ### Comparación empírica e híbrida
 
-Como en la anterior vez, ejecutamos los scripts cada uno por nuestra cuenta, y se han hallado los siguientes valores:
+Al igual que el caso anterior, hemos ejecutado un script que nos generaba un fichero de datos que procesar. El script ejecutado es el siguiente:
+
+```bash
+#!/bin/bash
+N=100
+for j in {1..28}; do
+    for i in {1..15}; do
+        ./heapsort $N >> resultados_heapsort.dat
+    done
+    N=$(($N+700))
+done
+```
+Es decir, hemos ejecutado 15 veces el programa para cada tamaño distinto. Los vectores estaban también formados por números aleatorios.
+
+Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
 
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
+Heapsort es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo el PC más rápido en general ha sido el de Andrés.
+
 ## Hanoi
 
-Código del programa:
+#### Código del programa:
 
 ```c++
 void hanoi (int M, int i, int j) {
@@ -142,9 +177,22 @@ void hanoi (int M, int i, int j) {
 }
 ```
 
-### Comparativa empírica
+### Eficiencia empírica
 
-Mostramos de nuevo todos los resultados en una misma gráfica:
+En este caso, como el algoritmo de las torres de Hanoi tiene una eficiencia que crece mucho más rápido, porque es de orden $O(2^n)$, necesita unos valores considerablemente menores que los demás algoritmos. El script ejecutado en esta ocasión es el siguiente:
+
+```bash
+#!/bin/bash
+N=2
+for j in {1..28}; do
+	for i in {1..25}; do
+		./hanoi $N >> resultados_hanoi.dat
+	done
+	N=$(($N+1))
+done
+```
+
+
 
 ![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
 
@@ -181,11 +229,16 @@ Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja 
 
 ### Teórico
 
-No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(nlog2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(nlog_2(n)) \subset O(n^2)$
+No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(n\log2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \subset O(n^2)$
 
 ### Empírico
 
 ### Híbrido
 
-
 ## Conclusiones
+
+Hemos podido comprobar que la eficiencia empírica obtenida al ejecutar los diversos algoritmos se ajusta adecuadamente a lo esperado según el modelo teórico. Además, es notable que el orden de los algoritmos no depende del ordenador como se ha puesto de manifiesto en las gráficas conjuntas presentadas anteriormente, por ejemplo, los algoritmos de burbuja o Hanoi.
+
+Con respecto a los algoritmos de ordenación, a saber, mergesort y burbuja, se aprecia claramente la superioridad de mergesort respecto a burbuja. 
+
+También se aprecia la cota que establece la constante $K$ en los algoritmos <insert lista> , como se esperaba según la teoría (xD). 
