@@ -2,6 +2,7 @@
 title: Presentacion
 revealOptions:
     transition: 'Fade'
+    theme: robot-lung
 ---
 
 # Algarítmica

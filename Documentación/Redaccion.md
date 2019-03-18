@@ -4,7 +4,7 @@
 
 #### Introducción
 
-En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asímismo, haremos un análisis de los algoritmos 4, 5 y 6, estudiando los diferentes efectos que producen en una específica máquina.
+En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asímismo, haremos un análisis de los algoritmos de búsqueda binaria, ordenación por heapsort y ordenación por mergesort, estudiando los diferentes efectos que producen en una específica máquina.
 
 ## Especificaciones
 
@@ -16,6 +16,27 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
 | Juan Antonio | i7-4500U 3.00GHz  | Ubuntu 18.04 LTS      |
 
 ## Algoritmo 4 - BuscarBinario
+
+Código del programa
+
+```c++
+    int BuscarBinario (int *v, const int ini, const int fin, const double x) {
+        int centro;
+
+        if (ini > fin)
+            return -1;
+
+        centro = (ini + fin)/2;
+
+        if (v[centro] == x)
+            return centro;
+
+        if (v[centro] > x)
+            return BuscarBinario(v, ini, centro-1, x);
+
+        return BuscarBinario (v, centro+1, fin, x);
+    }
+```
 
 ### Teórica
 
@@ -107,17 +128,60 @@ Como en la anterior vez, ejecutamos los scripts cada uno por nuestra cuenta, y s
 
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
-## Algoritmo 6
+## Hanoi
 
-### Teoría
+Código del programa:
+
+```c++
+void hanoi (int M, int i, int j) {
+    if (M > 0) {
+        hanoi(M-1, i, 6-i-j);
+        //cout << i << " -> " << j << endl;
+        hanoi (M-1, 6-i-j, j);
+    }
+}
+```
+
+### Comparativa empírica
+
+Mostramos de nuevo todos los resultados en una misma gráfica:
+
+![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
+
+## Burbuja
+
+Código del programa:
+
+```c++
+void burbuja (int T[], int inicial, int final) {
+        int i, j, aux;
+
+        for (i = inicial; i < final - 1; i++) {
+            for (j = final - 1; j > i; j--) {
+                if (T[j] < T[j-1]) {
+                    aux = T[j];
+                    T[j] = T[j-1];
+                    T[j-1] = aux;
+                }
+            }
+        }
+    }
+```
+
+### Comparativa empírica
+
+Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja y la regresión para cada persona del grupo:
+
+![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
+
+![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
 
 
 ## Comparación burbuja y mergesort
 
 ### Teórico
 
-No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(sepadios)$. Comparándolo con `burbuja`, claramente vemos que TODO
-
+No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(nlog2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(nlog_2(n)) \subset O(n^2)$
 
 ### Empírico
 
