@@ -1,0 +1,10 @@
+Mi función de regresión es:
+f(x)=0.16286x+0.00141932*x*log_2(x) - 26.6 y algo ya no me acuerdo
+
+el orden es
+g(x)=x*log_2(x)
+
+entonces la puta K se calcularía así:
+K = f(x)/g(x)
+
+pero sale puto menor que 1, casi 0 Y ENTONCES NO SE PUEDE JODER.
