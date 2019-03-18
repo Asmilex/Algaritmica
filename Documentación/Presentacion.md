@@ -15,9 +15,9 @@ Autores:
 
 ## Objetivos
 
-- Solucion teorica de los algoritmos 4, 5 y 6 (no existe el 6)
+- Solución teórica de los algoritmos 4, 5 y 6 (no existe el 6)
 - Comparación eficiencia empírica e híbrida de 4 y 5
-- Comparar burbuja y mergesort
+- Puesta en común de diferentes algoritmos
 
 ---
 
@@ -26,7 +26,7 @@ Autores:
 | Persona      | CPU               | OS                    |
 |--------------|-------------------|-----------------------|
 | Ana          | i5-6200U 2.30GHz  | Ubuntu 16.04 LTS      |
-| Andrés       | i5-8250U 3.4GHz   | Antergos 4-19.29 LTS  |
+| Andrés       | i5-8250U 3.40GHz  | Antergos 4-19.29 LTS  |
 | Paula        | i7-5600U 2.60GHz  | Ubuntu 18.04 LTS      |
 | Juan Antonio | i7-4500U 3.00GHz  | Ubuntu 18.04 LTS      |
 
@@ -45,8 +45,10 @@ Iter 2|  inicio   c    fin
 ------|
 ```
 
-Decrece en $n/2$. Resolvemos
-
+Decrece en $n/2$
+<p class="fragment fade-up">
+    $T(n) = T(n/2)+a$
+</p>
 ---
 
 Cambio de variable $n = 2^k$
@@ -56,7 +58,7 @@ $$T(2^{k-1}) = a + T(2^{k-2})$$
 ...
 $$T(2^k) = a \cdot k + 1$$
 
-Desaciendo el cambio de variable, obtenemos
+Deshaciendo el cambio de variable, obtenemos
 
 $$T(n) = a \cdot log_2(n) + 1$$
 
@@ -66,7 +68,7 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica BuscarBinario
 
 ![Gráficas](./graficas/BuscarBinario_grupo_datos.png)
 
@@ -76,10 +78,32 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 #### Heapsort
 
+---
+
+#### Análisis teórico
+
+- Se realiza la llamada a la función reajustar $n/2 + 1$ veces.
+- En `reajustar`, se llama como máximo al bucle $log_2(n) - a$
+$$\Downarrow$$
+- Eficiencia es $(n/2 + 1)(alog_2(n)-a)$
 
 ---
 
-#### Comparativa empírica
+#### Análisis teórico
+
+- Bucle central se ejecuta $n-1$ veces
+
+<p class="fragment fade-up">
+    Por tanto, tenemos que
+</p>
+
+<p class="fragment fade-up">
+    $$a(n-1)(log_2(n)-1) + b(n-1) \in O(nlog_2(n))$$
+</p>
+
+---
+
+##### Comparativa empírica heapsort
 
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
@@ -89,7 +113,7 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica Hanoi
 
 ![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
 
@@ -99,13 +123,13 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-#### Comparativa empírica
+##### Comparativa empírica burbuja
 
 ![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
 
 ---
 
-#### Comparativa híbrida
+##### Comparativa híbrida burbuja
 ![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
 
 ---
@@ -115,9 +139,22 @@ $$T(n) = a \cdot log_2(n) + 1$$
 <p class="fragment fade-up">
     $$Burbuja \in O(n^2)$$
 
-    $$Mergesort \in O(n + nlog_2(n))$$
+    $$Mergesort \in O(n + nlog_2(n)) \sim O(nlog_2(n))$$
 </p>
 
 ---
 
+###### Comparativa empírica burbuja y mergesort
 
+![Gráfica comparativa](./graficas/comparacion_algoritmos_ordenacion.png)
+
+---
+
+## Conclusiones
+
+<p class="fragment fade-up">
+    Coinciden los modelos teóricos y empíricos
+</p>
+<p class="fragment fade-up">
+
+</p>
