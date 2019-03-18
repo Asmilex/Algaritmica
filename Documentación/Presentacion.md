@@ -1,3 +1,9 @@
+---
+title: Presentacion
+revealOptions:
+    transition: 'Fade'
+---
+
 # Algarítmica
 
 Autores:
@@ -8,7 +14,7 @@ Autores:
 
 ## Objetivos
 
-- Solucion teorica de los algoritmos 4, 5 y 6
+- Solucion teorica de los algoritmos 4, 5 y 6 (no existe el 6)
 - Comparación eficiencia empírica e híbrida de 4 y 5
 - Comparar burbuja y mergesort
 
@@ -19,7 +25,7 @@ Autores:
 | Persona      | CPU               | OS                    |
 |--------------|-------------------|-----------------------|
 | Ana          | i5-6200U 2.30GHz  | Ubuntu 16.04 LTS      |
-| Andrés       | i5-8250U 3.4GHz   | Antergos 4-19.29 LTS |
+| Andrés       | i5-8250U 3.4GHz   | Antergos 4-19.29 LTS  |
 | Paula        | i7-5600U 2.60GHz  | Ubuntu 18.04 LTS      |
 | Juan Antonio | i7-4500U 3.00GHz  | Ubuntu 18.04 LTS      |
 
@@ -59,6 +65,58 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-## Comparativas empíricas y híbridas
+#### Comparativa empírica
 
-![Gráficas]()
+![Gráficas](./graficas/BuscarBinario_grupo_datos.png)
+
+---
+
+## Algoritmo 5
+
+#### Heapsort
+
+
+---
+
+#### Comparativa empírica
+
+![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
+
+---
+
+## Hanoi
+
+---
+
+#### Comparativa empírica
+
+![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
+
+---
+
+## Burbuja
+
+---
+
+#### Comparativa empírica
+
+![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
+
+---
+
+#### Comparativa híbrida
+![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
+
+---
+
+## Comparativa burbuja y mergesort
+
+<p class="fragment fade-up">
+    $$Burbuja \in O(n^2)$$
+
+    $$Mergesort \in O(n + nlog_2(n))$$
+</p>
+
+---
+
+
