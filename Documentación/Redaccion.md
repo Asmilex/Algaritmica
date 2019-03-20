@@ -292,7 +292,7 @@ La siguiente gráfica muestra los valores obtenidos para cada persona del grupo.
 La siguiente gráfica muestra la regresión de la nube de puntos obtenida con la eficiencia empírica.
 
 <p>
-![Burbuja - regresión](./graficas/burbuja_grupo_regresion.png)
+![Burbuja - regresión](./graficas/burbuja_hibrida.png)
 </p>
 
 

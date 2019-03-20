@@ -1,5 +1,5 @@
 ---
-title: Presentacion
+title: Práctica 1. Eficiencia
 revealOptions:
     transition: 'Fade'
     theme: robot-lung
@@ -15,9 +15,9 @@ Autores:
 
 ## Objetivos
 
-- Solución teórica de los algoritmos 4, 5 y 6 (no existe el 6)
-- Comparación eficiencia empírica e híbrida de 4 y 5
-- Puesta en común de diferentes algoritmos
+- Solución teórica de los algoritmos 4 y 5.
+- Comparación eficiencia empírica e híbrida de los algoritmos 4 y 5.
+- Puesta en común de diferentes algoritmos.
 
 ---
 
@@ -35,6 +35,8 @@ Autores:
 ## Algoritmo 4
 
 #### BuscarBinario
+
+##### Eficiencia teórica
 
 ```txt
              |_|_|_|_|_|_|_|_|_|_|_|
@@ -68,21 +70,21 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-##### Comparativa empírica BuscarBinario
+##### Eficiencia empírica
 
-![Gráficas](./graficas/BuscarBinario_grupo_datos.png)
-
----
-
-#### Comparativa híbrida
-
-![Eficiencia híbrida buscarbinario](./graficas/buscarbinario_hibrida.png)
+![BuscarBinario - empírica](./graficas/BuscarBinario_grupo_datos.png)
 
 ---
 
-### Constantes BuscarBinario
+#### Eficiencia híbrida
 
-| Persona      | K             |
+![BuscarBinario - híbrida](./graficas/buscarbinario_hibrida.png)
+
+---
+
+### Constante K
+
+| Persona      | *K*             |
 | ------------ | :------------ |
 | Ana          | 34.785220119  |
 | Andrés       | 28.9263485708 |
@@ -97,45 +99,42 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
-#### Análisis teórico
+#### Eficiencia teórica
 
-- Se realiza la llamada a la función reajustar $n/2 + 1$ veces.
-- En `reajustar`, se llama como máximo al bucle $log_2(n) - a$
-$$\Downarrow$$
-- Eficiencia es $(n/2 + 1)(alog_2(n)-a)$
-
----
-
-#### Análisis teórico
-
-- Bucle central se ejecuta $n-1$ veces
-
-<p class="fragment fade-up">
-    Por tanto, tenemos que
-</p>
-
-<p class="fragment fade-up">
-    $$a(n-1)(log_2(n)-1) + b(n-1) \in O(nlog_2(n))$$
-</p>
+- `reajustar`:
+    - Bucle `while`: se ejecuta como máximo $log_2(\frac{n}{2}) = log_2n -1$ veces.
+    - Resto de operaciones: constante $a$.
+    - Eficiencia: $alog_2n-a$.
 
 ---
 
-##### Comparativa empírica heapsort
+#### Eficiencia teórica
+
+- `heapsort`:
+    - Primer bucle: llama a `reajustar` $\frac{n}{2}$ veces. Eficiencia:
+      $$ \left( \frac{n}{2}+1 \right) (alog_2n-a)$$
+    - Segundo bucle: operaciones elementales ($b$) y llama a `reajustar`. Se ejecuta $n-1$ veces. Eficiencia:
+      $$ a(n-1)(log_2n-1)+b(n-1)$$
+- Eficiencia del algoritmo: $O(nlog_2n)$.
+
+---
+
+##### Eficiencia empírica
 
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
 ---
 
 
-##### Comparativa híbrida heapsort
+##### Eficiencia híbrida
 
 ![Eficiencia híbrida hepaosrt](./graficas/heapsort_hibrida.png)
 
 ---
 
-### Constantes heapsort
+### Constante K
 
-| Persona      | K               |
+| Persona      | *K*               |
 | ------------ | :-------------- |
 | Ana          | 0.0182624864036 |
 | Andrés       | 0.0141484097962 |
@@ -148,7 +147,13 @@ $$\Downarrow$$
 
 ---
 
-##### Comparativa empírica Hanoi
+##### Eficiencia teórica
+
+$O(2^n)$
+
+---
+
+##### Eficiencia empírica
 
 ![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
 
@@ -158,26 +163,24 @@ $$\Downarrow$$
 
 ---
 
-##### Comparativa empírica burbuja
+
+##### Eficiencia empírica
 
 ![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
 
 ---
 
+
+#### Eficiencia híbrida
+
 ![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
 
----
-
-#### Comparativa híbrida burbuja
-
-![Gráfica Burbuja - híbrida](./graficas/burbuja_hibrida.png)
-
 
 ---
 
-### Constantes burbuja
+### Constante K
 
-| Persona      | K                |
+| Persona      | *K*                |
 | ------------ | :--------------- |
 | Ana          | 0.00274223536473 |
 | Andrés       | 0.00533          |
@@ -190,21 +193,27 @@ $$\Downarrow$$
 
 ---
 
-##### Comparativa empírica
+##### Eficiencia teórica
+
+$O(nlog_2(n))$
+
+---
+
+##### Eficiencia empírica
 
 ![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png)
 
 ---
 
-##### Comparativa híbrida
+##### Eficiencia híbrida
 
-![Eficiencia híbrida mergesort](./graficas/mergesort_hibrida.png)
+![Eficiencia híbrida mergesort](./graficas/burbuja_hibrida.png)
 
 ---
 
-### Constantes mergesort
+### Constante K
 
-| Persona      | K               |
+| Persona      | *K*               |
 | ------------ | :-------------- |
 | Ana          | 0.0257882362952 |
 | Andrés       | 0.0229786230024 |
