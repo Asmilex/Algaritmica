@@ -173,7 +173,7 @@ $O(2^n)$
 
 #### Eficiencia híbrida
 
-![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
+![Gráfica Burbuja - Regresion](./graficas/burbuja_hibrida.png)
 
 
 ---
