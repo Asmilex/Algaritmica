@@ -164,11 +164,13 @@ void heapsort (int T[], int num_elem) {
 
 ### Eficiencia teórica
 
-Primero estudiaremos la eficiencia de `reajustar`. En cada iteración, la variable `k` se multiplica por 2.
+Nuestra variable `n` será `num_elem`. Primero calcularemos la eficiencia de la función `reajustar`, para ello tenemos que estudiar el bucle `while`. Este bucle se ejecuta como máximo, $log_2(\frac{n}{2}) = log_2n -1$, ya que en cada iteración, la variable `k` se multiplica por 2. El resto de operaciones del bucle while es insignificante, es decir, podemos tomar esas operaciones como una constante $a$. Por lo que la eficiencia de esta función `reajustar` es $alog_2n-a$. Como la función `heapsort` en el primer bucle llama a la función `reajustar` $\frac{n}{2}$ veces, entonces la eficiencia de este primer bucle es de
+$$\left( \frac{n}{2}+1 \right) (alog_2n-a)$$
 
-En el peor de los casos, en la función `reajustar`, el número debe ser llevado desde lo alto del *heap* hasta las hojas más bajas. Así, la cantidad de datos movidos no es más grande que
+En el segundo bucle de la función `heapsort` tenemos otra llamada a la función `reajustar` y operaciones elementales que podemos considerarlas como constantes ($b$). Este segundo bucle se ejecuta $n-1$ veces y como llama a la función `reajustar`, estamos en el mismo caso que en el bucle anterior. Luego este bucle tiene una eficiencia de
+$$a(n-1)(log_2n-1)+b(n-1)$$
 
-$$\sum_{N \geq i \geq 1}{\log_2(N/i)} + \sum_{N \geq i \geq 1}{\log_2(i)} = N \cdot \log_2(N) + O(N)$$
+Como la eficiencia de la función `heapsort` es la máxima eficiencia de los bucles, tenemos que es $O(nlogn)$.
 
 ### Eficiencia empírica
 
