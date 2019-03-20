@@ -1,10 +1,11 @@
-# Presentación
+# Práctica 1. Análisis de Eficiencia de Algoritmos
+
+## Presentación
 
 > Autores: Ana Buendía Ruiz Azuaga, Andrés Millán Muñoz, Paula Villanueva Núñez, Juan Antonio Villegas Recio.
 
 > 2º doble grado ingeniería informática y matemáticas (2018-19).
 
-# Práctica 1. Análisis de Eficiencia de Algoritmos
 
 #### Introducción
 
@@ -88,7 +89,7 @@ Los vectores estaban compuestos por números aleatorios positivos y en todos los
 
 Tras los diferentes tests en nuestras respectivas máquinas, estos son los resultados que hemos obtenido:
 
-![Gráficas](./graficas/BuscarBinario_grupo_datos.png)
+![BuscarBinario - empírica](./graficas/BuscarBinario_grupo_datos.png)
 
 Cabe destacar que en este caso las medidas están en nanosegundos (ns).
 
@@ -105,7 +106,7 @@ Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de
 | Juan Antonio | 35.1166541442 |
 | Paula        | 34.8506188855 |
 
-![Eficiencia híbrida buscarbinario](./graficas/buscarbinario_hibrida.png)
+![BuscarBinario - híbrida](./graficas/buscarbinario_hibrida.png)
 
 ## Algoritmo 5 - Heapsort
 
@@ -178,7 +179,7 @@ Es decir, hemos ejecutado 15 veces el programa para cada tamaño distinto. Los v
 
 Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
 
-![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
+![Heapsort - empírica](./graficas/heapsort_grupo_datos.png)
 
 Heapsort es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo, el PC más rápido en general ha sido el de Andrés.
 
@@ -193,7 +194,7 @@ Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de
 | Juan Antonio | 0.0164563064296 |
 | Paula        | 0.0176604264123 |
 
-![Eficiencia híbrida hepaosrt](./graficas/heapsort_hibrida.png)
+![Heapsort - híbrida](./graficas/heapsort_hibrida.png)
 
 ## Hanoi
 
@@ -226,7 +227,7 @@ done
 
 
 
-![Gráfica Hanoi](./graficas/hanoi_grupo_datos.png)
+![Hanoi - empírica](./graficas/hanoi_grupo_datos.png)
 
 ## Burbuja
 
@@ -252,9 +253,9 @@ void burbuja (int T[], int inicial, int final) {
 
 Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja y la regresión para cada persona del grupo:
 
-![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
+![Burbuja - empírica](./graficas/burbuja_grupo_datos.png)
 
-![Gráfica Burbuja - Regresión](./graficas/burbuja_grupo_regresion.png)
+![Burbuja - regresión](./graficas/burbuja_grupo_regresion.png)
 
 ### Eficiencia híbrida
 
@@ -279,7 +280,7 @@ Hemos realizado para 28 valores distintos 15 iteraciones de las que obtendremos 
 
 Así, hemos obtenido la siguiente gráfica:
 
-![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png)
+![Mergesort - empírica](./graficas/mergesort_grupo_datos.png)
 
 ### Eficiencia híbrida
 
@@ -292,7 +293,7 @@ De nuevo, hemos obtenido la *K* para cada integrante del grupo:
 | Juan Antonio | 0.0213731296921 |
 | Paula        | 0.0252865196358 |
 
-![Eficiencia híbrida mergesort](./graficas/mergesort_hibrida.png)
+![Mergesort híbrida](./graficas/mergesort_hibrida.png)
 
 ## Comparación burbuja y mergesort
 
@@ -304,7 +305,7 @@ No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectiv
 
 Representando en una misma gráfica los resultados de las ejecuciones más rápidas tanto en burbuja como en mergesort se aprecia claramente que el algoritmo más eficiente es mergesort.
 
-![Comparación burbuja y mergesort](./graficas/comparacion_algoritmos_ordenacion.png)
+![Comparación burbuja y mergesort - empírica](./graficas/comparacion_algoritmos_ordenacion.png)
 
 ## Conclusiones
 
