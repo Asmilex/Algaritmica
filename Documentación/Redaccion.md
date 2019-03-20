@@ -9,7 +9,7 @@
 
 #### Introducción
 
-En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asimismo, haremos un análisis de los algoritmos de búsqueda binaria, ordenación por heapsort y ordenación por mergesort, estudiando los diferentes efectos que producen en una máquina específica.
+En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asimismo, haremos un análisis de los algoritmos de búsqueda binaria, ordenación por `heapsort` y ordenación por `mergesort`, estudiando los diferentes efectos que producen en una máquina específica.
 
 ## Especificaciones
 
@@ -25,7 +25,7 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
 #### Código del programa
 
 ```c++
-    int BuscarBinario (int *v, const int ini, const int fin, const double x) {
+    int BuscarBinario (int *v, const int ini, const int fin, const double x){
         int centro;
 
         if (ini > fin)
@@ -45,7 +45,7 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
 
 ### Eficiencia teórica
 
-Observamos que llamamos recursivamente a la función. Nuestro problema decrece en $n/2$ por cada llamada que hacemos a la función:
+Observamos que llamamos recursivamente a la función. Nuestro problema decrece en $\frac{n}{2}$ por cada llamada que hacemos a la función:
 
 ```
              |_|_|_|_|_|_|_|_|_|_|_|
@@ -56,7 +56,7 @@ Iter 2|  inicio   c    fin
 ------|
 ```
 
-Definimos $T(n) = T(n/2)+a$, donde a es la constante asociada a las operaciones elementales.
+Definimos $T(n) = T(n/2)+a$, donde $a$ es la constante asociada a las operaciones elementales.
 
 Hacemos un cambio de variable $n = 2^k$. Se tiene entonces
 $$T(2^k) = a + T(2^{k-1}) \\ T(2^{k-1}) = a + T(2^{k-2})
@@ -65,7 +65,7 @@ T(2^k) = a \cdot k + 1$$
 Deshaciendo el cambio de variable, obtenemos
 $$T(n) = a \cdot \log_2(n) + 1$$
 
-Por tanto, concluimos que el algoritmo 4 es $O(\log_2(n))$
+Por tanto, concluimos que la eficiencia teórica del algoritmo `Buscar binario` es $O(\log_2(n))$
 
 ### Eficiencia empírica
 
@@ -89,7 +89,9 @@ Los vectores estaban compuestos por números aleatorios positivos y en todos los
 
 Tras los diferentes tests en nuestras respectivas máquinas, estos son los resultados que hemos obtenido:
 
+<p>
 ![BuscarBinario - empírica](./graficas/BuscarBinario_grupo_datos.png)
+</p>
 
 Cabe destacar que en este caso las medidas están en nanosegundos (ns).
 
@@ -99,14 +101,16 @@ Comprobamos que la nube de puntos de cada uno se asemeja a una curva logarítmic
 
 Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
-| Persona      | K             |
+| Persona      | *K*             |
 | ------------ | :------------ |
 | Ana          | 34.785220119  |
 | Andrés       | 28.9263485708 |
 | Juan Antonio | 35.1166541442 |
 | Paula        | 34.8506188855 |
 
+<p>
 ![BuscarBinario - híbrida](./graficas/buscarbinario_hibrida.png)
+</p>
 
 ## Algoritmo 5 - Heapsort
 
@@ -156,7 +160,7 @@ void heapsort (int T[], int num_elem) {
 
 Primero estudiaremos la eficiencia de `Reajustar`. En cada iteración, la variable `k` se multiplica por 2.
 
-En el peor de los casos, en la función reajustar, el número debe ser llevado desde lo alto del heap hasta las hojas más bajas. Así, la cantidad de datos movidos no es más grande que
+En el peor de los casos, en la función reajustar, el número debe ser llevado desde lo alto del *heap* hasta las hojas más bajas. Así, la cantidad de datos movidos no es más grande que
 
 $$\sum_{N \geq i \geq 1}{\log_2(N/i)} + \sum_{N \geq i \geq 1}{\log_2(i)} = N \cdot \log_2(N) + O(N)$$
 
@@ -179,22 +183,26 @@ Es decir, hemos ejecutado 15 veces el programa para cada tamaño distinto. Los v
 
 Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
 
+<p>
 ![Heapsort - empírica](./graficas/heapsort_grupo_datos.png)
+</p>
 
-Heapsort es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo, el PC más rápido en general ha sido el de Andrés.
+`Heapsort` es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo, el PC más rápido en general ha sido el de Andrés.
 
 ### Eficiencia híbrida
 
 Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
-| Persona      | K               |
+| Persona      | *K*               |
 | ------------ | :-------------- |
 | Ana          | 0.0182624864036 |
 | Andrés       | 0.0141484097962 |
 | Juan Antonio | 0.0164563064296 |
 | Paula        | 0.0176604264123 |
 
+<p>
 ![Heapsort - híbrida](./graficas/heapsort_hibrida.png)
+</p>
 
 ## Hanoi
 
@@ -212,7 +220,7 @@ void hanoi (int M, int i, int j) {
 
 ### Eficiencia empírica
 
-En este caso, como el algoritmo de las torres de Hanoi tiene una eficiencia que crece mucho más rápido, porque es de orden $O(2^n)$, necesita unos valores considerablemente menores que los demás algoritmos. El script ejecutado en esta ocasión es el siguiente:
+En este caso, como el algoritmo de las torres de `Hanoi` tiene una eficiencia que crece mucho más rápido, porque es de orden $O(2^n)$, necesita unos valores considerablemente menores que los demás algoritmos. El script ejecutado en esta ocasión es el siguiente:
 
 ```bash
 #!/bin/bash
@@ -225,13 +233,13 @@ for j in {1..28}; do
 done
 ```
 
-
-
+<p>
 ![Hanoi - empírica](./graficas/hanoi_grupo_datos.png)
+</p>
 
 ## Burbuja
 
-Código del programa:
+#### Código del programa:
 
 ```c++
 void burbuja (int T[], int inicial, int final) {
@@ -253,15 +261,19 @@ void burbuja (int T[], int inicial, int final) {
 
 Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja y la regresión para cada persona del grupo:
 
+<p>
 ![Burbuja - empírica](./graficas/burbuja_grupo_datos.png)
+</p>
 
+<p>
 ![Burbuja - regresión](./graficas/burbuja_grupo_regresion.png)
+</p>
 
 ### Eficiencia híbrida
 
 Hemos calculado la constante *k* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
-| Persona      | K                |
+| Persona      | *K*                |
 | ------------ | :--------------- |
 | Ana          | 0.00274223536473 |
 | Andrés       | 0.00533          |
@@ -272,7 +284,7 @@ Hemos calculado la constante *k* para todos los conjuntos de datos empíricos de
 
 ### Eficiencia teórica
 
-En el guión de prácticas se ha llegado a la conclusión de que la eficiencia teórica de Mergesort es $O(nlog_2(n))$.
+En el guión de prácticas se ha llegado a la conclusión de que la eficiencia teórica de `Mergesort` es $O(nlog_2(n))$.
 
 ### Eficiencia empírica
 
@@ -280,7 +292,9 @@ Hemos realizado para 28 valores distintos 15 iteraciones de las que obtendremos 
 
 Así, hemos obtenido la siguiente gráfica:
 
+<p>
 ![Mergesort - empírica](./graficas/mergesort_grupo_datos.png)
+</p>
 
 ### Eficiencia híbrida
 
@@ -293,7 +307,9 @@ De nuevo, hemos obtenido la *K* para cada integrante del grupo:
 | Juan Antonio | 0.0213731296921 |
 | Paula        | 0.0252865196358 |
 
-![Mergesort híbrida](./graficas/mergesort_hibrida.png)
+<p>
+![Mergesort - híbrida](./graficas/mergesort_hibrida.png)
+</p>
 
 ## Comparación burbuja y mergesort
 
@@ -303,14 +319,16 @@ No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectiv
 
 ### Eficiencia empírica
 
-Representando en una misma gráfica los resultados de las ejecuciones más rápidas tanto en burbuja como en mergesort se aprecia claramente que el algoritmo más eficiente es mergesort.
+Representando en una misma gráfica los resultados de las ejecuciones más rápidas tanto en burbuja como en `mergesort` se aprecia claramente que el algoritmo más eficiente es `mergesort`.
 
+<p>
 ![Comparación burbuja y mergesort - empírica](./graficas/comparacion_algoritmos_ordenacion.png)
+</p>
 
 ## Conclusiones
 
-Hemos podido comprobar que la eficiencia empírica obtenida al ejecutar los diversos algoritmos se ajusta adecuadamente a lo esperado según el modelo teórico. Además, es notable que el orden de los algoritmos no depende del ordenador como se ha puesto de manifiesto en las gráficas conjuntas presentadas anteriormente, por ejemplo, los algoritmos de burbuja o Hanoi.
+Hemos podido comprobar que la eficiencia empírica obtenida al ejecutar los diversos algoritmos se ajusta adecuadamente a lo esperado según el modelo teórico. Además, es notable que el orden de los algoritmos no depende del ordenador como se ha puesto de manifiesto en las gráficas conjuntas presentadas anteriormente, por ejemplo, los algoritmos de `burbuja` o `Hanoi`.
 
-Con respecto a los algoritmos de ordenación, a saber, mergesort y burbuja, se aprecia claramente la superioridad de mergesort respecto a burbuja.
+Con respecto a los algoritmos de ordenación, a saber, `mergesort` y `burbuja`, se aprecia claramente la superioridad de `mergesort` respecto a `burbuja`.
 
 También se aprecia la cota que establece la constante $K$ en los algoritmos, como se esperaba según la teoría.
