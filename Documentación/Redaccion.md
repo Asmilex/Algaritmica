@@ -4,7 +4,7 @@
 
 #### Introducción
 
-En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asímismo, haremos un análisis de los algoritmos de búsqueda binaria, ordenación por heapsort y ordenación por mergesort, estudiando los diferentes efectos que producen en una específica máquina.
+En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asimismo, haremos un análisis de los algoritmos de búsqueda binaria, ordenación por heapsort y ordenación por mergesort, estudiando los diferentes efectos que producen en una máquina específica.
 
 ## Especificaciones
 
@@ -62,7 +62,7 @@ $$T(n) = a \cdot \log_2(n) + 1$$
 
 Por tanto, concluimos que el algoritmo 4 es $O(\log_2(n))$
 
-### Comparación empírica e híbrida
+### Comparación empírica
 
 Para calcular las eficiencias empíricas, cada miembro del grupo ha ejecutado el siguiente script en su ordenador:
 
@@ -87,7 +87,20 @@ Tras los diferentes tests en nuestras respectivas máquinas, estos son los resul
 
 Cabe destacar que en este caso las medidas están en nanosegundos (ns).
 
-Comprobamos que la nube de puntos de cada uno se asemeja a una curva logarítmica y que el PC más rápido con este algoritmo es el de Andrés en, tardando unos 380ns como máximo.
+Comprobamos que la nube de puntos de cada uno se asemeja a una curva logarítmica y que el PC más rápido con este algoritmo es el de Andrés, tardando unos 380ns como máximo.
+
+### Comparación híbrida
+
+Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los sigueintes resultados:
+
+| Persona      | K             |
+| ------------ | :------------ |
+| Ana          | 34.785220119  |
+| Andrés       | 28.9263485708 |
+| Juan Antonio | 35.1166541442 |
+| Paula        | 34.8506188855 |
+
+![Eficiencia híbrida buscarbinario](./graficas/buscarbinario_hibrida.png)
 
 ## Algoritmo 5 - Heapsort
 
@@ -141,7 +154,7 @@ En el peor de los casos, en la función reajustar, el número debe ser llevado d
 
 $$\sum_{N \geq i \geq 1}{\log_2(N/i)} + \sum_{N \geq i \geq 1}{\log_2(i)} = N \cdot \log_2(N) + O(N)$$
 
-### Comparación empírica e híbrida
+### Comparación empírica
 
 Al igual que el caso anterior, hemos ejecutado un script que nos generaba un fichero de datos que procesar. El script ejecutado es el siguiente:
 
@@ -162,6 +175,19 @@ Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valor
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
 Heapsort es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo el PC más rápido en general ha sido el de Andrés.
+
+### Comparación híbrida
+
+Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los sigueintes resultados:
+
+| Persona      | K               |
+| ------------ | :-------------- |
+| Ana          | 0.0182624864036 |
+| Andrés       | 0.0141484097962 |
+| Juan Antonio | 0.0164563064296 |
+| Paula        | 0.0176604264123 |
+
+![Eficiencia híbrida hepaosrt](./graficas/heapsort_hibrida.png)
 
 ## Hanoi
 
@@ -224,16 +250,55 @@ Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja 
 
 ![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
 
+### Comparación híbrida
+
+Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los sigueintes resultados:
+
+| Persona      | K                |
+| ------------ | :--------------- |
+| Ana          | 0.00274223536473 |
+| Andrés       | 0.00533          |
+| Juan Antonio | 0.00272666666667 |
+| Paula        | 0.00274666666667 |
+
+## Mergesort
+
+### Teórico
+
+No lo estudiaremos ya que viene resuelto en los apuntes.
+
+### Empírico
+
+Hemos realizado para 28 valores distintos 15 iteraciones de las que obtendremos la media para obtener los resultados en media de las distintas ejecuciones. Además el vector está formado por números generados aleatoriamente.
+
+Así, hemos obtenido la siguiente gráfica:
+
+![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png) 
+
+### Comparación híbrida
+
+De nuevo, hemos obtenido la k para cada integrante del grupo:
+
+| Persona      | K               |
+| ------------ | :-------------- |
+| Ana          | 0.0257882362952 |
+| Andrés       | 0.0229786230024 |
+| Juan Antonio | 0.0213731296921 |
+| Paula        | 0.0252865196358 |
+
+![Eficiencia híbrida mergesort](./graficas/mergesort_hibrida.png)
 
 ## Comparación burbuja y mergesort
 
 ### Teórico
 
-No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(n\log2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \subset O(n^2)$
+No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(n\log2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \leq O(n^2)$
 
 ### Empírico
 
-### Híbrido
+Representando en una misma gráfica los resultados de las ejecuciones más rápidas tanto en burbuja como en mergesort se aprecia claramente que el algoritmo más eficiente es mergesort.
+
+![Comparacion burbuja y mergesort](./graficas/comparacion_algoritmos_ordenacion.png)
 
 ## Conclusiones
 
