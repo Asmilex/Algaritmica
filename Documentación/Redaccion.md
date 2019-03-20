@@ -64,13 +64,18 @@ Iter 2|  inicio   c    fin
 ```
 
 Definimos $T(n) = T(\frac{n}{2})+a$, donde $a$ es la constante asociada a las operaciones elementales. Hacemos un cambio de variable $n = 2^k$. Se tiene entonces
-$$T(2^k) = a + T(2^{k-1}) \\ T(2^{k-1}) = a + T(2^{k-2})
-\\...\\
-T(2^k) = a \cdot k + 1$$
-Deshaciendo el cambio de variable, obtenemos
-$$T(n) = a \cdot \log_2(n) + 1$$
+$$T(2^k) = a + T(2^{k-1}) $$
 
-Por tanto, concluimos que la eficiencia teórica de `BuscarBinario` es $O(\log_2(n))$.
+Si llamamos $t_k=T(2^k)$ obtenemos la siguiente recurrencia:
+
+$$t_k=t_{k-1}+a$$
+
+Para resolverla, sabemos que es equivalente a $t_k-t_{k-1}=a$, y la ecuación característica de esta recurrencia es $(x-1)\cdot(x-1)=(x-1)^2=0$, ya que $a$ no es más que un polinomio de grado 0. De aquí obtenemos que $t_k=c_1\cdot 1^n+c_2\cdot k\cdot 1^n=c_1+c_2\cdot k$
+
+Deshaciendo el cambio de variable, obtenemos
+$$T(n)=T(2^k)=t_k = a \cdot \log_2(n) + 1$$
+
+Por tanto, concluimos que la eficiencia teórica de `BuscarBinario` es $O(\log_2(n))​$.
 
 ### Eficiencia empírica
 
