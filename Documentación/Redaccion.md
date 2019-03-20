@@ -6,6 +6,8 @@
 
 > Autores: Ana Buendía Ruiz Azuaga, Andrés Millán Muñoz, Paula Villanueva Núñez, Juan Antonio Villegas Recio.
 
+> Grupo: Las algas.
+
 > 2º doble grado ingeniería informática y matemáticas (2018-19).
 
 
@@ -127,6 +129,20 @@ Este algoritmo consiste en almacenar todos los elementos del vector a ordenar en
 #### Código del programa:
 
 ```c++
+void heapsort (int T[], int num_elem) {
+    int i;
+
+    for (i = num_elem/2; i >= 0; i--)
+        reajustar(T, num_elem, i);
+
+    for (i = num_elem - 1; i >= 1; i--) {
+        int aux = T[0];
+        T[0] = T[i];
+        T[i] = aux;
+        reajustar(T, i, 0);
+    }
+}
+
 void reajustar (int T[], int num_elem, int k) {
     int j, v;
     bool esAPO = false;
@@ -146,20 +162,6 @@ void reajustar (int T[], int num_elem, int k) {
     }
 
     T[k] = v;
-}
-
-void heapsort (int T[], int num_elem) {
-    int i;
-
-    for (i = num_elem/2; i >= 0; i--)
-        reajustar(T, num_elem, i);
-
-    for (i = num_elem - 1; i >= 1; i--) {
-        int aux = T[0];
-        T[0] = T[i];
-        T[i] = aux;
-        reajustar(T, i, 0);
-    }
 }
 ```
 
@@ -338,7 +340,7 @@ De nuevo, hemos obtenido la *K* para cada integrante del grupo:
 
 ### Eficiencia teórica
 
-Tras los respectivos análisis hechos, podemos ver que la función `mergesort` es de tipo $O(n\log_2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \leq O(n^2)$.
+Tras los respectivos análisis hechos, podemos ver que la función `mergesort` es de tipo $O(n\log_2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \subset O(n^2)$.
 
 ### Eficiencia empírica
 
