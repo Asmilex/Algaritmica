@@ -79,7 +79,7 @@ done
 
 Es decir, hemos ejecutado el algoritmo para 28 tamaños diferentes, ejecutando el algoritmo 1000 veces para cada tamaño. El script producía un fichero de datos con el cual para cada tamaño se calculaba la media de los tiempos de ejecución, obteniendo así un tiempo medio de ejecución para cada tamaño.
 
-Los vectores estaban compuestos por números aleatorios positivos y en todos los casos se buscaba un número negativo, por lo que siempre se ejecutaba el peor de los casos. 
+Los vectores estaban compuestos por números aleatorios positivos y en todos los casos se buscaba un número negativo, por lo que siempre se ejecutaba el peor de los casos.
 
 Tras los diferentes tests en nuestras respectivas máquinas, estos son los resultados que hemos obtenido:
 
@@ -252,7 +252,7 @@ Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja 
 
 ### Comparación híbrida
 
-Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los sigueintes resultados:
+Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
 | Persona      | K                |
 | ------------ | :--------------- |
@@ -273,7 +273,7 @@ Hemos realizado para 28 valores distintos 15 iteraciones de las que obtendremos 
 
 Así, hemos obtenido la siguiente gráfica:
 
-![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png) 
+![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png)
 
 ### Comparación híbrida
 
@@ -304,6 +304,6 @@ Representando en una misma gráfica los resultados de las ejecuciones más rápi
 
 Hemos podido comprobar que la eficiencia empírica obtenida al ejecutar los diversos algoritmos se ajusta adecuadamente a lo esperado según el modelo teórico. Además, es notable que el orden de los algoritmos no depende del ordenador como se ha puesto de manifiesto en las gráficas conjuntas presentadas anteriormente, por ejemplo, los algoritmos de burbuja o Hanoi.
 
-Con respecto a los algoritmos de ordenación, a saber, mergesort y burbuja, se aprecia claramente la superioridad de mergesort respecto a burbuja. 
+Con respecto a los algoritmos de ordenación, a saber, mergesort y burbuja, se aprecia claramente la superioridad de mergesort respecto a burbuja.
 
-También se aprecia la cota que establece la constante $K$ en los algoritmos <insert lista> , como se esperaba según la teoría (xD). 
+También se aprecia la cota que establece la constante $K$ en los algoritmos, como se esperaba según la teoría.

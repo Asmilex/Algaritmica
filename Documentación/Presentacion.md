@@ -5,7 +5,7 @@ revealOptions:
     theme: robot-lung
 ---
 
-# Algarítmica
+# Presentación grupal
 
 Autores:
 
@@ -74,6 +74,23 @@ $$T(n) = a \cdot log_2(n) + 1$$
 
 ---
 
+#### Comparativa híbrida
+
+![Eficiencia híbrida buscarbinario](./graficas/buscarbinario_hibrida.png)
+
+---
+
+### Constantes BuscarBinario
+
+| Persona      | K             |
+| ------------ | :------------ |
+| Ana          | 34.785220119  |
+| Andrés       | 28.9263485708 |
+| Juan Antonio | 35.1166541442 |
+| Paula        | 34.8506188855 |
+
+---
+
 ## Algoritmo 5
 
 #### Heapsort
@@ -109,6 +126,24 @@ $$\Downarrow$$
 
 ---
 
+
+##### Comparativa híbrida heapsort
+
+![Eficiencia híbrida hepaosrt](./graficas/heapsort_hibrida.png)
+
+---
+
+### Constantes heapsort
+
+| Persona      | K               |
+| ------------ | :-------------- |
+| Ana          | 0.0182624864036 |
+| Andrés       | 0.0141484097962 |
+| Juan Antonio | 0.0164563064296 |
+| Paula        | 0.0176604264123 |
+
+---
+
 ## Hanoi
 
 ---
@@ -129,8 +164,52 @@ $$\Downarrow$$
 
 ---
 
-##### Comparativa híbrida burbuja
 ![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
+
+---
+
+#### Comparativa híbrida burbuja
+
+![Gráfica Burbuja - híbrida](./graficas/burbuja_hibrida.png)
+
+
+---
+
+### Constantes burbuja
+
+| Persona      | K                |
+| ------------ | :--------------- |
+| Ana          | 0.00274223536473 |
+| Andrés       | 0.00533          |
+| Juan Antonio | 0.00272666666667 |
+| Paula        | 0.00274666666667 |
+
+---
+
+## Mergesort
+
+---
+
+##### Comparativa empírica
+
+![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png)
+
+---
+
+##### Comparativa híbrida
+
+![Eficiencia híbrida mergesort](./graficas/mergesort_hibrida.png)
+
+---
+
+### Constantes mergesort
+
+| Persona      | K               |
+| ------------ | :-------------- |
+| Ana          | 0.0257882362952 |
+| Andrés       | 0.0229786230024 |
+| Juan Antonio | 0.0213731296921 |
+| Paula        | 0.0252865196358 |
 
 ---
 
@@ -150,11 +229,6 @@ $$\Downarrow$$
 
 ---
 
-## Conclusiones
-
 <p class="fragment fade-up">
     Coinciden los modelos teóricos y empíricos
-</p>
-<p class="fragment fade-up">
-
 </p>
