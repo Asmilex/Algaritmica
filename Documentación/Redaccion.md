@@ -64,9 +64,10 @@ Iter 2|  inicio   c    fin
 ```
 
 Definimos $T(n) = T(\frac{n}{2})+a$, donde $a$ es la constante asociada a las operaciones elementales. Hacemos un cambio de variable $n = 2^k$. Se tiene entonces
-$$T(2^k) = a + T(2^{k-1}) \\ T(2^{k-1}) = a + T(2^{k-2})
-\\...\\
-T(2^k) = a \cdot k + 1$$
+$$T(2^k) = a + T(2^{k-1}) $$
+$$T(2^{k-1}) = a + T(2^{k-2})$$
+$$...$$
+$$T(2^k) = a \cdot k + 1$$
 
 Deshaciendo el cambio de variable, obtenemos
 $$T(n) = a \cdot \log_2(n) + 1$$
@@ -118,7 +119,6 @@ Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de
 ![BuscarBinario - híbrida](./graficas/buscarbinario_hibrida.png)
 </p>
 
-$\pagebreak$
 
 ## Algoritmo 5 - Heapsort
 
