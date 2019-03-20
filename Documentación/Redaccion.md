@@ -1,3 +1,5 @@
+# Algorítmica
+
 # Práctica 1. Análisis de Eficiencia de Algoritmos
 
 ## Presentación
@@ -9,9 +11,11 @@
 
 #### Introducción
 
-En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asimismo, haremos un análisis de los algoritmos de búsqueda binaria, ordenación por `heapsort` y ordenación por `mergesort`, estudiando los diferentes efectos que producen en una máquina específica.
+En este documento recogeremos los datos de nuestras partes individuales y los compararemos. Asimismo, haremos un análisis completo de los algoritmos de búsqueda binaria, ordenación por `heapsort` y ordenación por `mergesort`, estudiando los diferentes efectos que producen en una máquina específica.
 
 ## Especificaciones
+
+La información sobre el ordenador de cada integrante del grupo se recoge en la siguiente tabla.
 
 | Persona      | CPU               | OS                    |
 |--------------|-------------------|-----------------------|
@@ -20,7 +24,11 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
 | Paula        | i7-5600U 2.60GHz  | Ubuntu 18.04 LTS      |
 | Juan Antonio | i7-4500U 3.00GHz  | Ubuntu 18.04 LTS      |
 
+$\pagebreak$
+
 ## Algoritmo 4 - BuscarBinario
+
+Consiste en encontrar la posición de un elemento en un vector ordenado.  Compara el valor con el elemento en el medio del array, si no son iguales, la mitad en la cual el valor no puede estar es eliminada y la búsqueda continúa en la mitad restante hasta que el valor se encuentre.
 
 #### Código del programa
 
@@ -35,7 +43,6 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
 
         if (v[centro] == x)
             return centro;
-
         if (v[centro] > x)
             return BuscarBinario(v, ini, centro-1, x);
 
@@ -56,20 +63,18 @@ Iter 2|  inicio   c    fin
 ------|
 ```
 
-Definimos $T(n) = T(n/2)+a$, donde $a$ es la constante asociada a las operaciones elementales.
-
-Hacemos un cambio de variable $n = 2^k$. Se tiene entonces
+Definimos $T(n) = T(\frac{n}{2})+a$, donde $a$ es la constante asociada a las operaciones elementales. Hacemos un cambio de variable $n = 2^k$. Se tiene entonces
 $$T(2^k) = a + T(2^{k-1}) \\ T(2^{k-1}) = a + T(2^{k-2})
 \\...\\
 T(2^k) = a \cdot k + 1$$
 Deshaciendo el cambio de variable, obtenemos
 $$T(n) = a \cdot \log_2(n) + 1$$
 
-Por tanto, concluimos que la eficiencia teórica del algoritmo `Buscar binario` es $O(\log_2(n))$
+Por tanto, concluimos que la eficiencia teórica de `BuscarBinario` es $O(\log_2(n))$.
 
 ### Eficiencia empírica
 
-Para calcular las eficiencias empíricas, cada miembro del grupo ha ejecutado el siguiente script en su ordenador:
+Para calcular la eficiencia empírica, cada miembro del grupo ha ejecutado el siguiente script en su ordenador:
 
 ```bash
 #!/bin/bash
@@ -87,13 +92,13 @@ Es decir, hemos ejecutado el algoritmo para 28 tamaños diferentes, ejecutando e
 
 Los vectores estaban compuestos por números aleatorios positivos y en todos los casos se buscaba un número negativo, por lo que siempre se ejecutaba el peor de los casos.
 
-Tras los diferentes tests en nuestras respectivas máquinas, estos son los resultados que hemos obtenido:
+Tras los diferentes tests en nuestras respectivas máquinas, hemos obtenido los siguientes resultados:
 
 <p>
 ![BuscarBinario - empírica](./graficas/BuscarBinario_grupo_datos.png)
 </p>
 
-Cabe destacar que en este caso las medidas están en nanosegundos (ns).
+Cabe destacar que en este caso las medidas están en nanosegundos (*ns*).
 
 Comprobamos que la nube de puntos de cada uno se asemeja a una curva logarítmica y que el PC más rápido con este algoritmo es el de Andrés, tardando unos 380ns como máximo.
 
@@ -112,7 +117,11 @@ Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de
 ![BuscarBinario - híbrida](./graficas/buscarbinario_hibrida.png)
 </p>
 
+$\pagebreak$
+
 ## Algoritmo 5 - Heapsort
+
+Este algoritmo consiste en almacenar todos los elementos del vector a ordenar en un montículo (*heap*), y luego extraer el nodo que queda como nodo raíz del montículo (cima) en sucesivas iteraciones obteniendo el conjunto ordenado. Además, basa su funcionamiento en una propiedad de los montículos, por la cual, la cima contiene siempre el menor elemento (o el mayor, según se haya definido el montículo) de todos los almacenados en él.
 
 #### Código del programa:
 
@@ -120,7 +129,6 @@ Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de
 void reajustar (int T[], int num_elem, int k) {
     int j, v;
     bool esAPO = false;
-
     v = T[k];
 
     while ( (k < num_elem/2) && !esAPO ) {
@@ -147,7 +155,6 @@ void heapsort (int T[], int num_elem) {
 
     for (i = num_elem - 1; i >= 1; i--) {
         int aux = T[0];
-
         T[0] = T[i];
         T[i] = aux;
         reajustar(T, i, 0);
@@ -155,12 +162,11 @@ void heapsort (int T[], int num_elem) {
 }
 ```
 
-
 ### Eficiencia teórica
 
-Primero estudiaremos la eficiencia de `Reajustar`. En cada iteración, la variable `k` se multiplica por 2.
+Primero estudiaremos la eficiencia de `reajustar`. En cada iteración, la variable `k` se multiplica por 2.
 
-En el peor de los casos, en la función reajustar, el número debe ser llevado desde lo alto del *heap* hasta las hojas más bajas. Así, la cantidad de datos movidos no es más grande que
+En el peor de los casos, en la función `reajustar`, el número debe ser llevado desde lo alto del *heap* hasta las hojas más bajas. Así, la cantidad de datos movidos no es más grande que
 
 $$\sum_{N \geq i \geq 1}{\log_2(N/i)} + \sum_{N \geq i \geq 1}{\log_2(i)} = N \cdot \log_2(N) + O(N)$$
 
@@ -179,9 +185,7 @@ for j in {1..28}; do
 done
 ```
 
-Es decir, hemos ejecutado 15 veces el programa para cada tamaño distinto. Los vectores estaban también formados por números aleatorios.
-
-Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
+Es decir, hemos ejecutado 15 veces el programa para cada tamaño distinto. Los vectores estaban también formados por números aleatorios. Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
 
 <p>
 ![Heapsort - empírica](./graficas/heapsort_grupo_datos.png)
@@ -206,6 +210,8 @@ Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de
 
 ## Hanoi
 
+Consiste en tres postes verticales y siete discos. Los discos se apilan sobre uno de los postes en tamaño decreciente  de abajo a arriba, luego hay que pasar todos los discos desde el poste ocupado a uno de los otros postes vacíos.
+
 #### Código del programa:
 
 ```c++
@@ -220,7 +226,7 @@ void hanoi (int M, int i, int j) {
 
 ### Eficiencia empírica
 
-En este caso, como el algoritmo de las torres de `Hanoi` tiene una eficiencia que crece mucho más rápido, porque es de orden $O(2^n)$, necesita unos valores considerablemente menores que los demás algoritmos. El script ejecutado en esta ocasión es el siguiente:
+En este caso, como el algoritmo de las torres de `hanoi` tiene una eficiencia que crece mucho más rápido, porque es de orden $O(2^n)$, necesita unos valores considerablemente menores que los demás algoritmos. El script ejecutado en esta ocasión es el siguiente:
 
 ```bash
 #!/bin/bash
@@ -233,43 +239,55 @@ for j in {1..28}; do
 done
 ```
 
+Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
+
 <p>
 ![Hanoi - empírica](./graficas/hanoi_grupo_datos.png)
 </p>
 
+Esta gráfica se corresponde con una función del tipo $2^n$, luego se corresponde con la eficiencia teórica.
+
+$\pagebreak$
+
 ## Burbuja
+
+Compara cada elemento del vector con el siguiente y los intercambia de posición si no están en el orden correcto.
 
 #### Código del programa:
 
 ```c++
 void burbuja (int T[], int inicial, int final) {
-        int i, j, aux;
+      int i, j, aux;
 
-        for (i = inicial; i < final - 1; i++) {
-            for (j = final - 1; j > i; j--) {
-                if (T[j] < T[j-1]) {
-                    aux = T[j];
-                    T[j] = T[j-1];
-                    T[j-1] = aux;
-                }
-            }
-        }
-    }
+      for (i = inicial; i < final - 1; i++) {
+          for (j = final - 1; j > i; j--) {
+              if (T[j] < T[j-1]) {
+                  aux = T[j];
+                  T[j] = T[j-1];
+                  T[j-1] = aux;
+              }
+          }
+      }
+}
 ```
 
 ### Eficiencia empírica
 
-Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja y la regresión para cada persona del grupo:
+La siguiente gráfica muestra los valores obtenidos para cada persona del grupo.
 
 <p>
 ![Burbuja - empírica](./graficas/burbuja_grupo_datos.png)
 </p>
 
+
+### Eficiencia híbrida
+
+La siguiente gráfica muestra la regresión de la nube de puntos obtenida con la eficiencia empírica.
+
 <p>
 ![Burbuja - regresión](./graficas/burbuja_grupo_regresion.png)
 </p>
 
-### Eficiencia híbrida
 
 Hemos calculado la constante *k* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
@@ -282,9 +300,11 @@ Hemos calculado la constante *k* para todos los conjuntos de datos empíricos de
 
 ## Mergesort
 
+Este algoritmo divide el vector en dos partes iguales y se vuelve a aplicar de forma recurrente a cada una de ellas. Luego une ambos vectores sobre el vector original, por lo que esta parte ya queda ordenada.
+
 ### Eficiencia teórica
 
-En el guión de prácticas se ha llegado a la conclusión de que la eficiencia teórica de `Mergesort` es $O(nlog_2(n))$.
+En el guión de prácticas se ha llegado a la conclusión de que la eficiencia teórica de `mergesort` es $O(nlog_2(n))$.
 
 ### Eficiencia empírica
 
@@ -315,7 +335,7 @@ De nuevo, hemos obtenido la *K* para cada integrante del grupo:
 
 ### Eficiencia teórica
 
-No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(n\log_2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \leq O(n^2)$
+Tras los respectivos análisis hechos, podemos ver que la función `mergesort` es de tipo $O(n\log_2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \leq O(n^2)$.
 
 ### Eficiencia empírica
 
@@ -324,6 +344,7 @@ Representando en una misma gráfica los resultados de las ejecuciones más rápi
 <p>
 ![Comparación burbuja y mergesort - empírica](./graficas/comparacion_algoritmos_ordenacion.png)
 </p>
+
 
 ## Conclusiones
 
