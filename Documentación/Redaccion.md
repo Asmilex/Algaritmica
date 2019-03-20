@@ -1,6 +1,10 @@
 # Presentación
 
-> Autores: Ana Buendía, Andrés Millán, Paula Villanueva, Juan Antonio Villegas
+> Autores: Ana Buendía Ruiz Azuaga, Andrés Millán Muñoz, Paula Villanueva Núñez, Juan Antonio Villegas Recio.
+
+> 2º doble grado ingeniería informática y matemáticas (2018-19).
+
+# Práctica 1. Análisis de Eficiencia de Algoritmos
 
 #### Introducción
 
@@ -38,7 +42,7 @@ En este documento recogeremos los datos de nuestras partes individuales y los co
     }
 ```
 
-### Teórica
+### Eficiencia teórica
 
 Observamos que llamamos recursivamente a la función. Nuestro problema decrece en $n/2$ por cada llamada que hacemos a la función:
 
@@ -62,7 +66,7 @@ $$T(n) = a \cdot \log_2(n) + 1$$
 
 Por tanto, concluimos que el algoritmo 4 es $O(\log_2(n))$
 
-### Comparación empírica
+### Eficiencia empírica
 
 Para calcular las eficiencias empíricas, cada miembro del grupo ha ejecutado el siguiente script en su ordenador:
 
@@ -73,6 +77,7 @@ for j in {1..28}; do
     for i in {1..1000}; do
         ./BuscarBinario $N >> resultados_buscarBinario.dat
     done
+
     N=$(($N+30000))
 done
 ```
@@ -89,9 +94,9 @@ Cabe destacar que en este caso las medidas están en nanosegundos (ns).
 
 Comprobamos que la nube de puntos de cada uno se asemeja a una curva logarítmica y que el PC más rápido con este algoritmo es el de Andrés, tardando unos 380ns como máximo.
 
-### Comparación híbrida
+### Eficiencia híbrida
 
-Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los sigueintes resultados:
+Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
 | Persona      | K             |
 | ------------ | :------------ |
@@ -146,7 +151,7 @@ void heapsort (int T[], int num_elem) {
 ```
 
 
-### Teórica
+### Eficiencia teórica
 
 Primero estudiaremos la eficiencia de `Reajustar`. En cada iteración, la variable `k` se multiplica por 2.
 
@@ -154,7 +159,7 @@ En el peor de los casos, en la función reajustar, el número debe ser llevado d
 
 $$\sum_{N \geq i \geq 1}{\log_2(N/i)} + \sum_{N \geq i \geq 1}{\log_2(i)} = N \cdot \log_2(N) + O(N)$$
 
-### Comparación empírica
+### Eficiencia empírica
 
 Al igual que el caso anterior, hemos ejecutado un script que nos generaba un fichero de datos que procesar. El script ejecutado es el siguiente:
 
@@ -168,17 +173,18 @@ for j in {1..28}; do
     N=$(($N+700))
 done
 ```
+
 Es decir, hemos ejecutado 15 veces el programa para cada tamaño distinto. Los vectores estaban también formados por números aleatorios.
 
 Ejecutamos los scripts, procesamos los ficheros y obtenemos los siguientes valores:
 
 ![Gráfica Heapsort](./graficas/heapsort_grupo_datos.png)
 
-Heapsort es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo el PC más rápido en general ha sido el de Andrés.
+Heapsort es de orden $O(n\log_2(n))$, y las gráficas se asemejan mucho a dicha curva. De nuevo, el PC más rápido en general ha sido el de Andrés.
 
-### Comparación híbrida
+### Eficiencia híbrida
 
-Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los sigueintes resultados:
+Hemos calculado la constante *K* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
 | Persona      | K               |
 | ------------ | :-------------- |
@@ -242,17 +248,17 @@ void burbuja (int T[], int inicial, int final) {
     }
 ```
 
-### Comparativa empírica
+### Eficiencia empírica
 
 Aquí mostramos las gráficas respectivas de los valores obtenidos para burbuja y la regresión para cada persona del grupo:
 
 ![Gráfica BurbujaDatos](./graficas/burbuja_grupo_datos.png)
 
-![Gráfica Burbuja - Regresion](./graficas/burbuja_grupo_regresion.png)
+![Gráfica Burbuja - Regresión](./graficas/burbuja_grupo_regresion.png)
 
-### Comparación híbrida
+### Eficiencia híbrida
 
-Hemos calculado la constante k para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
+Hemos calculado la constante *k* para todos los conjuntos de datos empíricos de cada componente del grupo, obteniendo así los siguientes resultados:
 
 | Persona      | K                |
 | ------------ | :--------------- |
@@ -263,11 +269,11 @@ Hemos calculado la constante k para todos los conjuntos de datos empíricos de c
 
 ## Mergesort
 
-### Teórico
+### Eficiencia teórica
 
-No lo estudiaremos ya que viene resuelto en los apuntes.
+En el guión de prácticas se ha llegado a la conclusión de que la eficiencia teórica de Mergesort es $O(nlog_2(n))$.
 
-### Empírico
+### Eficiencia empírica
 
 Hemos realizado para 28 valores distintos 15 iteraciones de las que obtendremos la media para obtener los resultados en media de las distintas ejecuciones. Además el vector está formado por números generados aleatoriamente.
 
@@ -275,9 +281,9 @@ Así, hemos obtenido la siguiente gráfica:
 
 ![Eficiencia empírica mergesort](./graficas/mergesort_grupo_datos.png)
 
-### Comparación híbrida
+### Eficiencia híbrida
 
-De nuevo, hemos obtenido la k para cada integrante del grupo:
+De nuevo, hemos obtenido la *K* para cada integrante del grupo:
 
 | Persona      | K               |
 | ------------ | :-------------- |
@@ -290,15 +296,15 @@ De nuevo, hemos obtenido la k para cada integrante del grupo:
 
 ## Comparación burbuja y mergesort
 
-### Teórico
+### Eficiencia teórica
 
-No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(n\log2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \leq O(n^2)$
+No hemos estudiado `mergesort` a nivel teórico. Sin embargo, tras los respectivos análisis hechos, podemos ver que la función es de tipo $O(n\log_2(n))$. En comparación con `burbuja`, claramente vemos que tiene que ser más eficiente `mergesort`, dado que $O(n\log_2(n)) \leq O(n^2)$
 
-### Empírico
+### Eficiencia empírica
 
 Representando en una misma gráfica los resultados de las ejecuciones más rápidas tanto en burbuja como en mergesort se aprecia claramente que el algoritmo más eficiente es mergesort.
 
-![Comparacion burbuja y mergesort](./graficas/comparacion_algoritmos_ordenacion.png)
+![Comparación burbuja y mergesort](./graficas/comparacion_algoritmos_ordenacion.png)
 
 ## Conclusiones
 
