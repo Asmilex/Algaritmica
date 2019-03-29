@@ -29,6 +29,31 @@ int maximo (vector<int> &flechita, int l, int r) {
     }
 }
 
+int minimo (vector<int> &flechita, int l, int r) {
+
+    if (r - l == 1) {
+        if (flechita[l] > flechita[r])
+            return flechita[r];
+        else
+            return flechita[l];
+    }
+
+    if (r == l) {
+        return flechita[l];
+    }
+
+    else {
+        int m    = (l + r)/2;
+        int minL = minimo(flechita, l, m);
+        int minR = minimo(flechita, m + 1, r);
+
+        if (minL < minR)
+            return minL;
+        else
+            return minR;
+    }
+}
+
 void generar_aleatorios (vector<int> &flechita, const size_t tamano) {
     std::mt19937 rng;
     rng.seed(std::random_device()());
@@ -52,5 +77,6 @@ int main(int argc, char const *argv[])
     for (auto num: flechita)
         cout << num << ", ";
 
-    cout << "\nMAXIMO: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
+    cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
+    cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
 }
