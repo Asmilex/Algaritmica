@@ -4,27 +4,25 @@
 
 using namespace std;
 
-int maximo(vector<int> &flechita, int l, int r){
+int maximo (vector<int> &flechita, int l, int r) {
 
-    if(r-l==1){
-        if(flechita[l]<flechita[r])
+    if (r - l == 1) {
+        if (flechita[l] < flechita[r])
             return flechita[r];
         else
-        {
             return flechita[l];
-        }
-        
     }
 
-    if(r==l){
+    if (r == l) {
         return flechita[l];
     }
 
-    else{
-        int m=(l+r)/2;
-        int maxL=maximo(flechita,l,m);
-        int maxR=maximo(flechita,m+1,r);
-        if(maxL<maxR)
+    else {
+        int m    = (l + r)/2;
+        int maxL = maximo(flechita, l, m);
+        int maxR = maximo(flechita, m + 1, r);
+
+        if (maxL < maxR)
             return maxR;
         else
             return maxL;
@@ -54,5 +52,5 @@ int main(int argc, char const *argv[])
     for (auto num: flechita)
         cout << num << ", ";
 
-    cout << "\nMAXIMO: " << maximo(flechita,0,flechita.size()-1);
+    cout << "\nMAXIMO: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
 }
