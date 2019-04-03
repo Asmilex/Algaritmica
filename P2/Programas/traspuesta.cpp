@@ -44,11 +44,11 @@ void trasponer (vector<vector<int>> & matriz) {
     trasponerDyV (matriz, 0, matriz[0].size()-1, 0, matriz.size()-1);
 }
 
-void print_matrix (vector<vector<int>> matrix) {
+void print_matrix (vector<vector<int>> matrix, size_t N, size_t M) {
     printf("\n");
 
-    for (size_t i = 0; i < matrix[0].size(); ++i) {
-        for (size_t j = 0; j < matrix.size(); ++j)
+    for (size_t i = 0; i < N; ++i) {
+        for (size_t j = 0; j < M; ++j)
             cout << matrix[i][j] << "\t";
 
         cout << "\n";
@@ -69,13 +69,11 @@ int main(int argc, char const *argv[])
 
     vector<vector<int>> matriz (dim, vector<int>(dim, -999));
 
-    print_matrix(matriz);
-
     generar_aleatorios(matriz, N, M);
 
-    print_matrix(matriz);
+    print_matrix(matriz, N, M);
 
     trasponer(matriz);
 
-    print_matrix(matriz);
+    print_matrix(matriz, M, N);
 }
