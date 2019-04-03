@@ -5,7 +5,7 @@
 SRC = $(wildcard *.c *.cc *cpp)
 EXE = $(basename $(SRC))
 
-CFLAGS = -O2 -std=c11 -Wall
+CFLAGS = -O2 -std=c11 -Wall -g
 CXXFLAGS = $(CFLAGS:c11=c++14)
 
 ###############################################################################
