@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -65,14 +66,27 @@ int main(int argc, char const *argv[])
         cerr << "Fallo en los parámetros";
         return -1;
     }
+     chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
+	double tejecucion; // tiempo de ejecucion del algoritmo en ms
 
     vector<int> flechita;
 
     generar_aleatorios(flechita, atoi(argv[1]));
 
+    t0= std::chrono::high_resolution_clock::now(); // Cogemos el tiempo en que comienza la ejecuciÛn del algoritmo
+    maximo(flechita, 0, flechita.size() - 1);
+    minimo(flechita, 0, flechita.size() - 1);
+	tf= std::chrono::high_resolution_clock::now(); // Cogemos el tiempo en que finaliza la ejecuciÛn del algoritmo
+
+    tejecucion= std::chrono::duration_cast<std::chrono::microseconds>(tf - t0).count();
+
+    cout << flechita.size() << " " << tejecucion << endl;
+
+/*
     for (auto num: flechita)
         cout << num << ", ";
 
     cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
     cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
+*/
 }
