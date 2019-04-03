@@ -69,10 +69,9 @@ int main(int argc, char const *argv[])
      chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
 	double tejecucion; // tiempo de ejecucion del algoritmo en ms
 
-    vector<int> flechita;
+    int n = atoi(argv[1]);
 
-    generar_aleatorios(flechita, atoi(argv[1]));
-
+<<<<<<< HEAD
     t0= std::chrono::high_resolution_clock::now(); // Cogemos el tiempo en que comienza la ejecuciÛn del algoritmo
     maximo(flechita, 0, flechita.size() - 1);
     minimo(flechita, 0, flechita.size() - 1);
@@ -89,4 +88,20 @@ int main(int argc, char const *argv[])
     cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
     cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
 */
+=======
+    vector<int> flechita;
+
+    generar_aleatorios(flechita, n);
+
+    /*for (auto num: flechita)
+        cout << num << ", ";*/
+    chrono::high_resolution_clock::time_point t_antes = chrono::high_resolution_clock::now();
+    int maximovector = maximo(flechita, 0, flechita.size());
+    int minimovector = minimo(flechita, 0, flechita.size());
+    chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
+  	unsigned long t_ejecucion = chrono::duration_cast<std::chrono::microseconds>(t_despues - t_antes).count();
+  	cout << "Tiempo de ejecucion: " << t_ejecucion << " para tamanio: "<< n <<endl;
+    //cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
+    //cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
+>>>>>>> 81acbea71101ada1fd29236ee227a7a32c194322
 }
