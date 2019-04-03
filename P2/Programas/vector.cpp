@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -66,13 +67,20 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
+    int n = atoi(argv[1]);
+
     vector<int> flechita;
 
-    generar_aleatorios(flechita, atoi(argv[1]));
+    generar_aleatorios(flechita, n);
 
-    for (auto num: flechita)
-        cout << num << ", ";
-
-    cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
-    cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
+    /*for (auto num: flechita)
+        cout << num << ", ";*/
+    chrono::high_resolution_clock::time_point t_antes = chrono::high_resolution_clock::now();
+    int maximovector = maximo(flechita, 0, flechita.size());
+    int minimovector = minimo(flechita, 0, flechita.size());
+    chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
+  	unsigned long t_ejecucion = chrono::duration_cast<std::chrono::microseconds>(t_despues - t_antes).count();
+  	cout << "Tiempo de ejecucion: " << t_ejecucion << " para tamanio: "<< n <<endl;
+    //cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
+    //cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
 }
