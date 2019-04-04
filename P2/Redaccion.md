@@ -1,11 +1,3 @@
----
-title: Práctica 1. Eficiencia
-revealOptions:
-    transition: 'Fade'
-    theme: robot-lung
-
----
-
 # Presentación grupal
 
 Autores:
@@ -23,7 +15,8 @@ Autores:
 
 ## Objetivos
 
-Y IO KHÉ ZE BRO
+- Resolver dos problemas con la metodología Divide y Vencerás
+- Exponer los tres tipos de eficiencia
 
 ### Problema asignado: Máximo y mínimo de un vector
 
@@ -34,14 +27,14 @@ Para este problema, hemos pensado en aplicar una filosofía al mergesort: subdiv
 ```c++
 int maximo (vector<int> &flechita, int l, int r) {
     if(l<=r){
-        
+
         if (r - l <= 1) {
             if (flechita[l] < flechita[r])
                 return flechita[r];
             else
                 return flechita[l];
         }
-        
+
         else {
             int m    = (l + r)/2;
             int maxL = maximo(flechita, l, m);
@@ -52,13 +45,13 @@ int maximo (vector<int> &flechita, int l, int r) {
             else
                 return maxL;
         }
-        
+
     }
 }
 
 int minimo (vector<int> &flechita, int l, int r) {
     if(l<=r){
-        
+
         if (r - l <= 1) {
             if (flechita[l] > flechita[r])
                 return flechita[r];
@@ -76,7 +69,7 @@ int minimo (vector<int> &flechita, int l, int r) {
             else
                 return minR;
         }
-        
+
     }
 }
 ```
@@ -85,7 +78,7 @@ int minimo (vector<int> &flechita, int l, int r) {
 
 Analizamos la eficiencia teórica de la función `maximo`, ya que la otra es análoga. La función es recursiva, luego necesitamos una ecuación de recurrencia para plantearlo. Si el tamaño del vector a buscar es 2 o menos, tenemos un bloque `if-else` cada uno con una sentencia de tiempo constante, luego este caso se puede acotar con una constante $a$. El caso en el que el tamaño sea mayor que 2, hay dos llamadas a la propia función pero el tamaño es de la mitad junto con un conjunto de sentencias que se pueden acotar por una constante $b$. Resumiendo:
 
-$T(n)=a$      si  $n\leq 2$ 
+$T(n)=a$      si  $n\leq 2$
 
 $T(n)=T(\frac{n}{2})+b$     si $n>2$
 
