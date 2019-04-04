@@ -6,9 +6,13 @@ make
 
 N=1000
 
+# Parámetros: 0 -> Lineal, 1 -> DyV
+
+DyV=1
+
 for i in {1..50}; do
 for j in {1..3}; do
-	    ./vector $N >> vector.log
+	    ./vector $N $DyV >> vector.log
 done
 	N=$(($N+700))
 done
