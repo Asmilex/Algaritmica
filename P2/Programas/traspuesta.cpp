@@ -44,6 +44,12 @@ void trasponer (vector<vector<int>> & matriz) {
     trasponerDyV (matriz, 0, matriz[0].size()-1, 0, matriz.size()-1);
 }
 
+void trasposicion_usual (vector<vector<int>> matriz, vector<vector<int>> & destino) {
+    for (int i = 0; i < matriz[0].size(); ++i)
+        for (int j = 0; j < matriz.size(); ++j)
+            destino[j][i] = matriz[i][j];
+}
+
 void print_matrix (vector<vector<int>> matrix, size_t N, size_t M) {
     printf("\n");
 
@@ -71,9 +77,18 @@ int main(int argc, char const *argv[])
 
     generar_aleatorios(matriz, N, M);
 
+    cout << "\nMatriz a trasponer:";
     print_matrix(matriz, N, M);
 
     trasponer(matriz);
 
+    cout << "\nMatriz traspuesta:";
     print_matrix(matriz, M, N);
+
+    vector<vector<int>> traspuesta (dim, vector<int>(dim, -999));
+
+    cout << "\n\nTraspuesta lineal:";
+    trasposicion_usual(matriz, traspuesta);
+
+    print_matrix(traspuesta, N, M);
 }
