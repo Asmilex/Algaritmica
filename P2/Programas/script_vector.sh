@@ -10,9 +10,11 @@ N=1000
 
 DyV=1
 
+echo \n\n\nDivide y vencerás activo: $DyV
 for i in {1..50}; do
-for j in {1..3}; do
+	for j in {1..3}; do
 	    ./vector $N $DyV >> vector.log
-done
+	done
+
 	N=$(($N+700))
 done

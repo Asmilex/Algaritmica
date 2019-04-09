@@ -1,17 +1,18 @@
 #include <vector>
 #include <iostream>
 #include <random>
+#include <chrono>
 
 using namespace std;
 
-void generar_aleatorios (vector<vector<int>> &peaso_matriz, const size_t N, const size_t M) {
+void generar_aleatorios (vector<vector<int>> &matriz, const size_t N, const size_t M) {
     std::mt19937 rng;
     rng.seed(std::random_device()());
     std::uniform_int_distribution<std::mt19937::result_type> dist(-100,100);
 
     for (size_t i = 0; i < N; ++i)
         for (size_t j = 0; j < M; ++j)
-            peaso_matriz[i][j] = dist(rng);
+            matriz[i][j] = dist(rng);
 
     // Valor no válido para los elementos no admisibles
 }
@@ -40,7 +41,7 @@ void trasponerDyV (vector<vector<int>> & matriz, int fInicio, int fFin, int cIni
     }
 }
 
-void trasponer (vector<vector<int>> & matriz) {
+void trasposicion_DyV (vector<vector<int>> & matriz) {
     trasponerDyV (matriz, 0, matriz[0].size()-1, 0, matriz.size()-1);
 }
 
@@ -65,19 +66,37 @@ void print_matrix (vector<vector<int>> matrix, size_t N, size_t M) {
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 3) {
-        cerr << "./traspuesta filas columnas. Matriz de N \\cdot M";
+    if (argc != 4) {
+        cerr << "./traspuesta filas columnas. Matriz de N \\cdot M {1,0}\nSi el último parámetro es 1, se ejecutará divide y vencerás";
         return -1;
     }
 
+    // Parse parameters
     int N = atoi(argv[1]), M = atoi(argv[2]);
     int dim = max(N, M);
+    bool is_DyV = atoi(argv[3]);
 
-    vector<vector<int>> matriz (dim, vector<int>(dim, -999));
+    vector<vector<int>> matriz     (dim, vector<int>(dim, -999));
+    vector<vector<int>> traspuesta (dim, vector<int>(dim, -999));
 
     generar_aleatorios(matriz, N, M);
 
-    cout << "\nMatriz a trasponer:";
+    chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
+    chrono::high_resolution_clock::time_point t_antes = chrono::high_resolution_clock::now();
+
+    if (is_DyV) {
+        trasposicion_DyV(matriz);
+    }
+    else {
+        trasposicion_usual(matriz, traspuesta);
+    }
+
+    chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
+
+    unsigned long t_ejecucion = chrono::duration_cast<std::chrono::microseconds>(t_despues - t_antes).count();
+  	cout << "para tamanio: " << N*M << " tiempo de ejecucion: "<< t_ejecucion <<endl;
+
+    /* cout << "\nMatriz a trasponer:";
     print_matrix(matriz, N, M);
 
     trasponer(matriz);
@@ -90,5 +109,5 @@ int main(int argc, char const *argv[])
     cout << "\n\nTraspuesta lineal:";
     trasposicion_usual(matriz, traspuesta);
 
-    print_matrix(traspuesta, N, M);
+    print_matrix(traspuesta, N, M); */
 }
