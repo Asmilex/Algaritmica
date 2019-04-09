@@ -95,7 +95,7 @@ int main(int argc, char const *argv[])
     }
 
     chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
-  	unsigned long t_ejecucion = chrono::duration_cast<std::chrono::microseconds>(t_despues - t_antes).count();
+  	unsigned long t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
   	cout << "para tamanio: " << n << " tiempo de ejecucion: "<< t_ejecucion <<endl;
     //cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
     //cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
