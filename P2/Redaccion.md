@@ -22,6 +22,58 @@ Autores:
 - Ḿostrar cómo proceden los algoritmos
 
 
+
+### Problema común: Traspuesta de una matriz
+
+Dada una matriz  $A\in \mathcal{M}_{N\times M}(\mathbb{Z})$, con $N$ y $M$ números naturales potencia de 2, se trata de trasponer la matriz usando la técnica de divide y vencerás. 
+
+Para ello subdividimos la matriz en 4 partes y aprovechamos que, si
+
+$A=$ $$\Big(\begin{matrix}A_{11} & \vert & A_{12} \\ \hline A_{21} & \vert & A_{22}  \end{matrix}\Big)$$ , entonces $A^t=$ $$\Big(\begin{matrix}A_{11}^t & \vert & A_{21}^t \\ \hline A_{12}^t & \vert & A_{22}^t  \end{matrix}\Big)$$
+
+(se quea to feo pero illo xd)
+
+#### Código
+
+```c++
+void intercambiar(vector<vector<int>> & matriz, int fIniA, int cIniA, int fIniB, int cIniB, int dim) {
+    for (size_t i = 0; i < dim ; i++) {
+        for (size_t j = 0; j < dim; j++) {
+            int aux = matriz[fIniA + i][cIniA + j];
+            matriz[fIniA + i][cIniA + j] = matriz[fIniB + i][cIniB + j];
+            matriz[fIniB + i][cIniB + j] = aux;
+        }
+    }
+}
+
+void trasponerDyV (vector<vector<int>> & matriz, int fInicio, int fFin, int cInicio, int cFin) {
+    if (fInicio < fFin) {
+        int fMedio = (fInicio + fFin)/2;
+        int cMedio = (cInicio + cFin)/2;
+
+        trasponerDyV(matriz, fInicio,    fMedio, cInicio,    cMedio);
+        trasponerDyV(matriz, fInicio,    fMedio, cMedio + 1, cFin);
+        trasponerDyV(matriz, fMedio + 1, fFin,   cInicio,    cMedio);
+        trasponerDyV(matriz, fMedio + 1, fFin,   cMedio + 1, cFin);
+
+        intercambiar(matriz, fMedio + 1, cInicio, fInicio, cMedio + 1, fFin - fMedio);
+    }
+}
+
+void trasponer (vector<vector<int>> & matriz) {
+    trasponerDyV (matriz, 0, matriz[0].size()-1, 0, matriz.size()-1);
+}
+```
+
+#### Análisis teórico
+
+Estudiar la eficiencia teórica de la función `trasponer` es equivalente a estudiar la eficiencia teórica de la función `trasponerDyV`. Suponiendo $n$ el número de datos de la matriz, primero debemos calcular la eficiencia teórica de la función `intercambiar`. Esta función únicamente intercambia los valores de dos de las submatrices, por lo que sólo necesita recorrer la cuarta parte de la matriz original. Es decir, $T(n)=a\frac{n}{4}$, siendo $a$ el tiempo que tarda en ejecutarse el bloque de código del bucle más interno. Por tanto, la función `intercambiar` es de orden $O(n)$. 
+
+Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$, por lo que la ecuación nos queda tal que ahora sigo escribiendo.
+
+
+
+
 ## Problema asignado: Máximo y mínimo de un vector
 
 Para resolver este problema, procederemos de la manera que sigue: Dividiremos el vector en dos partes y obtendremos el máximo (resp. mínimo) de cada subvector para después compararlos y devolver el máximo (resp. mínimo). Si el tamaño de los vectores está por encima del umbral, volveremos a aplicar el procedimiento.
