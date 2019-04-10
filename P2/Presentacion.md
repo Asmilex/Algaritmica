@@ -161,7 +161,9 @@ $$K = 3.205694396131746$$
 
 ### Comparación DyV y no DyV
 
-<img src="./graficas/matriz_empirica_comparacion.png" alt="Traspuesta 2^k - comparación" width="650px"/>
+<img src="./graficas/matriz_empirica_comparacion.png" alt="Traspuesta 2^k - comparación" width="450px"/>
+
+A partir de 256 componentes aprox. DyV tarda hasta 4 veces más.
 
 ---
 
@@ -240,7 +242,7 @@ int maximo (vector<int> &flechita, int l, int r) {
   `$$n=2^k \Rightarrow T(2^k) = t_k = 2t_{k-1} + b$$`
 
   $$t_k^h = c_1 2^k$$
-  $$t_k^p = -\frac{-b}{2} = c_2$$
+  $$t_k^p = -\frac{b}{2} = c_2$$
 
   $$t_k = c_1 2^k + c_2 \Rightarrow T(n) = c_1n + c_2 \Rightarrow O(n)$$
 
