@@ -16,7 +16,7 @@ Autores:
 
 ## Objetivos
 - Traspuesta de una matriz $2^k$.
-- Traspuesta de una matriz $N \times M$.
+- Traspuesta de una matriz $N^M$.
 - Calcular mínimo y máximo de un vector.
 
 ---
@@ -32,11 +32,11 @@ Autores:
 
 ---
 
-## Traspuesta de una matriz 2^k
+## Traspuesta de matriz cuadrada con 2^k elementos
 
 ---
 
-## Traspuesta de una matriz 2^k
+## Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia teórica (no DyV)
 
@@ -45,7 +45,7 @@ Autores:
 ---
 
 
-## Traspuesta de una matriz 2^k
+## Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia teórica (DyV)
 
@@ -53,7 +53,7 @@ Autores:
 
 ---
 
-## Traspuesta de una matriz 2^k
+## Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia empírica (no DyV)
 
@@ -61,41 +61,27 @@ Autores:
 
 ---
 
-### Constante K (no DyV)
+## Traspuesta de matriz cuadrada con 2^k elementos
 
-> Completar la tabla
+### Eficiencia empírica (DyV)
 
-| Persona      | *K*             |
-| ------------ | :------------ |
-| Ana          |  |
-| Andrés       |  |
-| Juan Antonio |  |
-| Paula        |  |
+![Traspuesta 2^k - eficiencia empírica](./graficas/matriz_empirica_DyV.png)
+
+K =
 
 ---
 
-## Traspuesta de una matriz 2^k
+## Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia híbrida (DyV)
 
->Insertar gráfica eficiencia híbrida DyV
+![Traspuesta 2^k - eficiencia híbrida](./graficas/matriz_hibrida_DyV.png)
+
+K = 3'143991
 
 ---
 
-### Constante K (DyV)
-
->Completar la tabla
-
-| Persona      | *K*             |
-| ------------ | :------------ |
-| Ana          |  |
-| Andrés       |  |
-| Juan Antonio |  |
-| Paula        |  |
-
----
-
-## Traspuesta de una matriz 2^k
+## Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Comparación DyV y no DyV
 
@@ -110,16 +96,15 @@ Autores:
 
 ## Traspuesta de una matriz 2^8 (DyV)
 
-> Es un caso particular de 2^k, hay que mostrar paso a paso cómo se divide y
- se calculan las traspuestas de las submatrices.
+![Pasos 4x4](./graficas/Pasos_4x4_DyV.png)
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Eficiencia teórica (no DyV)
 
@@ -127,7 +112,7 @@ Autores:
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Eficiencia teórica (DyV)
 
@@ -135,7 +120,7 @@ Autores:
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Eficiencia empírica (no DyV)
 
@@ -143,7 +128,7 @@ Autores:
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Eficiencia empírica (DyV)
 
@@ -152,45 +137,27 @@ Autores:
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Eficiencia híbrida (no DyV)
 
 >Insertar gráfica eficiencia híbrida no DyV
 
----
-
-### Constante K (no DyV)
-
-| Persona      | *K*             |
-| ------------ | :------------ |
-| Ana          |  |
-| Andrés       |  |
-| Juan Antonio |  |
-| Paula        |  |
+K =
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Eficiencia híbrida (DyV)
 
 >Insertar gráfica eficiencia híbrida DyV
 
----
-
-### Constante K (DyV)
-
-| Persona      | *K*             |
-| ------------ | :------------ |
-| Ana          |  |
-| Andrés       |  |
-| Juan Antonio |  |
-| Paula        |  |
+K =
 
 ---
 
-## Traspuesta de una matriz NxM
+## Traspuesta de una matriz N^M
 
 ### Comparación DyV y no DyV
 
@@ -215,7 +182,8 @@ Autores:
 
 ### Eficiencia teórica (DyV)
 
->Insertar eficiencia teórica DyV
+> Insertar las ecuaciones y eso
+$O(n)$.
 
 ---
 
@@ -231,7 +199,7 @@ Autores:
 
 ### Eficiencia empírica (DyV)
 
->Insertar gráfica eficiencia empírica DyV
+![Vector - eficiencia empírica](./graficas/vector_empiricasinregr_DyV.png)
 
 ---
 
@@ -241,18 +209,7 @@ Autores:
 
 >Insertar gráfica eficiencia híbrida no DyV
 
----
-
-### Constante K (no DyV)
-
->Completar gráficas
-
-| Persona      | *K*             |
-| ------------ | :------------ |
-| Ana          |  |
-| Andrés       |  |
-| Juan Antonio |  |
-| Paula        |  |
+K =
 
 ---
 
@@ -260,21 +217,15 @@ Autores:
 
 ### Eficiencia híbrida (DyV)
 
->Insertar gráfica eficiencia híbrida DyV
+![Vector - eficiencia empírica](./graficas/vector_empirica_DyV.png)
 
 ---
 
 ### Constante K (DyV)
 
->Completar tabla
+![Vector - eficiencia híbrida](./graficas/vector_hibrida_DyV.png)
 
-| Persona      | *K*             |
-| ------------ | :------------ |
-| Ana          |  |
-| Andrés       |  |
-| Juan Antonio |  |
-| Paula        |  |
-
+K = 0'00617544
 
 ---
 
