@@ -206,26 +206,6 @@ $$O(n)$$
 
 ###### Máximo y mínimo de un vector
 
-### Eficiencia teórica (no DyV)
-
-```c++
-int minimo (const vector<int> & flechita) {
-    int min = flechita[0];
-
-    for (auto elemento: flechita)
-        if (elemento < min)
-            min = elemento;
-
-    return min;
-}
-```
-
-$$O(n)$$
-
----
-
-###### Máximo y mínimo de un vector
-
 ### Eficiencia teórica (DyV)
 
 ```c++
