@@ -63,13 +63,15 @@ void trasponer (vector<vector<int>> & matriz) {
 }
 ```
 
-#### Análisis teórico
+### Análisis teórico
 
 Estudiar la eficiencia teórica de la función `trasponer` es equivalente a estudiar la eficiencia teórica de la función `trasponerDyV`. Suponiendo $n$ el número de datos de la matriz, primero debemos calcular la eficiencia teórica de la función `intercambiar`. Esta función únicamente intercambia los valores de dos de las submatrices, por lo que sólo necesita recorrer la cuarta parte de la matriz original. Es decir, $T(n)=a\frac{n}{4}$, siendo $a$ el tiempo que tarda en ejecutarse el bloque de código del bucle más interno. Por tanto, la función `intercambiar` es de orden $O(n)$.
 
 Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$, por lo que la ecuación nos queda tal que ahora sigo escribiendo.
 
-#### Análisis empírico
+### Análisis empírico
+
+Ejecutamos nuesto algoritmo de divide y vencerás para tamaños
 
 ## Problema asignado: Máximo y mínimo de un vector
 

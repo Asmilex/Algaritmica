@@ -13,8 +13,6 @@ void generar_aleatorios (vector<vector<int>> &peaso_matriz, const size_t N, cons
     for (size_t i = 0; i < N; ++i)
         for (size_t j = 0; j < M; ++j)
             peaso_matriz[i][j] = dist(rng);
-
-    // Valor no válido para los elementos no admisibles
 }
 
 void intercambiar(vector<vector<int>> & matriz, int fIniA, int cIniA, int fIniB, int cIniB, int dim) {
