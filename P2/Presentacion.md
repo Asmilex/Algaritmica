@@ -161,7 +161,9 @@ $$K = 3.205694396131746$$
 
 ### Comparación DyV y no DyV
 
-<img src="./graficas/matriz_empirica_comparacion.png" alt="Traspuesta 2^k - comparación" width="650px"/>
+<img src="./graficas/matriz_empirica_comparacion.png" alt="Traspuesta 2^k - comparación" width="450px"/>
+
+A partir de 256 componentes aprox. DyV tarda hasta 4 veces más.
 
 ---
 
