@@ -6,12 +6,24 @@
 
 using namespace std;
 
-int maximo(const vector<int> & flechita) {
-    return * max_element(flechita.begin(), flechita.end());
+int maximo (const vector<int> & flechita) {
+    int max = flechita[0];
+
+    for (auto elemento: flechita)
+        if (elemento > max)
+            max = elemento;
+
+    return max;
 }
 
-int minimo(const vector<int> & flechita) {
-    return * min_element(flechita.begin(), flechita.end());
+int minimo (const vector<int> & flechita) {
+    int min = flechita[0];
+
+    for (auto elemento: flechita)
+        if (elemento < min)
+            min = elemento;
+
+    return min;
 }
 
 int maximoDyV (const vector<int> &flechita, int l, int r) {
@@ -72,31 +84,35 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
-    int n = atoi(argv[1]);
+    int  n      = atoi(argv[1]);
     bool is_DyV = atoi(argv[2]);
 
     vector<int> flechita;
 
     generar_aleatorios(flechita, n);
 
-    /*for (auto num: flechita)
-        cout << num << ", ";*/
 
     chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
     chrono::high_resolution_clock::time_point t_antes = chrono::high_resolution_clock::now();
 
     if (is_DyV) {
         int maximovector = maximoDyV(flechita, 0, flechita.size());
-        int minimovector = minimoDyV(flechita, 0, flechita.size());
+        //int minimovector = minimoDyV(flechita, 0, flechita.size());
     }
     else {
         int maximovector = maximo(flechita);
-        int minimovector = minimo(flechita);
+        //int minimovector = minimo(flechita);
     }
 
     chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
   	unsigned long t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
-  	cout << "para tamanio: " << n << " tiempo de ejecucion: "<< t_ejecucion <<endl;
-    //cout << "\nMáximo: " << maximo(flechita, 0, flechita.size() - 1) << "\n\n";
-    //cout << "\nMínimo: " << minimo(flechita, 0, flechita.size() - 1) << "\n\n";
+
+  	cout << n << " " << t_ejecucion <<endl;
+
+
+    /* for (auto num: flechita)
+        cout << num << ", ";
+
+    cout << "\nMáximo: " << maximo(flechita) << "\n\n";
+    cout << "\nMínimo: " << minimo(flechita) << "\n\n"; */
 }

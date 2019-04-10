@@ -94,7 +94,8 @@ int main(int argc, char const *argv[])
     chrono::high_resolution_clock::time_point t_despues = chrono::high_resolution_clock::now();
 
     unsigned long t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
-  	cout << "para tamanio: " << N*M << " tiempo de ejecucion: "<< t_ejecucion <<endl;
+
+    cout << N*M << " " << t_ejecucion << endl;
 
     /* cout << "\nMatriz a trasponer:";
     print_matrix(matriz, N, M);
