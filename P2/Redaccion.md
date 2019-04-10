@@ -1,5 +1,4 @@
-# Presentación grupal
-
+# Memoria Práctica 2: Divide y Vencerás
 Autores:
 
 > Ana Buendía, Andrés Millán, Paula Villanueva, Juan Antonio Villegas
@@ -14,7 +13,7 @@ Autores:
 | Paula        | i7-5600U 2.60GHz | Ubuntu 18.04 LTS     |
 | Juan Antonio | i7-4500U 3.00GHz | Ubuntu 18.04 LTS     |
 
-
+---
 ## Objetivos
 
 - Resolver dos problemas con la metodología Divide y Vencerás
@@ -22,6 +21,8 @@ Autores:
 - Mostrar cómo proceden los algoritmos
 - Comparar el efoque Divide y Vencerás con el enfoque fuerza bruta
 - Comprender las diferencias entre ambos
+
+---
 
 ## Problema común: Traspuesta de una matriz
 
@@ -237,8 +238,6 @@ En el siguiente gráfico observamos el comportamiento de la versión fuerza brut
 
 
 
-
-
 ---
 
 
@@ -248,6 +247,42 @@ En el siguiente gráfico observamos el comportamiento de la versión fuerza brut
 ### Versión fuerza bruta
 
 #### Código
+
+```c++
+int maximo (const vector<int> & flechita) {
+    int max = flechita[0];
+
+    for (auto elemento: flechita)
+        if (elemento > max)
+            max = elemento;
+
+    return max;
+}
+```
+
+```c++
+int minimo (const vector<int> & flechita) {
+    int min = flechita[0];
+
+    for (auto elemento: flechita)
+        if (elemento < min)
+            min = elemento;
+
+    return min;
+}
+```
+
+#### Análisis teórico
+
+Si llamamos $a$ al tiempo de ejecución de la declaración de variables y retorno, teniendo en cuenta que el bucle en el peor de los casos recorre todo el vector comprobando si el elemento actual es mayor (resp. menor) que el guardado en la variable, llamamos $b$ al cuerpo del bucle. Concluimos entonces que $T(n)=a+bn$, siendo $n$ el número de elementos del vector. Por tanto el algoritmo es de orden $O(n)$.
+
+#### Análisis empírico
+
+TODO
+
+#### Análisis híbrido
+
+TODO
 
 
 
@@ -305,7 +340,7 @@ int minimo (vector<int> &flechita, int l, int r) {
 }
 ```
 
-### Análisis teórico
+#### Análisis teórico
 
 Analizamos la eficiencia teórica de la función `maximo`, ya que la otra es análoga. La función es recursiva, luego necesitamos una ecuación de recurrencia para plantearlo. Si el tamaño del vector a buscar es 2 o menos, tenemos un bloque `if-else` cada uno con una sentencia de tiempo constante, luego este caso se puede acotar con una constante $a$. El caso en el que el tamaño sea mayor que 2, hay dos llamadas a la propia función pero el tamaño es de la mitad junto con un conjunto de sentencias que se pueden acotar por una constante $b$. Resumiendo:
 
@@ -324,7 +359,7 @@ En conclusión: $t_k=t_k^h +t_k^p=c_1\cdot 2^k+c_2$, y deshaciendo el cambio de 
 
 
 
-### Análisis empírico
+#### Análisis empírico
 
 Procederemos de forma similar a como se hizo en la anterior práctica. Vamos aumentando el problema del tamaño, y mostramos el tiempo de ejecución de la función.
 
@@ -333,3 +368,17 @@ Hemos obtenido, en media, los siguientes valores:
 ```
 Peaso tabla loco
 ```
+
+#### Análisis híbrido
+
+TODO
+
+### Comparación entre ambas versiones
+
+TODO
+
+---
+
+## Conclusiones
+
+To mu bonito y DyV no sirve pa na :DDD
