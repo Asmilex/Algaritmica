@@ -82,6 +82,10 @@ Para ello subdividimos la matriz en 4 partes y aprovechamos que, si
 $$A=\Big(\begin{matrix}A_{11} & \vert & A_{12} \\ \hline A_{21} & \vert & A_{22}  \end{matrix}\Big)$$
 Entonces $$A^t=\Big(\begin{matrix}A_{11}^t & \vert & A_{21}^t \\ \hline A_{12}^t & \vert & A_{22}^t  \end{matrix}\Big)$$
 
+El problema $P$ es trasponer la matriz $A$. Y este se puede dividir en 4 subproblemas $P_i$, $i=1,2,3,4$, que se corresponden con el cálculo de las traspuestas de las 4 submatrices antes descritas, siendo estas las soluciones $S_i$, $i=1,2,3,4$ de los problemas $P_i$. Posteriormente, estas soluciones se pueden combinar mediante un intercambio de posiciones obteniendo así a través de $S_i$ la solución $S$ del problema $P$. 
+
+
+
 #### Código
 
 ```c++
@@ -178,7 +182,7 @@ Y si lo representamos gráficamente, obtenemos la siguiente gráfica:
 
 FIXME
 
-La constante $k$ para DyV es $k = 3.14399$
+La constante $K$ para DyV es $K = 3.14399$
 
 ![Gráfica constante K matriz DyV](./graficas/matriz_hibrida_DyV.png)
 
@@ -186,11 +190,13 @@ La constante $k$ para DyV es $k = 3.14399$
 
 ### Comparación entre ambas versiones
 
+Aparentemente, ya las eficiencias teóricas nos dicen que el enfoque DyV no es muy útil en este caso (al menos la implementación propuesta), ya que la versión por fuerza bruta es de eficiencia lineal $O(n)$ y la versión DyV es de eficiencia $O(n\cdot\log_2 n)$, es decir, es más ineficiente. 
+
 En el siguiente gráfico observamos el comportamiento de la versión fuerza bruta con respecto a la versión DyV:
 
 <img src="./graficas/matriz_empirica_comparacion.png" alt="Gráfica comparacion usual y DyV" width="500px"/>
 
-Para tamaños relativamente pequeños, hasta 256 componentes, la versión DyV tarda en media menos que la versión fuerza bruta, sin embargo, a partir de esos valores (umbral), la versión DyV tarda hasta 4 veces más en nuestra muestra.
+Observando las tablas de las eficiencias empíricas, para tamaños relativamente pequeños, hasta 256 componentes, la versión DyV tarda en media menos que la versión fuerza bruta, sin embargo, a partir de esos valores (umbral), la versión DyV tarda hasta 4 veces más en nuestra muestra, tal y como nos afirmaba la eficiencia calculada teóricamente.
 
 ---
 
@@ -304,6 +310,8 @@ Además, si aplicamos un ajuste por regresión lineal por mínimos cuadrados, ob
 ### Versión Divide y Vencerás
 
 Para resolver este problema, procederemos de la manera que sigue: Dividiremos el vector en dos partes y obtendremos el máximo (resp. mínimo) de cada subvector para después compararlos y devolver el máximo (resp. mínimo). Si el tamaño de los vectores está por encima del umbral, volveremos a aplicar el procedimiento.
+
+El problema $P$ es encontrar el máximo o mínimo del vector, y se puede subdividir en 2 subproblemas $P_1,P_2$  de la misma naturaleza, de tamaño menor (la mitad), y por tanto más fácil de resolver que $P$. Las soluciones $S_1,S_2$ de estos subproblemas se pueden integrar fácilmente simplemente comparándolas y devolviendo la mayor o menor dependiendo del caso, obteniendo a partir de $S_1$ y $S_2$ la solución $S$ del problema $P$.
 
 
 #### Código
@@ -439,14 +447,27 @@ De nuevo observamos un incremento lineal del tiempo de ejecución, tal y como no
 
 #### Análisis híbrido
 
-TODO
+Calculamos la constante $K = 17.4801$ y obtenemos mediante la función $T(n)=K\cdot n$ una cota superior del tiempo de ejecución estimado del algoritmo para un vector de $n$ componentes.
+
+<img src="/home/jantoniovr/Documentos/Universidad/ALGORITMICA/Algaritmica/P2/graficas/vector_hibrida_DyV.png" alt="Gráfica ejecucion y cota superior usual" width="500px"/>
+
+Además, si aplicamos un ajuste por regresión lineal por mínimos cuadrados, obtenemos una función de aproximación de $12.6470098x + 15089.5402$.
 
 ### Comparación entre ambas versiones
 
-TODO
+El primer detalle observable es que las eficiencias teóricas de las dos versiones coinciden, pues las dos son lineales. Esto tiene bastante sentido, ya que al querer calcular el máximo o mínimo de un vector, necesariamente hay que recorrer todas las componentes, lo cual ya asegura una eficiencia como mínimo lineal, y como únicamente hay que recorrerlas una vez, la eficiencia es lineal. Lo que marca la diferencia es la recursividad, pues añade un tiempo extra que el recorrido por fuerza bruta no requiere, por tanto este algoritmo que utiliza DyV no es más eficiente que el algoritmo fuerza bruta.
+
+Si juntamos en un sólo gráfico ambas nubes de puntos y sus respectivos ajustes por regresión lineal, podemos observar que en ningún caso el tiempo de ejecución de la variante DyV mejora a la variante por fuerza bruta.
+
+<img src="/home/jantoniovr/Documentos/Universidad/ALGORITMICA/Algaritmica/P2/graficas/vector_empirica_regresion_ambas.png" alt="Gráfica ejecucion y cota superior usual" width="500px"/>
+
+En este caso, el umbral no se puede calcular, pues en todo momento DyV supera en tiempo de ejecución al algoritmo fuerza bruta.
 
 ---
 
 ## Conclusiones
 
-To mu bonito y DyV no sirve pa na :DDD
+* El enfoque DyV en estos casos no es más eficiente.
+* La recursividad consume tiempo de ejecución que afecta a la eficiencia.
+* Los algoritmos DyV son sencillos de entender.
+* 
