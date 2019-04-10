@@ -19,7 +19,7 @@ Grupo: Las Algas
 - Resolver dos problemas con la metodología Divide y Vencerás
 - Exponer los tres tipos de eficiencia
 - Mostrar cómo proceden los algoritmos
-- Comparar el efoque Divide y Vencerás con el enfoque fuerza bruta
+- Comparar el enfoque Divide y Vencerás con el enfoque fuerza bruta
 - Comprender las diferencias entre ambos
 
 ---
@@ -44,7 +44,7 @@ Llamamos $n$ al número de elementos de la matriz, como el algoritmo intercambia
 
 #### Análisis empírico
 
-Ejecutamos el código usual varias veces con distintos tamaños. Para este problema, hemos ejecutado el programa para matrices cuadradas de $2^k\times 2^k$ (posteriormente se ejecutará la versión DyV con los mismos tamaños). Con los tiempos de cada ejecución hemos calculado el tiempo medio de respuesta y obtenemos los siguientes resultados:
+Ejecutamos el código usual varias veces con distintos tamaños. Para este problema, hemos ejecutado el programa para matrices cuadradas de $2^k \times 2^k$ (posteriormente se ejecutará la versión DyV con los mismos tamaños). Con los tiempos de cada ejecución hemos calculado el tiempo medio de respuesta y obtenemos los siguientes resultados:
 
 | Tamaño  | Tiempo (ns) |
 | ------- | ----------- |
@@ -82,7 +82,7 @@ Para ello subdividimos la matriz en 4 partes y aprovechamos que, si
 $$A=\Big(\begin{matrix}A_{11} & \vert & A_{12} \\ \hline A_{21} & \vert & A_{22}  \end{matrix}\Big)$$
 Entonces $$A^t=\Big(\begin{matrix}A_{11}^t & \vert & A_{21}^t \\ \hline A_{12}^t & \vert & A_{22}^t  \end{matrix}\Big)$$
 
-El problema $P$ es trasponer la matriz $A$. Y este se puede dividir en 4 subproblemas $P_i$, $i=1,2,3,4$, que se corresponden con el cálculo de las traspuestas de las 4 submatrices antes descritas, siendo estas las soluciones $S_i$, $i=1,2,3,4$ de los problemas $P_i$. Posteriormente, estas soluciones se pueden combinar mediante un intercambio de posiciones obteniendo así a través de $S_i$ la solución $S$ del problema $P$. 
+El problema $P$ es trasponer la matriz $A$. Y este se puede dividir en 4 subproblemas $P_i$, $i=1,2,3,4$, que se corresponden con el cálculo de las traspuestas de las 4 submatrices antes descritas, siendo estas las soluciones $S_i$, $i=1,2,3,4$ de los problemas $P_i$. Posteriormente, estas soluciones se pueden combinar mediante un intercambio de posiciones obteniendo así a través de $S_i$ la solución $S$ del problema $P$.
 
 
 
@@ -130,19 +130,19 @@ Si tomamos un tamaño de 4x4, podemos ver claramente los pasos que se realizan e
 
    <img src="./graficas/Pasos_4x4_DyV2.png" alt="Matriz original" width="350px"/>
 
-    
+
 
 3. En el tercero $A_{21}$.
 
    <img src="./graficas/Pasos_4x4_DyV3.png" alt="Matriz original" width="350px"/>
 
-    
 
-4. Y por último en el cuarto paso se traspone $A_{22}$. 
+
+4. Y por último en el cuarto paso se traspone $A_{22}$.
 
    <img src="./graficas/Pasos_4x4_DyV4.png" alt="Matriz original" width="350px"/>
 
-5. Una vez está traspuesta cada submatriz por su lado se llama a la función intercambiar y se intercambia la posición de $A_{12}^t$ y de $A_{21}^t$. Cabe destacar que en cada trasposición a su vez se llama recursivamente a la función y se aplica el mismo método. 
+5. Una vez está traspuesta cada submatriz por su lado se llama a la función intercambiar y se intercambia la posición de $A_{12}^t$ y de $A_{21}^t$. Cabe destacar que en cada trasposición a su vez se llama recursivamente a la función y se aplica el mismo método.
 
    <img src="./graficas/Pasos_4x4_DyV5.png" alt="Matriz original" width="350px"/>
 
@@ -150,9 +150,9 @@ Si tomamos un tamaño de 4x4, podemos ver claramente los pasos que se realizan e
 
 Estudiar la eficiencia teórica de la función `trasponer` es equivalente a estudiar la eficiencia teórica de la función `trasponerDyV`. Suponiendo $n$ el número de datos de la matriz, primero debemos calcular la eficiencia teórica de la función `intercambiar`. Esta función únicamente intercambia los valores de dos de las submatrices, por lo que sólo necesita recorrer la cuarta parte de la matriz original. Es decir, $T(n)=a\frac{n}{4}$, siendo $a$ el tiempo que tarda en ejecutarse el bloque de código del bucle más interno. Por tanto, la función `intercambiar` es de orden $O(n)$.
 
-Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$ y llamamos $t_k=T(2^k)$ por lo que se tiene la ecuación $t_k=4t_{k-2}+2^kb+a$, equivalentemente $t_{k+2}-4t_{k}=2^{k}b+a$. Procedemos a resolverla: 
+Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$ y llamamos $t_k=T(2^k)$ por lo que se tiene la ecuación $t_k=4t_{k-2}+2^kb+a$, equivalentemente $t_{k+2}-4t_{k}=2^{k}b+a$. Procedemos a resolverla:
 
-Primero resolvemos la ecuación homogénea asociada $t_k=4t_{k-2}$. Su polinomio característico es $p(\lambda)=\lambda^2-4=(\lambda-2)(\lambda+2)$, por tanto la solución es $t_k^h=c_1 2^k +c_2 (-2)^k$. 
+Primero resolvemos la ecuación homogénea asociada $t_k=4t_{k-2}$. Su polinomio característico es $p(\lambda)=\lambda^2-4=(\lambda-2)(\lambda+2)$, por tanto la solución es $t_k^h=c_1 2^k +c_2 (-2)^k$.
 
 Para hallar una solución particular, como el término independiente de la ecuación es una constante y una expresión $2^kb$, siendo 2 raíz del polinomio, existe una solución particular $t_k^p=c_3k2^k+c_4$. Por tanto, la solución de la ecuación es $t_k=c_1 2^k +c_2 (-2)^k+c_3k2^k+c_4$, y deshaciendo el cambio de variable, vemos 	que la función es $O(n\log_2 n)$.
 
@@ -180,9 +180,7 @@ Y si lo representamos gráficamente, obtenemos la siguiente gráfica:
 
 #### Análisis híbrido
 
-FIXME
-
-La constante $K$ para DyV es $K = 3.14399$
+La constante $K$ para DyV es $K = 3.205694396131746$
 
 ![Gráfica constante K matriz DyV](./graficas/matriz_hibrida_DyV.png)
 
@@ -190,7 +188,7 @@ La constante $K$ para DyV es $K = 3.14399$
 
 ### Comparación entre ambas versiones
 
-Aparentemente, ya las eficiencias teóricas nos dicen que el enfoque DyV no es muy útil en este caso (al menos la implementación propuesta), ya que la versión por fuerza bruta es de eficiencia lineal $O(n)$ y la versión DyV es de eficiencia $O(n\cdot\log_2 n)$, es decir, es más ineficiente. 
+Aparentemente, ya las eficiencias teóricas nos dicen que el enfoque DyV no es muy útil en este caso (al menos la implementación propuesta), ya que la versión por fuerza bruta es de eficiencia lineal $O(n)$ y la versión DyV es de eficiencia $O(n\cdot\log_2 n)$, es decir, es más ineficiente.
 
 En el siguiente gráfico observamos el comportamiento de la versión fuerza bruta con respecto a la versión DyV:
 
@@ -449,7 +447,7 @@ De nuevo observamos un incremento lineal del tiempo de ejecución, tal y como no
 
 Calculamos la constante $K = 17.4801$ y obtenemos mediante la función $T(n)=K\cdot n$ una cota superior del tiempo de ejecución estimado del algoritmo para un vector de $n$ componentes.
 
-<img src="/home/jantoniovr/Documentos/Universidad/ALGORITMICA/Algaritmica/P2/graficas/vector_hibrida_DyV.png" alt="Gráfica ejecucion y cota superior usual" width="500px"/>
+<img src="./graficas/vector_hibrida_DyV.png" alt="Gráfica ejecucion y cota superior usual" width="500px"/>
 
 Además, si aplicamos un ajuste por regresión lineal por mínimos cuadrados, obtenemos una función de aproximación de $12.6470098x + 15089.5402$.
 
@@ -459,7 +457,7 @@ El primer detalle observable es que las eficiencias teóricas de las dos version
 
 Si juntamos en un sólo gráfico ambas nubes de puntos y sus respectivos ajustes por regresión lineal, podemos observar que en ningún caso el tiempo de ejecución de la variante DyV mejora a la variante por fuerza bruta.
 
-<img src="/home/jantoniovr/Documentos/Universidad/ALGORITMICA/Algaritmica/P2/graficas/vector_empirica_regresion_ambas.png" alt="Gráfica ejecucion y cota superior usual" width="500px"/>
+<img src="./graficas/vector_empirica_regresion_ambas.png" alt="Gráfica ejecucion y cota superior usual" width="500px"/>
 
 En este caso, el umbral no se puede calcular, pues en todo momento DyV supera en tiempo de ejecución al algoritmo fuerza bruta.
 
@@ -467,7 +465,10 @@ En este caso, el umbral no se puede calcular, pues en todo momento DyV supera en
 
 ## Conclusiones
 
-* El enfoque DyV en estos casos no es más eficiente.
-* La recursividad consume tiempo de ejecución que afecta a la eficiencia.
-* Los algoritmos DyV son sencillos de entender.
-* 
+En nuestro caso, hemos podido observar que no merece la pena usar nuestra implementación de Divide y Vencerás, en ninguno de los dos casos. La trasposición de matrices por DyV es más eficiente para tamaños muy insignificantes. La búsqueda del máximo y el mínimo en un vector es demasiado trivial como para implementarla por recursividad.
+
+No obstante, se podrían encontrar algoritmos más eficientes en la traspuesta.
+
+Aún así, es interesante observar los comportamientos en función del tamaño para todos los algoritmos. Como en la práctica anterior, hemos podido ver que se ajustan a comportamientos teóricos, como cabía esperar.
+
+Finalmente, cabe destacar la sencillez de los algoritmos. Aunque en estos problemas, las versiones usuales son más simples, la recursividad de las propuestas divide y vencerás no son especialmente confusas.
