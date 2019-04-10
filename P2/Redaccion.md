@@ -19,8 +19,7 @@ Autores:
 
 - Resolver dos problemas con la metodología Divide y Vencerás
 - Exponer los tres tipos de eficiencia
-- Ḿostrar cómo proceden los algoritmos
-
+- Mostrar cómo proceden los algoritmos
 
 
 ### Problema común: Traspuesta de una matriz
@@ -70,8 +69,7 @@ Estudiar la eficiencia teórica de la función `trasponer` es equivalente a estu
 
 Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$, por lo que la ecuación nos queda tal que ahora sigo escribiendo.
 
-
-
+#### Análisis empírico
 
 ## Problema asignado: Máximo y mínimo de un vector
 
@@ -132,7 +130,7 @@ int minimo (vector<int> &flechita, int l, int r) {
 Analizamos la eficiencia teórica de la función `maximo`, ya que la otra es análoga. La función es recursiva, luego necesitamos una ecuación de recurrencia para plantearlo. Si el tamaño del vector a buscar es 2 o menos, tenemos un bloque `if-else` cada uno con una sentencia de tiempo constante, luego este caso se puede acotar con una constante $a$. El caso en el que el tamaño sea mayor que 2, hay dos llamadas a la propia función pero el tamaño es de la mitad junto con un conjunto de sentencias que se pueden acotar por una constante $b$. Resumiendo:
 
 $$T(n)=a \text{ si } n \leq 2$$
-$$T(n)=T(\frac{n}{2})+b \text{ si } n>2$$
+$$T(n)=T\Big(\frac{n}{2}\Big)+b \text{ si } n>2$$
 
 Resolvamos la recurrencia. Para ello, hacemos el cambio de variable $n=2^k$, y denotamos $T(2^k)=t_k$. Entonces, la segunda ecuación quedaría como: $t_k=2t_{k-1}+b$. Resolvemos esta ecuación de recurrencia.
 
