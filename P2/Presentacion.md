@@ -6,17 +6,16 @@ revealOptions:
 
 ---
 
-# Presentación grupal
-
-Autores:
+# Práctica 2. Divide y vencerás
+Grupo: Las algas
 
 > Ana Buendía, Andrés Millán, Paula Villanueva, Juan Antonio Villegas
 
 ---
 
 ## Objetivos
-- Traspuesta de una matriz $2^k$.
-- Traspuesta de una matriz $N^M$.
+- Traspuesta de una matriz $2^k$ elementos.
+- Traspuesta de una matriz $N^M$ elementos.
 - Calcular mínimo y máximo de un vector.
 
 ---
@@ -36,24 +35,43 @@ Autores:
 
 ---
 
-## Traspuesta de matriz cuadrada con 2^k elementos
+###### Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia teórica (no DyV)
 
->Insertar eficiencia teórica no DyV
+- $n$: número de elementos.
+- Recorre una vez la matriz: $T(n) = a \cdot n.$
+
+$$O(n)$$
 
 ---
 
 
-## Traspuesta de matriz cuadrada con 2^k elementos
+###### Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia teórica (DyV)
 
->Insertar eficiencia teórica DyV
+- `intercambiar`: $O(n)$.
+- `trasponerDyV`:
+    - $a$: dos primeras líneas.
+    - $b$: tiempo ejecución `intercambiar`.
+    $$T(n) = a + T \left( \frac{n}{4} \right) + nb$$
 
 ---
 
-## Traspuesta de matriz cuadrada con 2^k elementos
+`$$n = 2^k \Rightarrow t_k = T(2^k) = 4t_{k-2}+2^kb+a$$`
+`$$t_{k+2}-4t_k = 2^kb + a$$`
+
+$$ $$
+
+$$t_k^h = c_12^k + c_2(-2)^k$$
+$$t_k^p = c_3k2^k+c_4$$
+$$t_k = c_12^k + c_2(-2)^k + c_3k2^k + c_4$$
+$$O(nlog_2n)$$
+
+---
+
+###### Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia empírica (no DyV)
 
@@ -61,17 +79,27 @@ Autores:
 
 ---
 
-## Traspuesta de matriz cuadrada con 2^k elementos
+###### Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia empírica (DyV)
 
 ![Traspuesta 2^k - eficiencia empírica](./graficas/matriz_empirica_DyV.png)
 
+$f(x) = 8.61866395x - 9.50365406 · 10^4$
+
+---
+
+###### Traspuesta de matriz cuadrada con 2^k elementos
+
+### Eficiencia híbrida (no DyV)
+
+>Insertar ef hibrida
+
 K =
 
 ---
 
-## Traspuesta de matriz cuadrada con 2^k elementos
+###### Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Eficiencia híbrida (DyV)
 
@@ -81,7 +109,7 @@ K = 3'143991
 
 ---
 
-## Traspuesta de matriz cuadrada con 2^k elementos
+###### Traspuesta de matriz cuadrada con 2^k elementos
 
 ### Comparación DyV y no DyV
 
@@ -90,11 +118,11 @@ K = 3'143991
 ---
 
 
-## Traspuesta de una matriz 2^8 (DyV)
+## Traspuesta de una matriz 2^2 (DyV)
 
 ---
 
-## Traspuesta de una matriz 2^8 (DyV)
+## Traspuesta de una matriz 2^2 (DyV)
 
 ![Pasos 4x4](./graficas/Pasos_4x4_DyV.png)
 
@@ -104,7 +132,7 @@ K = 3'143991
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Eficiencia teórica (no DyV)
 
@@ -112,7 +140,7 @@ K = 3'143991
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Eficiencia teórica (DyV)
 
@@ -120,7 +148,7 @@ K = 3'143991
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Eficiencia empírica (no DyV)
 
@@ -128,7 +156,7 @@ K = 3'143991
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Eficiencia empírica (DyV)
 
@@ -137,7 +165,7 @@ K = 3'143991
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Eficiencia híbrida (no DyV)
 
@@ -147,7 +175,7 @@ K =
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Eficiencia híbrida (DyV)
 
@@ -157,7 +185,7 @@ K =
 
 ---
 
-## Traspuesta de una matriz N^M
+###### Traspuesta de una matriz N^M
 
 ### Comparación DyV y no DyV
 
@@ -170,7 +198,7 @@ K =
 
 ---
 
-## Máximo y mínimo de un vector
+###### Máximo y mínimo de un vector
 
 ### Eficiencia teórica (no DyV)
 
@@ -178,16 +206,26 @@ K =
 
 ---
 
-## Máximo y mínimo de un vector
+###### Máximo y mínimo de un vector
 
 ### Eficiencia teórica (DyV)
 
-> Insertar las ecuaciones y eso
-$O(n)$.
+- `maximo`:
+  $$T(n) = a \; \; si \; n \leq 2$$
+  $$T(n) = T\left( \frac{n}{2} \right) + b \; \; si \; n>2$$
 
 ---
 
-## Máximo y mínimo de un vector
+  `$$n=2^k \Rightarrow T(2^k) = t_k = 2t_{k-1} + b$$`
+
+  $$t_k^h = c_1 2^k$$
+  $$t_k^p = -\frac{-b}{2} = c_2$$
+
+  $$t_k = c_1 2^k + c_2 \Rightarrow T(n) = c_1n + c_2 \Rightarrow O(n)$$
+
+---
+
+###### Máximo y mínimo de un vector
 
 ### Eficiencia empírica (no DyV)
 
@@ -195,7 +233,7 @@ $O(n)$.
 
 ---
 
-## Máximo y mínimo de un vector
+###### Máximo y mínimo de un vector
 
 ### Eficiencia empírica (DyV)
 
@@ -203,7 +241,7 @@ $O(n)$.
 
 ---
 
-## Máximo y mínimo de un vector
+###### Máximo y mínimo de un vector
 
 ### Eficiencia híbrida (no DyV)
 
@@ -213,7 +251,7 @@ K =
 
 ---
 
-## Máximo y mínimo de un vector
+###### Máximo y mínimo de un vector
 
 ### Eficiencia híbrida (DyV)
 
@@ -229,7 +267,7 @@ K = 0'00617544
 
 ---
 
-## Máximo y mínimo de un vector
+###### Máximo y mínimo de un vector
 
 ### Comparación DyV y no DyV
 

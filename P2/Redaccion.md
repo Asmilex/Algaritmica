@@ -1,11 +1,10 @@
-# Presentación grupal
-
+# Memoria Práctica 2: Divide y Vencerás
 Autores:
 
 > Ana Buendía, Andrés Millán, Paula Villanueva, Juan Antonio Villegas
 
 
-#### Especificaciones
+## Especificaciones
 
 | Persona      | CPU              | OS                   |
 | ------------ | ---------------- | -------------------- |
@@ -14,15 +13,87 @@ Autores:
 | Paula        | i7-5600U 2.60GHz | Ubuntu 18.04 LTS     |
 | Juan Antonio | i7-4500U 3.00GHz | Ubuntu 18.04 LTS     |
 
-
-#### Objetivos
+---
+## Objetivos
 
 - Resolver dos problemas con la metodología Divide y Vencerás
 - Exponer los tres tipos de eficiencia
 - Mostrar cómo proceden los algoritmos
+- Comparar el efoque Divide y Vencerás con el enfoque fuerza bruta
+- Comprender las diferencias entre ambos
+
+---
+
+## Problema común: Traspuesta de una matriz
+
+### Versión fuerza bruta
+
+#### Código
+
+```c++
+void trasposicion_usual (vector<vector<int>> matriz, vector<vector<int>> & destino) {
+    for (int i = 0; i < matriz[0].size(); ++i)
+        for (int j = 0; j < matriz.size(); ++j)
+            destino[j][i] = matriz[i][j];
+}
+```
+
+#### Análisis teórico
+
+Llamamos $n$ al número de elementos de la matriz, como el algoritmo intercambia los elementos de la matriz original con los de la matriz destino, simplemente se recorre una vez la matriz. Si llamamos $a$ al tiempo que tarda en hacer la asignación, entonces $T(n)=a\cdot n$, por lo que el algoritmo es $O(n)$.
+
+#### Análisis empírico
+
+Ejecutamos el código usual varias veces con distintos tamaños y obtenemos los siguientes resultados:
+
+| Tamaño  |Tiempo(ns)|
+|---------|---------|
+| 4       |    |
+| 4       |    |
+| 4       |    |
+| 16      |    |
+| 16      |    |
+| 16      |    |
+| 64      |    |
+| 64      |    |
+| 64      |    |
+| 256     |    |
+| 256     |    |
+| 256     |    |
+| 1024    |    |
+| 1024    |    |
+| 1024    |    |
+| 4096    |    |
+| 4096    |    |
+| 4096    |    |
+| 16384   |    |
+| 16384   |    |
+| 16384   |    |
+| 65536   |    |
+| 65536   |    |
+| 65536   |    |
+| 262144  |    |
+| 262144  |    |
+| 262144  |    |
+| 1048576 |    |
+| 1048576 |    |
+| 1048576 |    |
+
+Y plasmando los tiempos medios de cada tamaño en una gráfica obtenemos lo siguiente:
+
+<img src="./graficas/matriz_empirica.png" alt="Gráfica traspuesta usual" width="500px"/>
+
+#### Análisis híbrido
+
+Calculamos la constante $K$ asociada a los resultados teóricos y empíricos y obtenemos una cota superior del tiempo de ejecución esperado.
+
+(Falta decir el valor de K)
+
+<img src="./graficas/matriz_hibrida.png" alt="Gráfica constante K matriz" width="500px"/>
 
 
-### Problema común: Traspuesta de una matriz
+
+### Versión divide y vencerás
 
 Dada una matriz  $A\in \mathcal{M}_{N\times M}(\mathbb{Z})$, con $N$ y $M$ números naturales potencia de 2, se trata de trasponer la matriz usando la técnica de divide y vencerás.
 
@@ -65,110 +136,87 @@ void trasponer (vector<vector<int>> & matriz) {
 
 Si tomamos un tamaño de 4x4, podemos ver claramente los pasos que se realizan en el algoritmo:
 
-![Pasos traspuesta DyV](./graficas/Pasos_4x4_DyV.png)
+<img src="./graficas/Pasos_4x4_DyVorig.png" alt="Matriz original" width="350px"/>
 
-TODO seguir explicando
+1. En el primer paso se ha traspuesto la submatriz $A_{11}$.
 
-### Análisis teórico
+   <img src="./graficas/Pasos_4x4_DyV1.png" alt="Matriz original" width="350px"/>
+
+2. En el segundo la submatriz $A_{12}$.
+
+   <img src="./graficas/Pasos_4x4_DyV2.png" alt="Matriz original" width="350px"/>
+
+    
+
+3. En el tercero $A_{21}$.
+
+   <img src="./graficas/Pasos_4x4_DyV3.png" alt="Matriz original" width="350px"/>
+
+    
+
+4. Y por último en el cuarto paso se traspone $A_{22}$. 
+
+   <img src="./graficas/Pasos_4x4_DyV4.png" alt="Matriz original" width="350px"/>
+
+5. Una vez está traspuesta cada submatriz por su lado se llama a la función intercambiar y se intercambia la posición de $A_{12}^t$ y de $A_{21}^t$. Cabe destacar que en cada trasposición a su vez se llama recursivamente a la función y se aplica el mismo método. 
+
+   <img src="./graficas/Pasos_4x4_DyV5.png" alt="Matriz original" width="350px"/>
+
+#### Análisis teórico
 
 Estudiar la eficiencia teórica de la función `trasponer` es equivalente a estudiar la eficiencia teórica de la función `trasponerDyV`. Suponiendo $n$ el número de datos de la matriz, primero debemos calcular la eficiencia teórica de la función `intercambiar`. Esta función únicamente intercambia los valores de dos de las submatrices, por lo que sólo necesita recorrer la cuarta parte de la matriz original. Es decir, $T(n)=a\frac{n}{4}$, siendo $a$ el tiempo que tarda en ejecutarse el bloque de código del bucle más interno. Por tanto, la función `intercambiar` es de orden $O(n)$.
 
-Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$, por lo que la ecuación nos queda tal que ahora sigo escribiendo.
+Sabiendo esto, ahora planteamos el tiempo de ejecución de la función `trasponerDyV` como una recurrencia, llamamos $a$ al tiempo de ejecución de las 2 primeras líneas y $b$ a la constante asociada a la ejecución de `intercambiar`. Así, tenemos $T(n)=a+4T(\frac{n}{4})+nb$. Hacemos el cambio de variable $n=2^k$ y llamamos $t_k=T(2^k)$ por lo que se tiene la ecuación $t_k=4t_{k-2}+2^kb+a$, equivalentemente $t_{k+2}-4t_{k}=2^{k}b+a$. Procedemos a resolverla: 
 
-### Análisis empírico
+Primero resolvemos la ecuación homogénea asociada $t_k=4t_{k-2}$. Su polinomio característico es $p(\lambda)=\lambda^2-4=(\lambda-2)(\lambda+2)$, por tanto la solución es $t_k^h=c_1 2^k +c_2 (-2)^k$. 
 
-Ejecutamos nuesto algoritmo de divide y vencerás para ciertos tamaños, y esto es lo que hemos obtenido:
+Para hallar una solución particular, como el término independiente de la ecuación es una constante y una expresión $2^kb$, siendo 2 raíz del polinomio, existe una solución particular $t_k^p=c_3k2^k+c_4$. Por tanto, la solución de la ecuación es $t_k=c_1 2^k +c_2 (-2)^k+c_3k2^k+c_4$, y deshaciendo el cambio de variable, vemos 	que la función es $O(n\log_2 n)$.
 
-| Tamaño  |Tiempo(ns)|
-|---------|---------|
-| 4       | 223 |
-| 4       | 228 |
-| 4       | 153 |
-| 16      | 285 |
-| 16      | 307 |
-| 16      | 396 |
-| 64      | 859 |
-| 64      | 795 |
-| 64      | 770 |
-| 256     | 1999 |
-| 256     | 1986 |
-| 256     | 2000 |
-| 1024    | 6104 |
-| 1024    | 5879 |
-| 1024    | 5631 |
-| 4096    | 21042 |
-| 4096    | 24889 |
-| 4096    | 20987 |
-| 16384   | 84201 |
-| 16384   | 84271 |
-| 16384   | 84461 |
-| 65536   | 349184 |
-| 65536   | 409262 |
-| 65536   | 349582 |
-| 262144  | 1518578 |
-| 262144  | 1520674 |
-| 262144  | 1463234 |
-| 1048576 | 11564469 |
-| 1048576 | 6562308 |
-| 1048576 | 9213409 |
+#### Análisis empírico
 
-Enseñando los puntos en media, obtenemos el siguiente gráfico:
+Ejecutamos nuesto algoritmo de divide y vencerás para ciertos tamaños y obtenemos los siguientes tiempos:
 
-![Gráfica traspuesta DyV](./graficas/matriz_empirica_DyV.png).
 
-A la vez, hemos usado un algoritmo usual para crear la traspuesta:
-
-```c++
-void trasposicion_usual (vector<vector<int>> matriz, vector<vector<int>> & destino) {
-    for (int i = 0; i < matriz[0].size(); ++i)
-        for (int j = 0; j < matriz.size(); ++j)
-            destino[j][i] = matriz[i][j];
-}
-```
-
-Esta función genera los siguientes resultados:
 
 | Tamaño  |Tiempo(ns)|
 |---------|---------|
-| 4       | 669   |
-| 4       | 580   |
-| 4       | 564   |
-| 16      | 733   |
-| 16      | 695   |
-| 16      | 679   |
-| 64      | 1199   |
-| 64      | 1560   |
-| 64      | 1067   |
-| 256     | 1530   |
-| 256     | 1607   |
-| 256     | 1503   |
-| 1024    | 5378   |
-| 1024    | 5542   |
-| 1024    | 5587   |
-| 4096    | 11927   |
-| 4096    | 12211   |
-| 4096    | 12020   |
-| 16384   | 51910   |
-| 16384   | 71191   |
-| 16384   | 54958   |
-| 65536   | 214262   |
-| 65536   | 218389   |
-| 65536   | 215743   |
-| 262144  | 1345798   |
-| 262144  | 1021042   |
-| 262144  | 1619368   |
-| 1048576 | 4062939   |
-| 1048576 | 3970055   |
-| 1048576 | 4040784   |
+| 4       |  |
+| 4       |            |
+| 4       |            |
+| 16      |  |
+| 16      |  |
+| 16      |  |
+| 64      |  |
+| 64      |  |
+| 64      |  |
+| 256     |  |
+| 256     |  |
+| 256     |  |
+| 1024    |  |
+| 1024    |  |
+| 1024    |  |
+| 4096    |  |
+| 4096    |  |
+| 4096    |  |
+| 16384   |  |
+| 16384   |  |
+| 16384   |  |
+| 65536   |  |
+| 65536   |  |
+| 65536   |  |
+| 262144  |  |
+| 262144  |  |
+| 262144  |  |
+| 1048576 |  |
+| 1048576 |  |
+| 1048576 |  |
 
-![Gráfica traspuesta usual](./graficas/matriz_empirica.png)
+Calculando la media de cada tiempo, obtenemos la siguiente gráfica:
 
-Plasmamos ambas en la misma gráfica, y este es el resultado:
-
-![Comparación traspuesta](./graficas/matriz_empirica_comparacion.png)
+<img src="./graficas/matriz_empirica_DyV.png" alt="Gráfica traspuesta DyV" width="500px"/>
 
 
-### Análisis empírico
+#### Análisis híbrido
 
 Hacemos la regresión para nuestro algoritmo basado en Divide y Vencerás, y obtenemos lo siguiente:
 
@@ -182,9 +230,11 @@ La constante $k$ para DyV es $k = 3.14399$
 
 ![Gráfica constante K matriz DyV](./graficas/matriz_hibrida_DyV.png)
 
-Para el algoritmo usual, se ha obtenido lo siguiente:
+### Comparación entre ambas versiones
 
-![Gráfica constante K matriz](./graficas/matriz_hibrida.png)
+En el siguiente gráfico observamos el comportamiento de la versión fuerza bruta con respecto a la versión DyV:
+
+(Insert grafico).
 
 
 
@@ -192,8 +242,51 @@ Para el algoritmo usual, se ha obtenido lo siguiente:
 
 
 
-
 ## Problema asignado: Máximo y mínimo de un vector
+
+### Versión fuerza bruta
+
+#### Código
+
+```c++
+int maximo (const vector<int> & flechita) {
+    int max = flechita[0];
+
+    for (auto elemento: flechita)
+        if (elemento > max)
+            max = elemento;
+
+    return max;
+}
+```
+
+```c++
+int minimo (const vector<int> & flechita) {
+    int min = flechita[0];
+
+    for (auto elemento: flechita)
+        if (elemento < min)
+            min = elemento;
+
+    return min;
+}
+```
+
+#### Análisis teórico
+
+Si llamamos $a$ al tiempo de ejecución de la declaración de variables y retorno, teniendo en cuenta que el bucle en el peor de los casos recorre todo el vector comprobando si el elemento actual es mayor (resp. menor) que el guardado en la variable, llamamos $b$ al cuerpo del bucle. Concluimos entonces que $T(n)=a+bn$, siendo $n$ el número de elementos del vector. Por tanto el algoritmo es de orden $O(n)$.
+
+#### Análisis empírico
+
+TODO
+
+#### Análisis híbrido
+
+TODO
+
+
+
+### Versión Divide y Vencerás
 
 Para resolver este problema, procederemos de la manera que sigue: Dividiremos el vector en dos partes y obtendremos el máximo (resp. mínimo) de cada subvector para después compararlos y devolver el máximo (resp. mínimo). Si el tamaño de los vectores está por encima del umbral, volveremos a aplicar el procedimiento.
 
@@ -247,7 +340,7 @@ int minimo (vector<int> &flechita, int l, int r) {
 }
 ```
 
-### Análisis teórico
+#### Análisis teórico
 
 Analizamos la eficiencia teórica de la función `maximo`, ya que la otra es análoga. La función es recursiva, luego necesitamos una ecuación de recurrencia para plantearlo. Si el tamaño del vector a buscar es 2 o menos, tenemos un bloque `if-else` cada uno con una sentencia de tiempo constante, luego este caso se puede acotar con una constante $a$. El caso en el que el tamaño sea mayor que 2, hay dos llamadas a la propia función pero el tamaño es de la mitad junto con un conjunto de sentencias que se pueden acotar por una constante $b$. Resumiendo:
 
@@ -266,7 +359,7 @@ En conclusión: $t_k=t_k^h +t_k^p=c_1\cdot 2^k+c_2$, y deshaciendo el cambio de 
 
 
 
-### Análisis empírico
+#### Análisis empírico
 
 Procederemos de forma similar a como se hizo en la anterior práctica. Vamos aumentando el problema del tamaño, y mostramos el tiempo de ejecución de la función.
 
@@ -275,3 +368,17 @@ Hemos obtenido, en media, los siguientes valores:
 ```
 Peaso tabla loco
 ```
+
+#### Análisis híbrido
+
+TODO
+
+### Comparación entre ambas versiones
+
+TODO
+
+---
+
+## Conclusiones
+
+To mu bonito y DyV no sirve pa na :DDD
