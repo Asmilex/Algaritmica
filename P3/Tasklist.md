@@ -1,0 +1,20 @@
+- Redacción y presentación
+    - [ ] Objetivos
+    - [ ] Desarrollo
+        - TLS
+            - [ ] Cercanía
+            - [ ] Inserción
+        - Específico
+            - [ ] TBD
+        - [ ] Introducción algoritmos voraces
+        - [ ] PsEUdoCóDiGo
+        - [ ] Escenarios de ejecución
+    - [ ] Conclusión
+- Programas
+    - TSL
+        - [ ] Cercanía
+        - [ ] Inserción
+    - Específico
+        - [ ] TBD
+    - [ ] Finalizados
+    - [ ] Makefile
