@@ -4,8 +4,9 @@
         - TLS
             - [ ] Cercanía
             - [ ] Inserción
-        - Específico
-            - [ ] TBD
+        - Contenedores de barco
+            - [ ] Maximizar contenedores cargados
+            - [ ] Maximizar toneladas cargadas
         - [ ] Introducción algoritmos voraces
         - [ ] PsEUdoCóDiGo
         - [ ] Escenarios de ejecución
@@ -14,7 +15,8 @@
     - TSL
         - [ ] Cercanía
         - [ ] Inserción
-    - Específico
-        - [ ] TBD
+    - Contenedores de barco
+        - [ ] Maximizar contenedores cargados
+        - [ ] Maximizar toneladas cargadas
     - [ ] Finalizados
     - [ ] Makefile
