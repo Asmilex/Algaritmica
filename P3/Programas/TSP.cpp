@@ -4,62 +4,152 @@
 #include <cmath>
 #include <fstream>
 #include <vector>
+#include <climits>
 
 using namespace std;
 
-bool parse_file (const string origen, vector<double> &xCords, vector<double> &yCords) {
-    ifstream f(origen);
-    bool return_value;
+//
+// ───────────────────────────────────────────────────────────────── ARCHIVOS ─────
+//
 
-    if (!f) {
-        cerr << "Fallo al abrir el fichero\n";
-        return_value = false;
-    }
-    else {
-        double n;
-        string dimension;
+    bool parse_file (const string origen, vector<double> &xCords, vector<double> &yCords) {
+        ifstream f(origen);
+        bool return_value;
 
-        f >> dimension;
-        f >> n;
+        if (!f) {
+            cerr << "Fallo al abrir el fichero\n";
+            return_value = false;
+        }
+        else {
+            double n;
+            string dimension;
 
-        xCords.clear();
-        yCords.clear();
+            f >> dimension;
+            f >> n;
 
-        int i, j;
-        double temporal;
+            xCords.clear();
+            yCords.clear();
 
-        for (j = 0; j < n; j++) {
-            f >> i;
-            f >> temporal;
-            xCords.push_back(temporal);
+            int i, j;
+            double temporal;
 
-            f >> temporal;
-            yCords.push_back(temporal);
+            for (j = 0; j < n; j++) {
+                f >> i;
+                f >> temporal;
+                xCords.push_back(temporal);
+
+                f >> temporal;
+                yCords.push_back(temporal);
+            }
+
+            return_value = true;
+
+            f.close();
         }
 
-        return_value = true;
+        return return_value;
     }
 
-    return return_value;
-}
 
-double distancia (double x1, double y1, double x2, double y2)  {
-    return sqrt(  (x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2) );
-}
+    template <class T>
+    bool load_file (    const string fichero
+                    ,   const vector<T> & resultados
+                    ,   const vector<T> & xCords
+                    ,   const vector<T> & yCords) {
 
-template <class T>
-void print_matrix(const vector<vector<T>> &matriz) {
-    for (int i = 0; i < matriz[i].size(); ++i) {
-        for (int j = 0; j < matriz.size(); ++j)
-            cout << matriz[i][j] << "\t";
+        ofstream f(fichero);
 
-        cout << endl;
+        if (!f) {
+            cerr << "Fallo al abrir el archivo de salida";
+            return false;
+        }
+        else {
+            f << "DIMENSION: " << resultados.size() << endl;
+
+            for (size_t i = 0; i < resultados.size(); i++) {
+                f << resultados[i] + 1 << " " << xCords[resultados[i]] << " " << yCords[resultados[i]] << endl;
+            }
+
+            f << resultados[0]+1 << " " << xCords[resultados[0]] << " " << yCords[resultados[0]] << endl;
+
+            f.close();
+
+            return true;
+        }
     }
-}
 
-int insercion () {}
-int cercania () {}
-int TBD () {}
+
+//
+// ──────────────────────────────────────────────────────────────────── OTROS ─────
+//
+
+    double distancia (double x1, double y1, double x2, double y2)  {
+        return sqrt(  (x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2) );
+    }
+
+    template <class T>
+    void print_matrix(const vector<vector<T>> &matriz) {
+        for (int i = 0; i < matriz.size(); ++i) {
+            for (int j = 0; j < matriz.size(); ++j)
+                cout << matriz[i][j] << "\t";
+
+            cout << endl;
+        }
+    }
+
+//
+// ─────────────────────────────────────────────────────────────── ALGORITMOS ─────
+//
+
+    int insercion () {}
+
+    template <class T>
+    double cercania (const vector<vector<T>> &map, vector<T> &resultados) {
+        // No tengo ni zorra de lo que hace esto
+        // Creo que ni está bien. Por el find()
+        size_t n = map.size();
+
+        resultados.resize(n);
+        resultados[0] = 0;
+
+        double dmin, suma_distancias = 0, distancia = 0;
+        size_t i = 0;
+
+        for (size_t k = 1; k < n; k++) {
+            dmin = INT_MAX;
+
+            for (size_t j = 0; j < n; j++) {
+                if ( find(resultados.begin(), resultados.end(), j) == resultados.end() ) {
+                    distancia = map[ max(j, resultados[k-1] )][ min(j, resultados[k-1]) ];
+
+                    if (distancia < dmin) {
+                        i = j;
+                        dmin = distancia;
+                    }
+                }
+            }
+
+            suma_distancias += dmin;
+            resultados[k] = i;
+        }
+
+        suma_distancias += map[ max(resultados[0], resultados[n-1]) ][ min(resultados[0], resultados[n-1]) ];
+
+        return suma_distancias;
+
+
+        // Da error de compilación. Pero es que no sé cómo arreglarlo sin cambiarlo todo.
+        // Está pensadopara enteros. Pero los datos están con decimales.
+        // Fuck this shit
+    }
+
+    int TBD () {}
+
+//
+// ──────────────────────────────────────────────── I ──────────
+//   :::::: M A I N : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────
+//
 
 int main(int argc, char const *argv[])
 {
@@ -86,26 +176,43 @@ int main(int argc, char const *argv[])
     vector<double> xCords, yCords;
     parse_file(origen, xCords, yCords);
 
-    vector<vector<double>> map(xCords.size());
+    vector<vector<double>> map (xCords.size(), vector<double>(xCords.size(), 0));
     double dist;
 
     for (size_t i = 0; i < xCords.size(); ++i) {
         for (size_t j = 0; j < yCords.size(); ++j) {
-            dist = distancia(xCords[i], xCords[j], yCords[i], yCords[j]);   //FIXME problemas
-            map[i].push_back(dist);
+            dist = distancia(xCords[i], xCords[j], yCords[i], yCords[j]);
+            map[i][j] = (dist);
         }
     }
 
-    //print_matrix(map); //FIXME
+    print_matrix(map);
+    vector<double> resultados;
 
-    if (algoritmo == "-i")
+    chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
+    chrono::high_resolution_clock::time_point t_antes, t_despues;
+
+
+    if (algoritmo == "-i") {
+        t_antes   = chrono::high_resolution_clock::now();
         insercion();
-    else if (algoritmo == "-c")
-        cercania();
-    else if (algoritmo == "-n")
+        t_despues = chrono::high_resolution_clock::now();
+    }
+    else if (algoritmo == "-c") {
+        t_antes   = chrono::high_resolution_clock::now();
+        cercania(map, resultados);
+        t_despues = chrono::high_resolution_clock::now();
+    }
+    else if (algoritmo == "-n") {
+        t_antes   = chrono::high_resolution_clock::now();
         TBD();
+        t_despues = chrono::high_resolution_clock::now();
+    }
     else
         cerr << "Cago en la hostia pon bien los parámetros";
+
+    unsigned long t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
+
 
     return 0;
 }
