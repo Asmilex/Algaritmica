@@ -5,19 +5,18 @@
 #include <random>
 #include <chrono>
 
-
 using namespace std;
 
 #define K 10000
 
-struct Contenedor{ 
-        string id;
-        int peso;
+struct Contenedor {
+    string id;
+    int peso;
 
-        Contenedor(string i, int p){
-            id=i;
-            peso=p;
-        }
+    Contenedor(string i, int p) {
+        id   = i;
+        peso = p;
+    }
 };
 
 struct lex_compare {
@@ -28,23 +27,27 @@ struct lex_compare {
 
 typedef set<Contenedor, lex_compare> mySet;
 
-int cargaMaxPeso(vector<Contenedor> &barco, mySet &contenedores){
-    int pesoTotal=0;
-    for(auto i = contenedores.rbegin(); i!=contenedores.rend() && pesoTotal<K; ++i){
-        if(pesoTotal+(*i).peso<=K){
+int cargaMaxPeso (vector<Contenedor> &barco, mySet &contenedores) {
+    int pesoTotal = 0;
+
+    for (auto i = contenedores.rbegin(); i != contenedores.rend() && pesoTotal < K; ++i) {
+        if (pesoTotal + (*i).peso <= K) {
             barco.push_back(*i);
-            pesoTotal+=(*i).peso;
+            pesoTotal += (*i).peso;
         }
     }
+
     return pesoTotal;
 }
 
-int cargaMaxContenedores(vector<Contenedor> &barco, mySet &contenedores){
-    int pesoTotal=0;
-    for(auto i = contenedores.begin(); i!=contenedores.end() && pesoTotal+(*i).peso<=K; ++i){
-            barco.push_back(*i);
-            pesoTotal+=(*i).peso;
+int cargaMaxContenedores (vector<Contenedor> &barco, mySet &contenedores) {
+    int pesoTotal = 0;
+
+    for (auto i = contenedores.begin(); i != contenedores.end() && pesoTotal + (*i).peso <= K; ++i){
+        barco.push_back(*i);
+        pesoTotal+=(*i).peso;
     }
+
     return pesoTotal;
 }
 
@@ -60,52 +63,50 @@ void generarContenedores (mySet &contenedores, const size_t tamano, const int ma
 
 }
 
-void imprimeLosContenedores(const mySet &contenedores){
-    for(auto i = contenedores.begin(); i!=contenedores.end(); ++i){
-        cout << (*i).id << ": "<<(*i).peso << "Kg\t";
+void imprimirContenedores(const mySet &contenedores) {
+    for (auto contenedor: contenedores){
+        cout << "\t" << contenedor.id << ": "<<contenedor.peso << "Kg\t";
     }
+
     cout << endl;
 }
 
-void imprimeElBarco(vector<Contenedor> barco){
-    for(auto i = barco.begin(); i!=barco.end(); ++i){
-        cout << (*i).id << ": "<<(*i).peso << "Kg\t";
+void imprimirBarco (vector<Contenedor> barco){
+    for (auto elemento: barco){
+        cout << "\t" << elemento.id << ": "<< elemento.peso << "Kg\t";
     }
     cout << endl;
 }
 
 int main(int argc, char ** argv){
-    if(argc<2){
+    if(argc<2) {
         cout << "Error en los parámetros" << endl;
         cout << "Sintaxis: "<< argv[0] << " <Numero de contenedores>" << endl;
         exit(-1);
     }
-    int N=atoi(argv[1]);
-    int pesoMax=1000;
+
+    int N       = atoi(argv[1])
+      , pesoMax = 1000;
 
     mySet contenedores;
     vector<Contenedor> barco;
     int pesoFinal;
 
-    cout << "LA MMA DEL BARCO ES " << K << " Y LOS CONTENEDORES PESAN HASTA " << pesoMax << " Kg" << endl;
+    cout << "La MMA del barco es " << K << " y los contenedores pueden llegar a pesar hasta " << pesoMax << " KG" << endl;
 
     generarContenedores(contenedores, N, pesoMax);
-    cout << "\nCONTENEDORES DISPONIBLES:" << endl;
-    imprimeLosContenedores(contenedores);
+    cout << "\nContenedores disponibles:" << endl;
+    imprimirContenedores(contenedores);
 
-    pesoFinal=cargaMaxPeso(barco, contenedores);
-    cout << "\nBARCO CARGADO CON: " << pesoFinal << "Kg (MÁXIMO PESO)" << endl;
-    imprimeElBarco(barco);
+    pesoFinal = cargaMaxPeso(barco, contenedores);
+    cout << "\nBarco cargado con: " << pesoFinal << "KG (peso máximo)" << endl;
+    imprimirBarco(barco);
 
     barco.clear();
 
-    pesoFinal=cargaMaxContenedores(barco, contenedores);
-    cout << "\nBARCO CARGADO CON: " << pesoFinal << "Kg (MÁXIMO NÚMERO DE CONTENEDORES)" << endl;
-    imprimeElBarco(barco);
+    pesoFinal = cargaMaxContenedores(barco, contenedores);
+    cout << "\nBarco cargado con: " << pesoFinal << "KG (máximo numero de contenedores)" << endl;
+    imprimirBarco(barco);
 
-
-
-
+    return 0;
 }
-
-
