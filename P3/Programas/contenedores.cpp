@@ -30,7 +30,7 @@ typedef set<Contenedor, lex_compare> mySet;
 int cargaMaxPeso (vector<Contenedor> &barco, mySet &contenedores) {
     int pesoTotal = 0;
 
-    for (auto i = contenedores.rbegin(); i != contenedores.rend() && pesoTotal < K; ++i) {
+    for (auto i = contenedores.rbegin(); i != contenedores.rend(); ++i) {
         if (pesoTotal + (*i).peso <= K) {
             barco.push_back(*i);
             pesoTotal += (*i).peso;
