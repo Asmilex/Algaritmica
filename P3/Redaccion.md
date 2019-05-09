@@ -6,19 +6,20 @@
 
 #### Objetivos
 
-* Ser los putos amos de los algoritmos voraces
-* Meter en un barco todo lo que no quepa
-* Y muchas cosas más que quedan por descubrir :D
+* Aprender a aplicar algoritmos voraces.
+* Resolver el problema del Viajante de Comercio.
+* Diseñar un algoritmo que maximice el número de contenedores cargados en un barco.
+* Diseñar un algoritmo que maximice el peso cargado en un barco.
 
 ## Problema asignado: Contenedores en un barco
 
-Se tiene un buque mercante cuya capacidad de carga es de $K$ toneladas y un conjunto de contenedores  $c_1,\dots,c_n$ cuyos pesos respectivos son $p_1 , \dots , p_n$ (expresados también en toneladas). Teniendo en cuenta que la capacidad del buque es menor que la suma total de los pesos de los contenedores:
+Se tiene un buque mercante cuya capacidad de carga es de $K$ toneladas y un conjunto de contenedores  $c_1,\dots,c_n$ cuyos pesos respectivos pesos son $p_1 , \dots , p_n$ (expresados también en toneladas). Teniendo en cuenta que la capacidad del buque es menor que la suma total de los pesos de los contenedores:
 1. Diseñe un algoritmo que maximice el número de contenedores cargados, y demuestre su optimalidad.
 2. Diseñe un algoritmo que intente maximizar el número de toneladas cargadas.
 
 ### Solución
 
-Para solucionar este problema hemos aprovechado la clase `set` de la librería `STL`, aprovechando que puede contener elementos ordenados bajo cierto criterio. Por ello, los distintos contenedores disponibles han sido almacenados en un `set` ordenados por su peso, de cara a ser más fácil tratar con ellos aprovechando el orden implícito.
+Para solucionar este problema hemos empleado la clase `set` (que representa el concepto de conjunto matemático) de la librería `STL`, aprovechando que puede contener elementos ordenados bajo cierto criterio. Por ello, los distintos contenedores disponibles han sido almacenados en un `set` ordenados por su peso, facilitando así el tratar con ellos aprovechando el orden implícito.
 
 Para tratar con los contenedores, hemos creado la siguiente estructura:
 
@@ -34,9 +35,9 @@ struct Contenedor {
 };
 ```
 
-La idea es que `id` sea el identificador del contenedor, del tipo $c_i,\; i=1,\dots,n$ que nos indica el enunciado y `peso` sea la variable que define, tal y como su propio nombre indica, el peso del contenedor en toneladas.
+Donde `id` es el identificador del contenedor, del tipo $c_i,\; i=1,\dots,n$ que nos indica el enunciado y `peso` sea la variable que define, tal y como su propio nombre indica, el peso del contenedor en toneladas.
 
-Y para que el `set` ordene elementos de tipo `Contenedor` hay que especificarle la función de ordenación que debe utilizar, para ello utilizamos un *funtor* tal que así:
+Para que el `set` ordene elementos de tipo `Contenedor` hay que especificarle la función de ordenación que debe utilizar, para ello utilizamos un *funtor* de la siguiente manera:
 
 ```c++
 struct lex_compare {
@@ -46,7 +47,7 @@ struct lex_compare {
 };
 ```
 
-Y si al declarar un elemento de la clase `set` le indicamos esta estructura y este predicado, obtendríamos un `set` de elementos tipo `Contenedor` y que ordene según el método descrito en `lex_compare`. Esto es, la declaración `set<Contenedor, lex_compare> contenedores;` nos daría el tipo de dato que buscamos. Por simplicidad y para hacer el código más legible, hemos hecho el siguiente alias:
+Y así, al declarar un elemento de la clase `set` indicando esta estructura y este predicado, obtendríamos un `set` de elementos tipo `Contenedor` que los ordena según el método descrito en `lex_compare`. Esto es, la declaración `set<Contenedor, lex_compare> contenedores;` nos daría el tipo de dato que buscamos. Por simplicidad y para hacer el código más legible, hemos hecho el siguiente alias:
 
 ```c++
 typedef set<Contenedor, lex_compare> mySet;
@@ -71,7 +72,7 @@ void generarContenedores (mySet &contenedores, const size_t tamano, const int ma
 
 Lo que hace es rellenar el `contenedores` con `tamano` elementos (contenedores) de entre 0 y `max` toneladas de peso.
 
-El valor de la constante de Masa Máxima Autorizada (MMA) $K$ lo hemos definido como una variable global:
+El valor de la constante de Masa Máxima Autorizada (MMA) $K​$ lo hemos definido como una variable global:
 
 ```c++ 
 #define K 10000
@@ -107,7 +108,7 @@ int cargaMaxContenedores (vector<Contenedor> &barco, mySet &contenedores) {
 }
 ```
 
-Como vemos, y teniendo en cuenta las características del tipo de dato `set`, el algoritmo simplemente va subiendo los contenedores más pequeños al barco hasta que ya no cabe el siguiente. Paramos cuando llegamos a un contenedor que no cabe, ya que si ese no cabe, los siguientes que son aún más pesados tampoco tendrán cabida en el barco.
+Como vemos, y teniendo en cuenta las características del tipo de dato `set`, el algoritmo simplemente va subiendo los contenedores más pequeños al barco hasta que ya no cabe el siguiente. Paramos cuando llegamos a un contenedor que no cabe, ya que si ese no cabe, los siguientes que son aún más pesados tampoco lo harán.
 
 El algoritmo de paso devuelve el peso total que ha conseguido almacenar siguiendo este criterio, aunque realmente no es relevante, pues lo que interesa maximizar es el número de contenedores (en nuestra implementación, maximizar `barco.size()`).
 
