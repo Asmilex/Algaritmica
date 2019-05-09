@@ -45,7 +45,7 @@ int cargaMaxContenedores (vector<Contenedor> &barco, mySet &contenedores) {
 
     for (auto i = contenedores.begin(); i != contenedores.end() && pesoTotal + (*i).peso <= K; ++i){
         barco.push_back(*i);
-        pesoTotal+=(*i).peso;
+        pesoTotal += (*i).peso;
     }
 
     return pesoTotal;
@@ -79,34 +79,45 @@ void imprimirBarco (vector<Contenedor> barco){
 }
 
 int main(int argc, char ** argv){
-    if(argc<2) {
+    if (argc < 3) {
         cout << "Error en los parámetros" << endl;
-        cout << "Sintaxis: "<< argv[0] << " <Numero de contenedores>" << endl;
+        cout << "Sintaxis: "<< argv[0] << " <Numero de contenedores> <Modo benchmark {0,1}>" << endl;
         exit(-1);
     }
 
     int N       = atoi(argv[1])
       , pesoMax = 1000;
+    bool benchmark = atoi(argv[2]);
 
     mySet contenedores;
     vector<Contenedor> barco;
     int pesoFinal;
 
-    cout << "La MMA del barco es " << K << " y los contenedores pueden llegar a pesar hasta " << pesoMax << " KG" << endl;
+    if (benchmark) {
+        //cout << "MMA: " << K << "\tmax_weight: " << pesoMax << " KG" << endl;
+        generarContenedores(contenedores, N, pesoMax);
 
-    generarContenedores(contenedores, N, pesoMax);
-    cout << "\nContenedores disponibles:" << endl;
-    imprimirContenedores(contenedores);
+        //pesoFinal = cargaMaxPeso(barco, contenedores);
+        pesoFinal = cargaMaxContenedores(barco, contenedores);
 
-    pesoFinal = cargaMaxPeso(barco, contenedores);
-    cout << "\nBarco cargado con: " << pesoFinal << "KG (peso máximo)" << endl;
-    imprimirBarco(barco);
+        cout << N << " " << pesoFinal << " " << barco.size() <<  endl;
+    }
+    else {
+        cout << "La MMA del barco es " << K << " y los contenedores pueden llegar a pesar hasta " << pesoMax << " KG" << endl;
 
-    barco.clear();
+        generarContenedores(contenedores, N, pesoMax);
+        cout << "\nContenedores disponibles:" << endl;
+        imprimirContenedores(contenedores);
 
-    pesoFinal = cargaMaxContenedores(barco, contenedores);
-    cout << "\nBarco cargado con: " << pesoFinal << "KG (máximo numero de contenedores)" << endl;
-    imprimirBarco(barco);
+        pesoFinal = cargaMaxPeso(barco, contenedores);
+        cout << "\nBarco cargado con: " << pesoFinal << "KG (peso máximo)" << endl;
+        imprimirBarco(barco);
 
+        barco.clear();
+
+        pesoFinal = cargaMaxContenedores(barco, contenedores);
+        cout << "\nBarco cargado con: " << pesoFinal << "KG (máximo numero de contenedores)" << endl;
+        imprimirBarco(barco);
+    }
     return 0;
 }
