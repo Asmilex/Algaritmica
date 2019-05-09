@@ -13,7 +13,7 @@
 
 ## Problema asignado: Contenedores en un barco
 
-Se tiene un buque mercante cuya capacidad de carga es de $K$ toneladas y un conjunto de contenedores  $c_1,\dots,c_n$ cuyos pesos respectivos pesos son $p_1 , \dots , p_n$ (expresados también en toneladas). Teniendo en cuenta que la capacidad del buque es menor que la suma total de los pesos de los contenedores:
+Se tiene un buque mercante cuya capacidad de carga es de $K$ toneladas y un conjunto de contenedores  $c_1,\dots,c_n$ cuyos respectivos pesos son $p_1 , \dots , p_n$ (expresados también en toneladas). Teniendo en cuenta que la capacidad del buque es menor que la suma total de los pesos de los contenedores:
 1. Diseñe un algoritmo que maximice el número de contenedores cargados, y demuestre su optimalidad.
 2. Diseñe un algoritmo que intente maximizar el número de toneladas cargadas.
 
@@ -35,7 +35,7 @@ struct Contenedor {
 };
 ```
 
-Donde `id` es el identificador del contenedor, del tipo $c_i,\; i=1,\dots,n$ que nos indica el enunciado y `peso` sea la variable que define, tal y como su propio nombre indica, el peso del contenedor en toneladas.
+Donde `id` es el identificador del contenedor, del tipo $c_i,\; i=1,\dots,n$ que nos indica el enunciado y `peso` es la variable que define, tal y como su propio nombre indica, el peso del contenedor en toneladas.
 
 Para que el `set` ordene elementos de tipo `Contenedor` hay que especificarle la función de ordenación que debe utilizar, para ello utilizamos un *funtor* de la siguiente manera:
 
