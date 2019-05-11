@@ -25,8 +25,17 @@ bool parse_file (const string origen, vector<double> &xCords, vector<double> &yC
         double n;
         string dimension;
 
-        f >> dimension;
+        do {
+            f >> dimension;
+        } while (dimension != "DIMENSION:");
+
         f >> n;
+
+        string coordenadas;
+
+        do {
+            f >> coordenadas;
+        } while (coordenadas != "NODE_COORD_SECTION");
 
         xCords.clear();
         yCords.clear();
