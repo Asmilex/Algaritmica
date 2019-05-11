@@ -13,7 +13,8 @@ using namespace std;
 // ───────────────────────────────────────────────────────────────── ARCHIVOS ─────
 //
 
-bool parse_file (const string origen, vector<double> &xCords, vector<double> &yCords) {
+template <class T>
+bool parse_file (const string origen, vector<T> &xCords, vector<T> &yCords) {
     ifstream f(origen);
     bool return_value;
 
@@ -60,7 +61,9 @@ bool parse_file (const string origen, vector<double> &xCords, vector<double> &yC
     return return_value;
 }
 
-bool load_file (const string fichero, const vector<double> & resultados, const vector<double> & xCords, const vector<double> & yCords) {
+
+template <class T>
+bool save_file (const string fichero, const vector<T> & resultados, const vector<T> & xCords, const vector<double> & yCords) {
     ofstream f(fichero);
 
     if (!f) {
@@ -70,7 +73,7 @@ bool load_file (const string fichero, const vector<double> & resultados, const v
     else {
         f << "DIMENSION: " << resultados.size() << endl;
 
-        for (int i = 0; i<resultados.size(); i++)
+        for (int i = 0; i < resultados.size(); i++)
             f << resultados[i] + 1 << " " << xCords[resultados[i]] << " " << yCords[resultados[i]] << endl;
 
         f << resultados[0]+1 << " " << xCords[resultados[0]] << " " << yCords[resultados[0]] << endl;
@@ -85,11 +88,14 @@ bool load_file (const string fichero, const vector<double> & resultados, const v
 // ──────────────────────────────────────────────────────────────────── OTROS ─────
 //
 
-double distancia (double x1, double x2, double y1, double y2)  {
+template <class T>
+double distancia (const T x1, const T x2, const T y1, const T y2)  {
     return sqrt(  (x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2) );
 }
 
-void print_matrix (const vector<vector<double>> &matriz) {
+
+template <class T>
+void print_matrix (const vector<vector<T>> &matriz) {
     for (int i = 0; i < matriz.size(); ++i) {
         for (int j = 0; j < matriz.size(); ++j)
             cout << matriz[i][j] << "\t";
