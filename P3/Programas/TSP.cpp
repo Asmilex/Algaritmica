@@ -72,11 +72,12 @@ bool save_file (const string fichero, const vector<T> & resultados, const vector
     }
     else {
         f << "DIMENSION: " << resultados.size() << endl;
+        f << "TOUR_SECTION" << endl;
 
         for (int i = 0; i < resultados.size(); i++)
             f << resultados[i] + 1 << " " << xCords[resultados[i]] << " " << yCords[resultados[i]] << endl;
 
-        f << resultados[0]+1 << " " << xCords[resultados[0]] << " " << yCords[resultados[0]] << endl;
+        f << resultados[0] + 1 << " " << xCords[resultados[0]] << " " << yCords[resultados[0]] << endl;
 
         f.close();
 
@@ -192,7 +193,7 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    print_matrix(map);
+    //print_matrix(map);
     vector<double> resultados;
 
     chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
@@ -206,7 +207,7 @@ int main(int argc, char const *argv[]) {
     }
     else if (algoritmo == "-c") {
         t_antes   = chrono::high_resolution_clock::now();
-    //    cercania(map, resultados);
+        cercania(map, resultados);
         t_despues = chrono::high_resolution_clock::now();
     }
     else if (algoritmo == "-n") {
@@ -214,11 +215,25 @@ int main(int argc, char const *argv[]) {
         TBD();
         t_despues = chrono::high_resolution_clock::now();
     }
-    else
+    else {
         cerr << "Cago en la hostia pon bien los parámetros";
+        return -1;
+    }
+
+    cout << "Recorrido: ";
+    for(size_t i = 0; i < xCords.size()-1; i++)
+        cout << resultados[i]+1 << ", ";
 
     unsigned long t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
 
+    string output = origen.append("_output");
+
+    if ( save_file(output, resultados, xCords, yCords) ) {
+        cout << "\nArchivo guardado correctamente. Puedes mirar la salida en " << output << endl;
+    }
+    else {
+        cerr << "\nFallo al guardar el archivo\n";
+    }
 
     return 0;
 }
