@@ -234,16 +234,18 @@ int main(int argc, char const *argv[]) {
 
     string algoritmo = argv[1], origen = argv[2], output;
     vector<double> x, y;
-    int dist;
     vector<int> resultados;
-    chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
-    chrono::high_resolution_clock::time_point t_antes, t_despues;
-    unsigned long t_ejecucion;
 
-    if (!parse_file (origen, x, y)){
-      cerr << "\nError en los valores\n";
-      return 1;
+    int dist;
+
+    if (!parse_file (origen, x, y)) {
+        cerr << "\nError en los valores\n";
+        return 1;
     }
+
+//
+// ──────────────────────────────────────────── CALCULAR MATRIZ DE ADYACENCIA ─────
+//
 
     vector<vector<int>> adyacencia (x.size(), vector<int>(x.size(), 0));
 
@@ -254,38 +256,38 @@ int main(int argc, char const *argv[]) {
     //cout << "\nMATRIZ:\n";
     //print_matrix(adyacencia);
 
+//
+// ──────────────────────────────────────────────────────────────── ALGORITMO ─────
+//
+
     if (algoritmo == "-i") {
-        t_antes = chrono::high_resolution_clock::now();
         dist = insercion();
-        t_despues = chrono::high_resolution_clock::now();
     }
     else if (algoritmo == "-c") {
-        t_antes = chrono::high_resolution_clock::now();
         dist = cercania (adyacencia, resultados);
-        t_despues = chrono::high_resolution_clock::now();
     }
     else if (algoritmo == "-n") {
-        t_antes = chrono::high_resolution_clock::now();
-        barrido(x, y, adyacencia, resultados);
-        t_despues = chrono::high_resolution_clock::now();
+        dist = barrido(x, y, adyacencia, resultados);
     }
     else {
         cerr << "Error en los parámetros.";
         return -1;
     }
 
+
     cout << "\nSuma de las distancias: " << dist;
 
     cout << "\nRecorrido: ";
-
     for (int i=0; i<resultados.size(); ++i)
         cout << resultados[i] + 1 << ", ";
-
     cout << endl;
 
-    t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
 
-    output = origen.append("_output"); //cambiar sintaxis
+//
+// ────────────────────────────────────────────────────────── GUARDAR ARCHIVO ─────
+//
+
+    output = origen.append("_salida"); //cambiar sintaxis
 
     if (save_file(output, resultados, x, y))
         cout << "\nGuardado. Salida en: " << output << endl;
