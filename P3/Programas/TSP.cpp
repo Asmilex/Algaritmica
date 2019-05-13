@@ -54,11 +54,12 @@ bool load_file (const string fichero, const vector<int> & resultados, const vect
     }
     else {
         f << "DIMENSION: " << resultados.size() << endl;
+        f << "TOUR_SECTION" << endl;
 
         for (int i=0; i<resultados.size(); i++)
             f << resultados[i] + 1 << " " << x[resultados[i]] << " " << y[resultados[i]] << endl;
 
-        f << resultados[0]+1 << " " << x[resultados[0]] << " " << y[resultados[0]] << endl;
+        f << resultados[0] + 1 << " " << x[resultados[0]] << " " << y[resultados[0]] << endl;
 
         f.close();
 
@@ -154,7 +155,7 @@ int main(int argc, char const *argv[]) {
         return 1;
     }
 
-    string algoritmo = argv[1], origen = argv[2];
+    string algoritmo = argv[1], origen = argv[2], output;
     vector<double> x, y;
     int dist, cerc;
     vector<int> resultados;
@@ -173,6 +174,7 @@ int main(int argc, char const *argv[]) {
         for (int j=0; j<y.size(); ++j)
             map[i][j] = distancia(x[i], x[j], y[i], y[j]);
 
+    cout << "\nMATRIZ:\n";
     print_matrix(map);
 
     if (algoritmo == "-i") {
@@ -187,8 +189,7 @@ int main(int argc, char const *argv[]) {
 
         cout << "\n" << cerc << "\n\n";
 
-        for (int i=0; i<resultados.size(); ++i)
-            cout << resultados[i] << "\t";
+
 
         cout << "\n";
     }
@@ -197,10 +198,24 @@ int main(int argc, char const *argv[]) {
         TBD();
         t_despues = chrono::high_resolution_clock::now();
     }
-    else
+    else {
         cerr << "Error en los parámetros.";
+        return -1;
+    }
+
+    cout << "Recorrido: ";
+
+    for (int i=0; i<resultados.size(); ++i) //resultados o x?
+        cout << resultados[i] + 1 << ", ";
 
     t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
+
+    output = origen.append("_output"); //cambiar sintaxis
+
+    if (save_file(output, resultados, x, y))
+        cout << "\nGuardado. Salida en: " << output << endl;
+    else
+        cerr << "\nError al guardar el fichero\n";
 
     return 0;
 }
