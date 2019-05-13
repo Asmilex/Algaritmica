@@ -105,10 +105,10 @@ void print_matrix (const vector<vector<int>> & matriz) {
 
 int insercion () {}
 
-int cercania (const vector<vector<int>> & map, vector<int> & resultados) {
-    int n = map.size();
-    double dist_min, suma_distancias = 0, dist = 0;
-    int i, j, aux;
+int cercania (const vector<vector<int>> & adyacencia, vector<int> & resultados) {
+    int n = adyacencia.size();
+    int dist_min, dist = 0, i, j, aux;
+    long suma_distancias = 0;
 
     resultados.resize(n);
     resultados[0] = 0;
@@ -116,9 +116,9 @@ int cercania (const vector<vector<int>> & map, vector<int> & resultados) {
     for (i=1; i<n; i++) {
         dist_min = INT_MAX;
 
-        for (j=0; j<n; j++) {
+        for (j=0; j<n; j++)
             if (find(resultados.begin(), resultados.end(), j) == resultados.end()) {
-                dist = map[max(j, resultados[i-1])][min(j, resultados[i-1])];
+                dist = adyacencia[max(j, resultados[i-1])][min(j, resultados[i-1])];
 
                 if (dist < dist_min) {
                     aux = j;
@@ -126,12 +126,11 @@ int cercania (const vector<vector<int>> & map, vector<int> & resultados) {
                 }
             }
 
-            suma_distancias += dist_min;
-            resultados[i] = aux;
-          }
+        suma_distancias += dist_min;
+        resultados[i] = aux;
     }
 
-    suma_distancias += map[max(resultados[0], resultados[n-1])][min(resultados[0], resultados[n-1])];
+    suma_distancias += adyacencia[max(resultados[0], resultados[n-1])][min(resultados[0], resultados[n-1])];
 
     return suma_distancias;
 }
@@ -174,14 +173,14 @@ int main(int argc, char const *argv[]) {
       return 1;
     }
 
-    vector<vector<int>> map (x.size(), vector<int>(x.size(), 0));
+    vector<vector<int>> adyacencia (x.size(), vector<int>(x.size(), 0));
 
     for (int i=0; i<x.size(); i++)
         for (int j=0; j<y.size(); j++)
-            map[i][j] = distancia(x[i], x[j], y[i], y[j]);
+            adyacencia[i][j] = distancia(x[i], x[j], y[i], y[j]);
 
-    cout << "\nMATRIZ:\n";
-    print_matrix(map);
+    //cout << "\nMATRIZ:\n";
+    //print_matrix(adyacencia);
 
     if (algoritmo == "-i") {
         t_antes = chrono::high_resolution_clock::now();
@@ -190,13 +189,10 @@ int main(int argc, char const *argv[]) {
     }
     else if (algoritmo == "-c") {
         t_antes = chrono::high_resolution_clock::now();
-        cerc = cercania (map, resultados);
+        cerc = cercania (adyacencia, resultados);
         t_despues = chrono::high_resolution_clock::now();
 
         cout << "\n" << cerc << "\n\n";
-
-
-
         cout << "\n";
     }
     else if (algoritmo == "-n") {
