@@ -13,8 +13,7 @@ using namespace std;
 // ───────────────────────────────────────────────────────────────── ARCHIVOS ─────
 //
 
-template <class T>
-bool parse_file (const string origen, vector<T> &xCords, vector<T> &yCords) {
+bool parse_file (const string origen, vector<double> & x, vector<double> & y) {
     ifstream f(origen);
     bool return_value;
 
@@ -23,34 +22,19 @@ bool parse_file (const string origen, vector<T> &xCords, vector<T> &yCords) {
         return_value = false;
     }
     else {
-        double n;
-        string dimension;
+        int n, i, j, aux;
+        string dim;
 
-        do {
-            f >> dimension;
-        } while (dimension != "DIMENSION:");
-
+        f >> dim;
         f >> n;
 
-        string coordenadas;
+        x.clear();
+        y.clear();
 
-        do {
-            f >> coordenadas;
-        } while (coordenadas != "NODE_COORD_SECTION");
-
-        xCords.clear();
-        yCords.clear();
-
-        int i, j;
-        double temporal;
-
-        for (j = 0; j < n; j++) {
-            f >> i;
-            f >> temporal;
-            xCords.push_back(temporal);
-
-            f >> temporal;
-            yCords.push_back(temporal);
+        for (i=0; i<n; j++) {
+            f >> aux;
+            f >> x[i];
+            f >> y[i];
         }
 
         return_value = true;
@@ -61,9 +45,7 @@ bool parse_file (const string origen, vector<T> &xCords, vector<T> &yCords) {
     return return_value;
 }
 
-
-template <class T>
-bool save_file (const string fichero, const vector<T> & resultados, const vector<T> & xCords, const vector<double> & yCords) {
+bool load_file (const string fichero, const vector<int> & resultados, const vector<double> & x, const vector<double> & y) {
     ofstream f(fichero);
 
     if (!f) {
@@ -72,12 +54,11 @@ bool save_file (const string fichero, const vector<T> & resultados, const vector
     }
     else {
         f << "DIMENSION: " << resultados.size() << endl;
-        f << "TOUR_SECTION" << endl;
 
-        for (int i = 0; i < resultados.size(); i++)
-            f << resultados[i] + 1 << " " << xCords[resultados[i]] << " " << yCords[resultados[i]] << endl;
+        for (int i=0; i<resultados.size(); i++)
+            f << resultados[i] + 1 << " " << x[resultados[i]] << " " << y[resultados[i]] << endl;
 
-        f << resultados[0] + 1 << " " << xCords[resultados[0]] << " " << yCords[resultados[0]] << endl;
+        f << resultados[0]+1 << " " << x[resultados[0]] << " " << y[resultados[0]] << endl;
 
         f.close();
 
@@ -89,16 +70,13 @@ bool save_file (const string fichero, const vector<T> & resultados, const vector
 // ──────────────────────────────────────────────────────────────────── OTROS ─────
 //
 
-template <class T>
-double distancia (const T x1, const T x2, const T y1, const T y2)  {
-    return sqrt(  (x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2) );
+int distancia (double x1, double x2, double y1, double y2)  {
+    return ((int) rint(sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
 }
 
-
-template <class T>
-void print_matrix (const vector<vector<T>> &matriz) {
-    for (int i = 0; i < matriz.size(); ++i) {
-        for (int j = 0; j < matriz.size(); ++j)
+void print_matrix (const vector<vector<int>> &matriz) {
+    for (int i=0; i<matriz.size(); ++i) {
+        for (int j=0; j<matriz.size(); ++j)
             cout << matriz[i][j] << "\t";
 
         cout << endl;
@@ -111,30 +89,30 @@ void print_matrix (const vector<vector<T>> &matriz) {
 
 int insercion () {}
 
-double cercania (const vector<vector<double>> &map, vector<double> &resultados) {
+int cercania (const vector<vector<int>> & map, vector<int> & resultados) {
     int n = map.size();
 
     resultados.resize(n);
     resultados[0] = 0;
 
-    double dmin, suma_distancias = 0, distancia = 0;
-    vector<double> c(n-1);
+    double dmin, suma_distancias = 0, dist = 0;
+    vector<int> c(n-1);
     int i;
 
-    for (i = 1; i<n; i++){
-        c[i-1] = (double) i;
+    for (i=1; i<n; i++){
+        c[i-1] = i;
     }
 
-    for (size_t k = 1; k < n; k++) {
+    for (size_t k=1; k<n; k++) {
         dmin = INT_MAX;
 
-        for (size_t j = 0; j < n; j++) {
-            if ( find(resultados.begin(), resultados.end(), j) == resultados.end() ) {
-                distancia = map[ max(c[j], resultados[k-1] )][ min(c[j], resultados[k-1]) ];
+        for (size_t j=0; j<n; j++) {
+            if (find(resultados.begin(), resultados.end(), j) == resultados.end() ) {
+                dist = map[ max(c[j], resultados[k-1] )][ min(c[j], resultados[k-1]) ];
 
-                if (distancia < dmin) {
+                if (dist < dmin) {
                     i = j;
-                    dmin = distancia;
+                    dmin = dist;
                 }
             }
 
@@ -169,71 +147,60 @@ int main(int argc, char const *argv[]) {
         Son exhaustivos
 
         2: nombre del archivo
-
     */
 
     if (argc != 3) {
-        cerr << "Fallo de parámetros (mira el cpp)";
+        cerr << "\nFallo de parámetros (mira el cpp)\n";
         return 1;
     }
 
-    string algoritmo = argv[1];
-    string origen    = argv[2];
-
-    vector<double> xCords, yCords;
-    parse_file(origen, xCords, yCords);
-
-    vector<vector<double>> map (xCords.size(), vector<double>(xCords.size(), 0));
-    double dist;
-
-    for (int i = 0; i < xCords.size(); ++i) {
-        for (int j = 0; j < yCords.size(); ++j) {
-            dist = distancia(xCords[i], xCords[j], yCords[i], yCords[j]);
-            map[i][j] = (dist);
-        }
-    }
-
-    //print_matrix(map);
-    vector<double> resultados;
-
+    string algoritmo = argv[1], origen = argv[2];
+    vector<double> x, y;
+    int dist, cerc;
+    vector<int> resultados;
     chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
     chrono::high_resolution_clock::time_point t_antes, t_despues;
+    unsigned long t_ejecucion;
 
+    if (!parse_file (origen, x, y)){
+      cerr << "\nError en los valores\n";
+      return 1;
+    }
+
+    vector<vector<int>> map (x.size(), vector<int>(x.size(), 0));
+
+    for (int i=0; i<x.size(); ++i)
+        for (int j=0; j<y.size(); ++j)
+            map[i][j] = distancia(x[i], x[j], y[i], y[j]);
+
+    print_matrix(map);
 
     if (algoritmo == "-i") {
-        t_antes   = chrono::high_resolution_clock::now();
+        t_antes = chrono::high_resolution_clock::now();
         insercion();
         t_despues = chrono::high_resolution_clock::now();
     }
     else if (algoritmo == "-c") {
-        t_antes   = chrono::high_resolution_clock::now();
-        cercania(map, resultados);
+        t_antes = chrono::high_resolution_clock::now();
+        cerc = cercania (map, resultados);
         t_despues = chrono::high_resolution_clock::now();
+
+        cout << "\n" << cerc << "\n\n";
+
+        for (int i=0; i<resultados.size(); ++i)
+            cout << resultados[i] << "\t";
+
+        cout << "\n";
     }
     else if (algoritmo == "-n") {
-        t_antes   = chrono::high_resolution_clock::now();
+        t_antes = chrono::high_resolution_clock::now();
         TBD();
         t_despues = chrono::high_resolution_clock::now();
     }
-    else {
-        cerr << "Cago en la hostia pon bien los parámetros";
-        return -1;
-    }
+    else
+        cerr << "Error en los parámetros.";
 
-    cout << "Recorrido: ";
-    for(size_t i = 0; i < xCords.size()-1; i++)
-        cout << resultados[i]+1 << ", ";
-
-    unsigned long t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
-
-    string output = origen.append("_output");
-
-    if ( save_file(output, resultados, xCords, yCords) ) {
-        cout << "\nArchivo guardado correctamente. Puedes mirar la salida en " << output << endl;
-    }
-    else {
-        cerr << "\nFallo al guardar el archivo\n";
-    }
+    t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
 
     return 0;
 }
