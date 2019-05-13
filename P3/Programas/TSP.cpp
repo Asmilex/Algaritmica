@@ -14,35 +14,50 @@ using namespace std;
 //
 
 bool parse_file (const string origen, vector<double> & x, vector<double> & y) {
-    ifstream f(origen);
-    bool return_value;
+  ifstream f(origen);
+  bool return_value;
 
-    if (!f) {
-        cerr << "Fallo al abrir el fichero\n";
-        return_value = false;
-    }
-    else {
-        int n, i, j, aux;
-        string dim;
+  if (!f) {
+      cerr << "Fallo al abrir el fichero\n";
+      return_value = false;
+  }
+  else {
+      double n;
+      string dimension;
 
-        f >> dim;
-        f >> n;
+      do {
+          f >> dimension;
+      } while (dimension != "DIMENSION:");
 
-        x.clear();
-        y.clear();
+      f >> n;
 
-        for (i=0; i<n; j++) {
-            f >> aux;
-            f >> x[i];
-            f >> y[i];
-        }
+      string coordenadas;
 
-        return_value = true;
+      do {
+          f >> coordenadas;
+      } while (coordenadas != "NODE_COORD_SECTION");
 
-        f.close();
-    }
+      x.clear();
+      y.clear();
 
-    return return_value;
+      int i, j;
+      double temporal;
+
+      for (j = 0; j < n; j++) {
+          f >> i;
+          f >> temporal;
+          x.push_back(temporal);
+
+          f >> temporal;
+          y.push_back(temporal);
+      }
+
+      return_value = true;
+
+      f.close();
+  }
+
+  return return_value;
 }
 
 bool load_file (const string fichero, const vector<int> & resultados, const vector<double> & x, const vector<double> & y) {
@@ -75,7 +90,7 @@ int distancia (double x1, double x2, double y1, double y2)  {
     return ((int) rint(sqrt((x1 - x2)*(x1 - x2) + (y1 - y2)*(y1 - y2))));
 }
 
-void print_matrix (const vector<vector<int>> &matriz) {
+void print_matrix (const vector<vector<int>> & matriz) {
     for (int i=0; i<matriz.size(); ++i) {
         for (int j=0; j<matriz.size(); ++j)
             cout << matriz[i][j] << "\t";
@@ -92,42 +107,33 @@ int insercion () {}
 
 int cercania (const vector<vector<int>> & map, vector<int> & resultados) {
     int n = map.size();
+    double dist_min, suma_distancias = 0, dist = 0;
+    int i, j, aux;
 
     resultados.resize(n);
     resultados[0] = 0;
 
-    double dmin, suma_distancias = 0, dist = 0;
-    vector<int> c(n-1);
-    int i;
+    for (i=1; i<n; i++) {
+        dist_min = INT_MAX;
 
-    for (i=1; i<n; i++){
-        c[i-1] = i;
-    }
+        for (j=0; j<n; j++) {
+            if (find(resultados.begin(), resultados.end(), j) == resultados.end()) {
+                dist = map[max(j, resultados[i-1])][min(j, resultados[i-1])];
 
-    for (size_t k=1; k<n; k++) {
-        dmin = INT_MAX;
-
-        for (size_t j=0; j<n; j++) {
-            if (find(resultados.begin(), resultados.end(), j) == resultados.end() ) {
-                dist = map[ max(c[j], resultados[k-1] )][ min(c[j], resultados[k-1]) ];
-
-                if (dist < dmin) {
-                    i = j;
-                    dmin = dist;
+                if (dist < dist_min) {
+                    aux = j;
+                    dist_min = dist;
                 }
             }
 
-            suma_distancias += dmin;
-            resultados[k] = i;
+            suma_distancias += dist_min;
+            resultados[i] = aux;
           }
     }
 
-    suma_distancias += map[ max(resultados[0], resultados[n-1]) ][ min(resultados[0], resultados[n-1]) ];
+    suma_distancias += map[max(resultados[0], resultados[n-1])][min(resultados[0], resultados[n-1])];
 
     return suma_distancias;
-    // Da error de compilación. Pero es que no sé cómo arreglarlo sin cambiarlo todo.
-    // Está pensadopara enteros. Pero los datos están con decimales.
-    // Fuck this shit
 }
 
 int TBD () {}
@@ -170,8 +176,8 @@ int main(int argc, char const *argv[]) {
 
     vector<vector<int>> map (x.size(), vector<int>(x.size(), 0));
 
-    for (int i=0; i<x.size(); ++i)
-        for (int j=0; j<y.size(); ++j)
+    for (int i=0; i<x.size(); i++)
+        for (int j=0; j<y.size(); j++)
             map[i][j] = distancia(x[i], x[j], y[i], y[j]);
 
     cout << "\nMATRIZ:\n";
@@ -209,13 +215,13 @@ int main(int argc, char const *argv[]) {
         cout << resultados[i] + 1 << ", ";
 
     t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
-
+/*
     output = origen.append("_output"); //cambiar sintaxis
 
     if (save_file(output, resultados, x, y))
         cout << "\nGuardado. Salida en: " << output << endl;
     else
         cerr << "\nError al guardar el fichero\n";
-
+*/
     return 0;
 }
