@@ -11,6 +11,34 @@
 * Diseñar un algoritmo que maximice el número de contenedores cargados en un barco.
 * Diseñar un algoritmo que maximice el peso cargado en un barco.
 
+## Problema común:
+
+### Resolución por cercanía
+
+Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
+
+A continuación se adjunta función cercanía que hemos implementado:
+
+> Meter aqui el coooooodigo
+
+### Resolución por inserción
+
+Se parte de un recorrido que solo contiene algunas de las ciudades, en este caso, se cogen las tres ciudades que forman el triángulo más grande y se van añadiendo ciudades al circuito, por ejemplo la que menor incremento de la longitud del recorrido provoque.
+
+La función implementada para esta resolución:
+
+> Meter aquí el codigo
+
+### Algoritmo propio
+
+Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura (eje y) y de izquierda a derecha de forma secuencial.
+
+Para ello el código utilizado ha sido:
+
+> Aqui el codigo
+
+
+
 ## Problema asignado: Contenedores en un barco
 
 Se tiene un buque mercante cuya capacidad de carga es de $K$ toneladas y un conjunto de contenedores  $c_1,\dots,c_n$ cuyos respectivos pesos son $p_1 , \dots , p_n$ (expresados también en toneladas). Teniendo en cuenta que la capacidad del buque es menor que la suma total de los pesos de los contenedores:
