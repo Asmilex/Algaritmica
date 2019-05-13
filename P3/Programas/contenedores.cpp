@@ -97,8 +97,8 @@ int main(int argc, char ** argv){
         //cout << "MMA: " << K << "\tmax_weight: " << pesoMax << " KG" << endl;
         generarContenedores(contenedores, N, pesoMax);
 
-        //pesoFinal = cargaMaxPeso(barco, contenedores);
-        pesoFinal = cargaMaxContenedores(barco, contenedores);
+        pesoFinal = cargaMaxPeso(barco, contenedores);
+        //pesoFinal = cargaMaxContenedores(barco, contenedores);
 
         cout << N << " " << pesoFinal << " " << barco.size() <<  endl;
     }

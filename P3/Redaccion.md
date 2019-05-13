@@ -66,7 +66,7 @@ void generarContenedores (mySet &contenedores, const size_t tamano, const int ma
     for (size_t i = 0; i < tamano; ++i){
         contenedores.insert(Contenedor("c"+to_string(i),dist(rng))) ;
     }
-    
+
 }
 ```
 
@@ -74,13 +74,13 @@ Lo que hace es rellenar el `contenedores` con `tamano` elementos (contenedores) 
 
 El valor de la constante de Masa Máxima Autorizada (MMA) $K​$ lo hemos definido como una variable global:
 
-```c++ 
+```c++
 #define K 10000
 ```
 
 El barco lo hemos representado como un vector de elementos `Contenedor` , para este caso usamos la clase `vector`, suponiendo que el orden en el que se ordenen no es relevante.
 
-Sin más dilación, procedemos a mostrar las funciones que pedía el problema. 
+Sin más dilación, procedemos a mostrar las funciones que pedía el problema.
 
 #### Función que maximiza el número de contenedores cargados
 
@@ -185,3 +185,29 @@ Sabiendo esto, podemos entonces afirmar que, rigurosamente, nuestras funciones s
 Por último, demostraremos la optimalidad del primer problema, para ello, supongamos que $S=\{c_1,\dots,c_m\}$ es la solución que devuelve nuestro algoritmo y $P_S=\{p_1,\dots,p_m\}$ son los pesos asociados. Como el algoritmo va incluyendo elementos en el vector de menor a mayor peso, podemos afirmar que $p_i\leq p_j$ siempre que $i\leq j$. Ahora, razonemos por reducción al absurdo y supongamos que $S'=\{c_1',\dots,c_k'\}$ es otra solución más óptima que la calculada por el algoritmo, es decir, $k>m$, llamamos $P_{S'}=\{p'_1,\dots,p'_m\}$ A los pesos asociados. La optimalidad no cambiaría si cambiamos el orden de la solución, por lo que podemos suponer que las componentes de $S'$ están ordenadas.
 
 Como hemos diseñado el algoritmo de forma que siempre se coja el más pequeño disponible, necesariamente $p_i\leq p_i'\ \forall i\in\{1,\dots,m\}$. Por lo que $\hat{S}=\{c_1,\dots,c_m,c_{m+1}'\dots c'_k\}$ es otra solución del problema. Consideramos ahora el "primer elemento que se quedó fuera de la solución del algoritmo", es decir, el contenedor menos pesado que no forma parte de $S$, lo denotamos como $c$ y a su peso como $p_c$. Como es el menos pesado que no pertenece a $S$, entonces $p_c\leq\sum_{i=1}^{k-m}p'_{m+i}$, es decir, que $c$ es menos pesado que los elementos añadidos a $S$ para formar $\hat{S}$. Por lo que entonces $\hat{S'}=\{c_1,\dots,c_m,c\}$ es solución, pero por definición de nuestro algoritmo, si $\hat{S'}$ fuera solución, el propio algoritmo la habría incluido, luego $\hat{S'}$ sería una solución que supera la carga máxima, llegando así a contradicción y demostrando que nuestra solución $S$ es la solución óptima.
+
+### Resultados
+
+Hemos generado varios contenedores, de 50 en 50, y hemos ejecutado ambos algoritmos. Podremos analizar cómo se comportan las soluciones según los diferentes contenedores generados:
+
+
+#### Maximizar peso cargado
+
+![](./Graficas/Optimizar_peso_cargado_peso.png)
+
+En esta gráfica, vemos que si deseamos maximizar el peso, con pocos contenedores generados se consigue. La carga máxima soportada por el barco es de 10000KG.
+
+![](./Graficas/Optimizar_peso_cargado_contenedores.png)
+
+Además, vemos que el número de contenedores necesarios se mantiene prácticamente constante. No importa apenas la cantidad generada.
+
+#### Maximizar contenedores cargados
+
+![](./Graficas/Optimizar_contenedores_cargados_peso.png)
+
+Podemos que si optimizamos el número de contenedores cargados, el peso de la carga no se acerca tanto al tope del barco. Además, varía más que el anterior
+
+![](./Graficas/Optimizar_contenedores_contenedores.png)
+
+Lo más significativo se produce en la anterior gráfica.
+Usando el algoritmo que le da más importancia a los contenedores cargados, observamos que el algoritmo se beneficia claramente de una mayor cantidad de contenedores generados. Esto es debido a que hay más probabilidades de encontrar contenedores con una masa menor.
