@@ -234,7 +234,7 @@ int main(int argc, char const *argv[]) {
 
     string algoritmo = argv[1], origen = argv[2], output;
     vector<double> x, y;
-    int dist, cerc;
+    int dist;
     vector<int> resultados;
     chrono::time_point<std::chrono::high_resolution_clock> t0, tf; // Para medir el tiempo de ejecución
     chrono::high_resolution_clock::time_point t_antes, t_despues;
@@ -256,16 +256,13 @@ int main(int argc, char const *argv[]) {
 
     if (algoritmo == "-i") {
         t_antes = chrono::high_resolution_clock::now();
-        insercion();
+        dist = insercion();
         t_despues = chrono::high_resolution_clock::now();
     }
     else if (algoritmo == "-c") {
         t_antes = chrono::high_resolution_clock::now();
-        cerc = cercania (adyacencia, resultados);
+        dist = cercania (adyacencia, resultados);
         t_despues = chrono::high_resolution_clock::now();
-
-        cout << "\n" << cerc << "\n\n";
-        cout << "\n";
     }
     else if (algoritmo == "-n") {
         t_antes = chrono::high_resolution_clock::now();
@@ -277,19 +274,23 @@ int main(int argc, char const *argv[]) {
         return -1;
     }
 
-    cout << "Recorrido: ";
+    cout << "\nSuma de las distancias: " << dist;
 
-    for (int i=0; i<resultados.size(); ++i) //resultados o x?
+    cout << "\nRecorrido: ";
+
+    for (int i=0; i<resultados.size(); ++i)
         cout << resultados[i] + 1 << ", ";
 
+    cout << endl;
+
     t_ejecucion = chrono::duration_cast<std::chrono::nanoseconds>(t_despues - t_antes).count();
-/*
+
     output = origen.append("_output"); //cambiar sintaxis
 
     if (save_file(output, resultados, x, y))
         cout << "\nGuardado. Salida en: " << output << endl;
     else
         cerr << "\nError al guardar el fichero\n";
-*/
+
     return 0;
 }
