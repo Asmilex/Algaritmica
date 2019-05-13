@@ -136,7 +136,43 @@ int cercania (const vector<vector<int>> & map, vector<int> & resultados) {
     return suma_distancias;
 }
 
-int TBD () {}
+template <class T>
+int barrido (vector<T> x, vector<T> y, vector<vector<double>> matriz_adyacencia, vector<int> resultados) {
+    /*
+        Hacemos un barrido de abajo hacia arriba, buscando las ciudades por orden de altura.
+        Si hay varias ciudades donde coinciden la misma altura, se barre desde izquierda a derecha
+    */
+    size_t n = y.size();
+
+    vector<size_t> orden (n);
+
+    T aux;
+    size_t posicion;
+
+    for (size_t i = 0; i < n; i++)
+        orden[i] = i + 1;
+
+    for (size_t i = 0; i < n; i++) {
+        for (size_t j = 0; j < n; j++) {
+            if (y[i] < y[j]) {
+                // Mantener la posición entre los 3 vectores
+                y[i] = aux;
+                y[i] = y[j];
+                y[j] = aux;
+
+                x[i] = aux;
+                x[i] = y[j];
+                x[j] = aux;
+
+                orden[i] = posicion;
+                orden[i] = orden[j];
+                orden[j] = posicion;
+            }
+        }
+    }
+
+    // TODO
+}
 
 //
 // ──────────────────────────────────────────────── I ──────────
