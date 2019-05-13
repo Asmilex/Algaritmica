@@ -136,47 +136,77 @@ int cercania (const vector<vector<int>> & adyacencia, vector<int> & resultados) 
 }
 
 template <class T>
-int barrido (vector<T> x, vector<T> y, vector<vector<T>> matriz_adyacencia, vector<T> resultados) {
+long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_adyacencia, vector<int> &orden) {
     /*
         Hacemos un barrido de abajo hacia arriba, buscando las ciudades por orden de altura.
         Si hay varias ciudades donde coinciden la misma altura, se barre desde izquierda a derecha
     */
     size_t n = y.size();
 
-    vector<size_t> orden (n);
+    orden.resize(n);
 
     T aux;
     size_t posicion;
 
     for (size_t i = 0; i < n; i++)
-        orden[i] = i + 1;
+        orden[i] = i;
 
-    for (size_t i = 0; i < n; i++) {
-        cout << "\t" <<orden[i] << ": " << x[i] << " " << y[i] << endl;
-    }
-
+    // Reordenar con respecto a y
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < n; j++) {
             if (y[i] < y[j]) {
                 // Mantener la posición entre los 3 vectores
-                y[i] = aux;
-                y[i] = y[j];
-                y[j] = aux;
+                aux   = y[i];
+                y[i]  = y[j];
+                y[j]  = aux;
 
-                x[i] = aux;
-                x[i] = y[j];
-                x[j] = aux;
+                aux   = x[i];
+                x[i]  = x[j];
+                x[j]  = aux;
 
-                orden[i] = posicion;
+                posicion = orden[i];
                 orden[i] = orden[j];
                 orden[j] = posicion;
             }
         }
     }
 
-    for (size_t i = 0; i < n; i++) {
-        cout << "\t" <<orden[i] << ": " << x[i] << " " << y[i] << endl;
+    // Reordenar x aquellos que tengan la misma posición y
+    size_t saved_iter;
+    for (size_t iter = 0; iter < n - 1; iter++) {
+        // Encontrar repetidos
+        saved_iter = iter;
+
+        while (y[iter] == y[iter+1] && iter < n-1)
+            iter++;
+
+        //Ordenar parcialmente
+        for (size_t i = saved_iter; i <= iter; i++) {
+            for (size_t j = saved_iter; j <= iter; j++) {
+                if (x[i] < x[j]) {
+                    // Mantener la posición entre los 3 vectores
+                    aux   = y[i];
+                    y[i]  = y[j];
+                    y[j]  = aux;
+
+                    aux   = x[i];
+                    x[i]  = x[j];
+                    x[j]  = aux;
+
+                    posicion = orden[i];
+                    orden[i] = orden[j];
+                    orden[j] = posicion;
+                }
+            }
+        }
     }
+
+    long int distancia_total = 0;
+
+
+    // Operaciones
+
+    return distancia_total;
 }
 
 //
@@ -239,7 +269,7 @@ int main(int argc, char const *argv[]) {
     }
     else if (algoritmo == "-n") {
         t_antes = chrono::high_resolution_clock::now();
-        //barrido(x, y, adyacencia, resultados);
+        barrido(x, y, adyacencia, resultados);
         t_despues = chrono::high_resolution_clock::now();
     }
     else {
