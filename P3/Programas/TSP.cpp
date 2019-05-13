@@ -266,7 +266,7 @@ int main(int argc, char const *argv[]) {
     else if (algoritmo == "-c") {
         dist = cercania (adyacencia, resultados);
     }
-    else if (algoritmo == "-n") {
+    else if (algoritmo == "-b") {
         dist = barrido(x, y, adyacencia, resultados);
     }
     else {
@@ -288,6 +288,7 @@ int main(int argc, char const *argv[]) {
 //
 
     output = origen.append("_salida"); //cambiar sintaxis
+    output = output.append(algoritmo);
 
     if (save_file(output, resultados, x, y))
         cout << "\nGuardado. Salida en: " << output << endl;
