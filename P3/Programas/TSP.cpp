@@ -60,7 +60,7 @@ bool parse_file (const string origen, vector<double> & x, vector<double> & y) {
   return return_value;
 }
 
-bool load_file (const string fichero, const vector<int> & resultados, const vector<double> & x, const vector<double> & y) {
+bool save_file (const string fichero, const vector<int> & resultados, const vector<double> & x, const vector<double> & y) {
     ofstream f(fichero);
 
     if (!f) {
@@ -136,7 +136,7 @@ int cercania (const vector<vector<int>> & adyacencia, vector<int> & resultados) 
 }
 
 template <class T>
-int barrido (vector<T> x, vector<T> y, vector<vector<double>> matriz_adyacencia, vector<int> resultados) {
+int barrido (vector<T> x, vector<T> y, vector<vector<T>> matriz_adyacencia, vector<T> resultados) {
     /*
         Hacemos un barrido de abajo hacia arriba, buscando las ciudades por orden de altura.
         Si hay varias ciudades donde coinciden la misma altura, se barre desde izquierda a derecha
@@ -150,6 +150,10 @@ int barrido (vector<T> x, vector<T> y, vector<vector<double>> matriz_adyacencia,
 
     for (size_t i = 0; i < n; i++)
         orden[i] = i + 1;
+
+    for (size_t i = 0; i < n; i++) {
+        cout << "\t" <<orden[i] << ": " << x[i] << " " << y[i] << endl;
+    }
 
     for (size_t i = 0; i < n; i++) {
         for (size_t j = 0; j < n; j++) {
@@ -170,7 +174,9 @@ int barrido (vector<T> x, vector<T> y, vector<vector<double>> matriz_adyacencia,
         }
     }
 
-    // TODO
+    for (size_t i = 0; i < n; i++) {
+        cout << "\t" <<orden[i] << ": " << x[i] << " " << y[i] << endl;
+    }
 }
 
 //
@@ -233,7 +239,7 @@ int main(int argc, char const *argv[]) {
     }
     else if (algoritmo == "-n") {
         t_antes = chrono::high_resolution_clock::now();
-        TBD();
+        //barrido(x, y, adyacencia, resultados);
         t_despues = chrono::high_resolution_clock::now();
     }
     else {
