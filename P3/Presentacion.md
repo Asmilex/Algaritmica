@@ -136,4 +136,7 @@ Luego se tiene: $O(n\cdot \log_2(n))$.
 - Supongamos que $S'=\{c_1',\dots,c_k'\}$ es otra solución más óptima, es decir, $k>m$.
 - Consideramos el "primer elemento que se quedó fuera de la solución del algoritmo", es decir, el contenedor menos pesado que no forma parte de $S$, lo denotamos como $c$ y a su peso como $p_c$.
 - Se demuestra por reductio ad absurdum
-> No sé como explicar esto bien en una presentacion SOCORRO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+- Tenemos que $T=\{c_1,\cdots,c_m,c'_{m+1},\cdots,c'_k\}$ es solución del problema.
+- Por cómo hemos escogido $c$ tenemos $T'=\{c_1,\cdots,c_m,c\}$ es solución. Contradicción, si fuera solución nuestro algoritmo habría incluido $c$.
+---
+
