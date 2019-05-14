@@ -180,3 +180,18 @@ Variamos la cantidad generada de contenedores $N$ y observamos cómo se comporta
 #### Optimizar contenedores cargados
 ##### Estudio de los contenedores
 <img src="./Graficas/Optimizar_contenedores_contenedores.png" width="1200">
+
+---
+
+## Problema común: Problema del viajante de comercio
+
+---
+
+### Resolución por cercanía
+
+Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
+
+```c++
+
+```
+
