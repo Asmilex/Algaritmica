@@ -139,13 +139,14 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
         for (int i = 0; i < candidatos.size(); i++) {
 
             for(int j = 0; j < resultados.size(); j++) {
-                //Calcular incrementp total si insertamos el candidato i en la posición j
+                //Calcular incremento total si insertamos el candidato i en la posición j
 
+                //Sumar la arista entre la ciudad en la posición j y el candidato +
+                //la arista entre el candidato y la ciudad j+1
                 //Restar la distancia entre el que está en la posición j y la j+1
                 incremento = map[resultados[j]][candidatos[i]] +
                              map[candidatos[i]][resultados[(j+1)%resultados.size()]] -
                              map[resultados[j]][resultados[(j+1)%resultados.size()]];
-                //Sumar las distancias que sumaria meter ahi el nodo
 
                 if (incremento < incrementoMin){
                     incrementoMin = incremento;
