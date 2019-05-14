@@ -130,10 +130,10 @@ int insercion (const vector<vector<int>> & map, vector<int> & resultados, int c0
     int nextCity, incrementoMin, incremento, posicion;
 
     while(candidatos.size()>0){
-        
+
         nextCity=candidatos[0];
         incrementoMin = INT_MAX;
-        
+
 
         for (int i = 0; i < candidatos.size(); i++){
 
@@ -142,7 +142,7 @@ int insercion (const vector<vector<int>> & map, vector<int> & resultados, int c0
 
                 //Restar la distancia entre el que está en la posición j y la j+1
                 incremento = map[resultados[j]-1][candidatos[i]-1] +
-                             map[candidatos[i]-1][resultados[(j+1)%resultados.size()]-1] - 
+                             map[candidatos[i]-1][resultados[(j+1)%resultados.size()]-1] -
                              map[resultados[j]-1][resultados[(j+1)%resultados.size()]-1];
                 //Sumar las distancias que sumaria meter ahi el nodo
 
@@ -158,7 +158,7 @@ int insercion (const vector<vector<int>> & map, vector<int> & resultados, int c0
         resultados.insert(resultados.begin()+posicion,nextCity);
         candidatos.erase(remove(candidatos.begin(),candidatos.end(),nextCity));
         distancia+=incrementoMin;
-        
+
     }
 
     return distancia;
@@ -190,7 +190,7 @@ int cercania (const vector<vector<int>> & adyacencia, vector<int> & resultados) 
     }
 
     suma_distancias += adyacencia[max(resultados[0], resultados[n-1])][min(resultados[0], resultados[n-1])];
-    
+
     return suma_distancias;
 }
 
@@ -210,9 +210,9 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
     for (size_t i = 0; i < n; i++)
         orden[i] = i;
 
-    // Reordenar con respecto a y
-    for (size_t i = 0; i < n; i++) {
-        for (size_t j = 0; j < n; j++) {
+    // Reordenar con respecto a y. La primera ciudad se deja fija
+    for (size_t i = 1; i < n; i++) {
+        for (size_t j = 1; j < n; j++) {
             if (y[i] < y[j]) {
                 // Mantener la posición entre los 3 vectores
                 aux   = y[i];
@@ -232,7 +232,7 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
 
     // Reordenar x aquellos que tengan la misma posición y
     size_t saved_iter;
-    for (size_t iter = 0; iter < n - 1; iter++) {
+    for (size_t iter = 1; iter < n - 1; iter++) {
         // Encontrar repetidos
         saved_iter = iter;
 
