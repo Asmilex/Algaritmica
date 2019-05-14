@@ -19,7 +19,39 @@ Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada
 
 A continuación se adjunta función cercanía que hemos implementado:
 
-> Meter aqui el coooooodigo
+```c++
+int cercania (const vector<vector<int>> & adyacencia, vector<int> & resultados) {
+    int n = adyacencia.size();
+    int dist_min, dist = 0, i, j, aux;
+    long suma_distancias = 0;
+
+    resultados.resize(n);
+    resultados[0] = 0;
+
+    for (i=1; i<n; i++) {
+        dist_min = INT_MAX;
+
+        for (j=0; j<n; j++)
+            if (find(resultados.begin(), resultados.end(), j) == resultados.end()) {
+                dist = adyacencia[max(j, resultados[i-1])][min(j, resultados[i-1])];
+
+                if (dist < dist_min) {
+                    aux = j;
+                    dist_min = dist;
+                }
+            }
+
+        suma_distancias += dist_min;
+        resultados[i] = aux;
+    }
+
+    suma_distancias += adyacencia[max(resultados[0], resultados[n-1])][min(resultados[0], resultados[n-1])];
+
+    return suma_distancias;
+}
+```
+
+
 
 ### Resolución por inserción
 
@@ -27,15 +59,155 @@ Se parte de un recorrido que solo contiene algunas de las ciudades, en este caso
 
 La función implementada para esta resolución:
 
-> Meter aquí el codigo
+```c++
+template <class T>
+int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>> & map, vector<int> & resultados) {
+    int c0 = 1, c1 = 1, c2 = 1;
+
+    for (int i = 0; i < x.size(); i++) {
+        if(x[i] < x[c0])      c0 = i;
+        if(x[i] > x[c1])      c1 = i;
+        if(y[i] > y[c2])      c2 = i;
+    }
+
+    int n         = map.size();
+    int distancia = 0;
+
+    resultados.clear();
+    resultados.push_back(c0);
+    resultados.push_back(c1);
+    resultados.push_back(c2);
+
+    distancia += map[c0][c1];
+    distancia += map[c1][c2];
+    distancia += map[c2][c0];
+
+    vector<int> candidatos;
+    for (int i = 0; i<n; i++)
+        if (i!=c0 && i!=c1 && i!=c2)
+            candidatos.push_back(i);
+
+    int nextCity, incrementoMin, incremento, posicion;
+
+    while (candidatos.size() > 0) {
+        nextCity      = candidatos[0];
+        incrementoMin = INT_MAX;
+
+        for (int i = 0; i < candidatos.size(); i++) {
+
+            for(int j = 0; j < resultados.size(); j++) {
+                //Calcular incrementp total si insertamos el candidato i en la posición j
+
+                //Restar la distancia entre el que está en la posición j y la j+1
+                incremento = map[resultados[j]][candidatos[i]] +
+                             map[candidatos[i]][resultados[(j+1)%resultados.size()]] -
+                             map[resultados[j]][resultados[(j+1)%resultados.size()]];
+                //Sumar las distancias que sumaria meter ahi el nodo
+
+                if (incremento < incrementoMin){
+                    incrementoMin = incremento;
+                    nextCity      = candidatos[i];
+                    posicion      = j;
+                }
+            }
+        }
+
+        resultados.insert(resultados.begin()+posicion,nextCity);
+        candidatos.erase(remove(candidatos.begin(),candidatos.end(),nextCity));
+        distancia += incrementoMin;
+    }
+
+    return distancia;
+}
+```
+
+
 
 ### Algoritmo propio
 
-Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura (eje y) y de izquierda a derecha de forma secuencial.
+Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
 
 Para ello el código utilizado ha sido:
 
-> Aqui el codigo
+```c++
+template <class T>
+long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_adyacencia, vector<int> &orden) {
+    /*
+        Hacemos un barrido de abajo hacia arriba, buscando las ciudades por orden de altura.
+        Si hay varias ciudades donde coinciden la misma altura, se barre desde izquierda a derecha
+    */
+    size_t n = y.size();
+
+    orden.resize(n);
+
+    T aux;
+    size_t posicion;
+
+    for (size_t i = 0; i < n; i++)
+        orden[i] = i;
+
+    // Reordenar con respecto a y. La primera ciudad se deja fija
+    for (size_t i = 1; i < n; i++) {
+        for (size_t j = 1; j < n; j++) {
+            if (y[i] < y[j]) {
+                // Mantener la posición entre los 3 vectores
+                aux   = y[i];
+                y[i]  = y[j];
+                y[j]  = aux;
+
+                aux   = x[i];
+                x[i]  = x[j];
+                x[j]  = aux;
+
+                posicion = orden[i];
+                orden[i] = orden[j];
+                orden[j] = posicion;
+            }
+        }
+    }
+
+    // Reordenar x aquellos que tengan la misma posición y
+    size_t saved_iter;
+    for (size_t iter = 1; iter < n - 1; iter++) {
+        // Encontrar repetidos
+        saved_iter = iter;
+
+        while (iter < n-1 && y[iter] == y[iter+1])
+            iter++;
+
+        //Ordenar parcialmente
+        for (size_t i = saved_iter; i <= iter; i++) {
+            for (size_t j = saved_iter; j <= iter; j++) {
+                if (x[i] < x[j]) {
+                    // Mantener la posición entre los 3 vectores
+                    aux   = y[i];
+                    y[i]  = y[j];
+                    y[j]  = aux;
+
+                    aux   = x[i];
+                    x[i]  = x[j];
+                    x[j]  = aux;
+
+                    posicion = orden[i];
+                    orden[i] = orden[j];
+                    orden[j] = posicion;
+                }
+            }
+        }
+    }
+
+    long int distancia_total = 0;
+
+    for (int i = 1; i < n; i++) {
+        distancia_total += matriz_adyacencia[ orden[i] ][ orden[i-1] ];
+    }
+
+    distancia_total += matriz_adyacencia[ orden[0] ][ orden[n-1] ];
+
+    return distancia_total;
+}
+
+```
 
 
 
