@@ -263,10 +263,10 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
     long int distancia_total = 0;
 
     for (int i = 1; i < n; i++) {
-        distancia_total += matriz_adyacencia[i][i-1];
+        distancia_total += matriz_adyacencia[ orden[i] ][ orden[i-1] ];
     }
 
-    distancia_total += matriz_adyacencia[0][n-1];
+    distancia_total += matriz_adyacencia[ orden[0] ][ orden[n-1] ];
 
     return distancia_total;
 }
