@@ -191,14 +191,23 @@ Variamos la cantidad generada de contenedores $N$ y observamos cómo se comporta
 
 Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
 
+![](./Graficas/Cercania.png)
+
 ---
 
 ### Resolución por inserción
 
 Se parte de un recorrido que solo contiene algunas de las ciudades, en este caso, se cogen las tres ciudades que forman el triángulo más grande y se van añadiendo ciudades al circuito, por ejemplo la que menor incremento de la longitud del recorrido provoque.
 
+![](./Graficas/Insercion.png)
+
 ---
 
 ### Algoritmo propio
 
 Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
+
+![](./Graficas/Barrido1.png)
+
+![](./Graficas/Barrido2.png)
+
