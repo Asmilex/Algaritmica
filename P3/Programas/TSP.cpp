@@ -102,7 +102,6 @@ void print_matrix (const vector<vector<int>> & matriz) {
 //
 // ─────────────────────────────────────────────────────────────── ALGORITMOS ─────
 //
-
 int insercion (const vector<vector<int>> & map, vector<int> & resultados, int c0, int c1, int c2) {
 
     int n = map.size();
@@ -113,14 +112,14 @@ int insercion (const vector<vector<int>> & map, vector<int> & resultados, int c0
     resultados.push_back(c1);
     resultados.push_back(c2);
 
-    distancia += map[c0-1][c1-1];
-    distancia += map[c1-1][c2-1];
-    distancia += map[c2-1][c0-1];
+    distancia += map[c0][c1];
+    distancia += map[c1][c2];
+    distancia += map[c2][c0];
 
     //cout << c0 << "," << c1 << "," << c2 << endl;
 
     vector<int> candidatos;
-    for(int i = 1; i<=n; i++)
+    for(int i = 0; i<n; i++)
         if(i!=c0 && i!=c1 && i!=c2)
             candidatos.push_back(i);
 
@@ -141,9 +140,9 @@ int insercion (const vector<vector<int>> & map, vector<int> & resultados, int c0
                 //Calcular incrementp total si insertamos el candidato i en la posición j
 
                 //Restar la distancia entre el que está en la posición j y la j+1
-                incremento = map[resultados[j]-1][candidatos[i]-1] +
-                             map[candidatos[i]-1][resultados[(j+1)%resultados.size()]-1] -
-                             map[resultados[j]-1][resultados[(j+1)%resultados.size()]-1];
+                incremento = map[resultados[j]][candidatos[i]] +
+                             map[candidatos[i]][resultados[(j+1)%resultados.size()]] - 
+                             map[resultados[j]][resultados[(j+1)%resultados.size()]];
                 //Sumar las distancias que sumaria meter ahi el nodo
 
                 if(incremento < incrementoMin){
@@ -326,9 +325,9 @@ int main(int argc, char const *argv[]) {
         int c0=1,c1=1,c2=1;
 
         for(int i = 0; i<x.size(); i++){
-            if(x[i]<x[c0-1]) c0=i+1;
-            if(x[i]>x[c1-1]) c1=i+1;
-            if(y[i]>y[c2-1]) c2=i+1;
+            if(x[i]<x[c0]) c0=i;
+            if(x[i]>x[c1]) c1=i;
+            if(y[i]>y[c2]) c2=i;
         }
 
 
