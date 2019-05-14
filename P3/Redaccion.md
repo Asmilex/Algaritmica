@@ -7,11 +7,13 @@
 #### Objetivos
 
 * Aprender a aplicar algoritmos voraces.
-* Resolver el problema del Viajante de Comercio.
+* Resolver el problema del Viajante de Comercio de diferentes maneras.
 * Diseñar un algoritmo que maximice el número de contenedores cargados en un barco.
 * Diseñar un algoritmo que maximice el peso cargado en un barco.
 
-## Problema común:
+## Problema común: El problema del viajante de comercio
+
+Dado un conjunto de ciudades y una matriz con las distancias entre todas ellas, un viajante debe recorrer todas las ciudades exactamente una vez, regresando al punto de partida, de forma tal que la distancia recorrida sea mı́nima. Mas formalmente, dado un grafo $G$, conexo y ponderado, se trata de hallar el ciclo hamiltoniano de mı́nimo peso de ese grafo.
 
 ### Resolución por cercanía
 
@@ -96,13 +98,14 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
         for (int i = 0; i < candidatos.size(); i++) {
 
             for(int j = 0; j < resultados.size(); j++) {
-                //Calcular incrementp total si insertamos el candidato i en la posición j
+                //Calcular incremento si insertamos el candidato i en la posición j
 
+                //Sumar la arista entre la ciudad en la posición j y el candidato +
+                //la arista entre el candidato y la ciudad j+1
                 //Restar la distancia entre el que está en la posición j y la j+1
                 incremento = map[resultados[j]][candidatos[i]] +
                              map[candidatos[i]][resultados[(j+1)%resultados.size()]] -
                              map[resultados[j]][resultados[(j+1)%resultados.size()]];
-                //Sumar las distancias que sumaria meter ahi el nodo
 
                 if (incremento < incrementoMin){
                     incrementoMin = incremento;
@@ -171,7 +174,7 @@ A continuación, se presenta un cuadro resumen con todas las distancias generada
 
 ### Algoritmo propio
 
-Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
+Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x​$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
 
 Para ello el código utilizado ha sido:
 

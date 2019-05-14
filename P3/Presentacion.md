@@ -180,3 +180,106 @@ Variamos la cantidad generada de contenedores $N$ y observamos cómo se comporta
 #### Optimizar contenedores cargados
 ##### Estudio de los contenedores
 <img src="./Graficas/Optimizar_contenedores_contenedores.png" width="1200">
+
+---
+
+## Problema común: Problema del viajante de comercio
+
+---
+
+### Resolución por cercanía
+
+Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
+
+```c++
+for (i=1; i<n; i++) {
+        dist_min = INT_MAX;
+        for (j=0; j<n; j++)
+            if (find(resultados.begin(), resultados.end(), j) == resultados.end()) {
+                dist = adyacencia[max(j, resultados[i-1])][min(j, resultados[i-1])];
+                if (dist < dist_min) {
+                    aux = j;
+                    dist_min = dist;
+                }
+            }
+        suma_distancias += dist_min;
+        resultados[i] = aux;
+    }
+    suma_distancias += adyacencia[max(resultados[0], resultados[n-1])][min(resultados[0], resultados[n-1])];
+```
+
+---
+
+### Resolución por inserción
+
+Se parte de un recorrido que solo contiene algunas de las ciudades, en este caso, se cogen las tres ciudades que forman el triángulo más grande y se van añadiendo ciudades al circuito, por ejemplo la que menor incremento de la longitud del recorrido provoque.
+
+```c++
+while (candidatos.size() > 0) {
+        nextCity      = candidatos[0];
+        incrementoMin = INT_MAX;
+        for (int i = 0; i < candidatos.size(); i++) 
+            for(int j = 0; j < resultados.size(); j++) {
+                incremento = map[resultados[j]][candidatos[i]] +
+                             map[candidatos[i]][resultados[(j+1)%resultados.size()]] -
+                             map[resultados[j]][resultados[(j+1)%resultados.size()]];
+                if (incremento < incrementoMin){
+                    incrementoMin = incremento;
+                    nextCity      = candidatos[i];
+                    posicion      = j;
+                }
+            }
+        resultados.insert(resultados.begin()+posicion,nextCity);
+        candidatos.erase(remove(candidatos.begin(),candidatos.end(),nextCity));
+        distancia += incrementoMin;
+    }
+```
+
+---
+
+### Algoritmo propio
+
+Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
+
+```c++
+for (size_t i = 1; i < n; i++) 
+        for (size_t j = 1; j < n; j++) 
+            if (y[i] < y[j]) 
+                aux   = y[i];
+                y[i]  = y[j];
+                y[j]  = aux;
+                aux   = x[i];
+                x[i]  = x[j];
+                x[j]  = aux;
+                posicion = orden[i];
+                orden[i] = orden[j];
+                orden[j] = posicion;
+    for (size_t iter = 1; iter < n - 1; iter++) {
+        saved_iter = iter;
+
+        while (iter < n-1 && y[iter] == y[iter+1])
+            iter++;
+        
+```
+
+---
+
+```c++
+for (size_t i = saved_iter; i <= iter; i++)
+            for (size_t j = saved_iter; j <= iter; j++)
+                if (x[i] < x[j])
+                    aux   = y[i];
+                    y[i]  = y[j];
+                    y[j]  = aux;
+                    aux   = x[i];
+                    x[i]  = x[j];
+                    x[j]  = aux;
+                    posicion = orden[i];
+                    orden[i] = orden[j];
+                    orden[j] = posicion;
+    for (int i = 1; i < n; i++) 
+        distancia_total += matriz_adyacencia[ orden[i] ][ orden[i-1] ];
+    distancia_total += matriz_adyacencia[ orden[0] ][ orden[n-1] ];
+
+```
+
