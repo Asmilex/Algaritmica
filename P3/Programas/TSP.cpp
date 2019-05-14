@@ -104,7 +104,7 @@ void print_matrix (const vector<vector<int>> & matriz) {
 //
 
 template <class T>
-int insercion (vector<T> x, vector<T> y, const vector<vector<int>> & map, vector<int> & resultados) {
+int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>> & map, vector<int> & resultados) {
     int c0 = 1, c1 = 1, c2 = 1;
 
     for (int i = 0; i < x.size(); i++) {
