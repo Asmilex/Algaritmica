@@ -236,7 +236,7 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
         // Encontrar repetidos
         saved_iter = iter;
 
-        while (y[iter] == y[iter+1] && iter < n-1)
+        while (iter < n-1 && y[iter] == y[iter+1])
             iter++;
 
         //Ordenar parcialmente
