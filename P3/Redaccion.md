@@ -222,50 +222,48 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
 
 ### Resultados
 
-Estos son las ciudades de los 3 archivos proporcionados
+Hemos aplicado estos tres algoritmos a las ciudades proporcionadas.
+
+#### a280
 
 <img src="./Graficas/a280.png" width="800">
+
+![Inserción](./Graficas/a280-i.png)
+
+![Cercanía](./Graficas/a280-c.png)
+
+![Barrido](./Graficas/a280-b.png)
+
+#### att48
+
 <img src="./Graficas/att48.png" width="800">
+
+![Inserción](./Graficas/att48-i.png)
+
+![Cercanía](./Graficas/att48-c.png)
+
+![Barrido](./Graficas/att48-b.png)
+
+#### ulysses16
+
 <img src="./Graficas/ulysses16.png" width="800">
+
+![Inserción](./Graficas/ulysses16-i.png)
+
+![Cercanía](./Graficas/ulysses16-c.png)
+
+
+![Barrido](./Graficas/ulysses16-b.png)
+
+#### ulysses22
+
 <img src="./Graficas/ulysses22.png" width="800">
 
-Veamos las soluciones que han generado nuestros algoritmos:
+![Inserción](./Graficas/ulysses22-i.png)
 
-<div style="page-break-after: always;"></div>
+![Cercanía](./Graficas/ulysses22-c.png)
 
-#### Inserción
-
-![](./Graficas/a280-i.png)
-
-![](./Graficas/att48-i.png)
-
-![](./Graficas/ulysses16-i.png)
-
-![](./Graficas/ulysses22-i.png)
-
-<div style="page-break-after: always;"></div>
-
-#### Cercanía
-
-![](./Graficas/a280-c.png)
-
-![](./Graficas/att48-c.png)
-
-![](./Graficas/ulysses16-c.png)
-
-![](./Graficas/ulysses22-c.png)
-
-<div style="page-break-after: always;"></div>
-
-#### Barrido
-
-![](./Graficas/a280-b.png)
-
-![](./Graficas/att48-b.png)
-
-![](./Graficas/ulysses16-b.png)
-
-![](./Graficas/ulysses22-b.png)
+![Barrido](./Graficas/ulysses22-b.png)
 
 <div style="page-break-after: always;"></div>
 
