@@ -133,10 +133,10 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
     int nextCity, incrementoMin, incremento, posicion;
 
     while (candidatos.size() > 0) {
-        nextCity      = candidatos[0];
-        incrementoMin = INT_MAX;
+        nextCity = candidatos[0];
 
         for (int i = 0; i < candidatos.size(); i++) {
+            incrementoMin = INT_MAX;
 
             for(int j = 0; j < resultados.size(); j++) {
                 //Calcular incremento total si insertamos el candidato i en la posición j
@@ -151,7 +151,7 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
                 if (incremento < incrementoMin){
                     incrementoMin = incremento;
                     nextCity      = candidatos[i];
-                    posicion      = j+1;
+                    posicion      = (j+1)%resultados.size();
                 }
             }
         }

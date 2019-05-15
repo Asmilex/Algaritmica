@@ -104,9 +104,9 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
 
     while (candidatos.size() > 0) {
         nextCity      = candidatos[0];
-        incrementoMin = INT_MAX;
 
         for (int i = 0; i < candidatos.size(); i++) {
+            incrementoMin = INT_MAX;
 
             for(int j = 0; j < resultados.size(); j++) {
                 //Calcular incremento si insertamos el candidato i en la posición j
@@ -121,7 +121,7 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
                 if (incremento < incrementoMin){
                     incrementoMin = incremento;
                     nextCity      = candidatos[i];
-                    posicion      = j+1;
+                    posicion      = (j+1)%resultados.size();
                 }
             }
         }
@@ -275,7 +275,7 @@ A continuación, se presenta un cuadro resumen con todas las distancias generada
 
 | Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
 |-----------|------|-------|-----------|-----------|
-| **Inserción**  |`3083` |`36899` |`75` |`76` |
+| **Inserción**  |`3123` |`36529` |`71` |`75` |
 | **Cercanía** |`3157` |`40583` |`103` |`93` |
 | **Barrido** |`12664` |`107713` |`89` |`95` |
 
