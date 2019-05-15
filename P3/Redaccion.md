@@ -15,6 +15,15 @@
 
 Dado un conjunto de ciudades y una matriz con las distancias entre todas ellas, un viajante debe recorrer todas las ciudades exactamente una vez, regresando al punto de partida, de forma tal que la distancia recorrida sea mı́nima. Mas formalmente, dado un grafo $G$, conexo y ponderado, se trata de hallar el ciclo hamiltoniano de mı́nimo peso de ese grafo.
 
+Al problema se le puede aplicar el enfoque **Greedy** : La cuestión es seleccionar uno o más nodos iniciales e ir incluyendo en el recorrido los nodos que incrementen la distancia recorrida lo menos posible. Si entramos más en detalle, los elementos que nos definen el enfoque Greedy son:
+
+- Un **conjunto de candidatos**: Los distintos candidatos son los nodos o ciudades que hay que recorrer.
+- Un **conjunto de candidatos ya usados**: Son las ciudades ya recorridas en cada etapa.
+- Una **función solución** que nos dice cuando un subconjunto de candidatos forma una solución: Una lista ordenada de *todas* las ciudades en la que el orden de listado define el orden en el que serán recorridas las ciudades es una solución.
+- Un **criterio de factibilidad**: Una lista ordenada de ciudades es factible si recorre un subconjunto de todas las ciudades, de forma que forme un ciclo y no se repita ninguna ciudad.
+- Una **función de selección**: El siguiente candidato más prometedor es la ciudad que aumente la distancia recorrida lo menos posible.
+- Una **función objetivo**: El objetivo es recorrer todas las ciudades minimizando la distancia total recorrido.
+
 ### Resolución por cercanía
 
 Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
@@ -264,7 +273,7 @@ A continuación, se presenta un cuadro resumen con todas las distancias generada
 
 | Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
 |-----------|------|-------|-----------|-----------|
-| **Inserción**  |`3083` |36899 |`75` |`76` |
+| **Inserción**  |`3083` |`36899` |`75` |`76` |
 | **Cercanía** |`3157` |`40583` |`103` |`93` |
 | **Barrido** |`12664` |`107713` |`89` |`95` |
 
