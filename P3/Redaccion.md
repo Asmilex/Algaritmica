@@ -226,44 +226,91 @@ Hemos aplicado estos tres algoritmos a las ciudades proporcionadas.
 
 #### a280
 
+La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
+
 <img src="./Graficas/a280.png" width="800">
+
+Al aplicarle el algoritmo de inserción, obtenemos el siguiente recorrido.
 
 ![Inserción](./Graficas/a280-i.png)
 
+Al aplicarle el algoritmo de cercanía, obtenemos el siguiente recorrido.
+
 ![Cercanía](./Graficas/a280-c.png)
+
+Al aplicarle el algoritmo de barrido, obtenemos el siguiente recorrido.
 
 ![Barrido](./Graficas/a280-b.png)
 
+La solución más óptima proporcionada es la siguiente.
+
+![Óptima](./Graficas/a280_sol.png)
+
 #### att48
+
+La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
 
 <img src="./Graficas/att48.png" width="800">
 
+Al aplicarle el algoritmo de inserción, obtenemos el siguiente recorrido.
+
 ![Inserción](./Graficas/att48-i.png)
+
+Al aplicarle el algoritmo de cercanía, obtenemos el siguiente recorrido.
 
 ![Cercanía](./Graficas/att48-c.png)
 
+Al aplicarle el algoritmo de barrido, obtenemos el siguiente recorrido.
+
 ![Barrido](./Graficas/att48-b.png)
+
+La solución más óptima proporcionada es la siguiente.
+
+![Óptima](./Graficas/att48_sol.png)
 
 #### ulysses16
 
+La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
+
 <img src="./Graficas/ulysses16.png" width="800">
+
+Al aplicarle el algoritmo de inserción, obtenemos el siguiente recorrido.
 
 ![Inserción](./Graficas/ulysses16-i.png)
 
+Al aplicarle el algoritmo de cercanía, obtenemos el siguiente recorrido.
+
 ![Cercanía](./Graficas/ulysses16-c.png)
 
+Al aplicarle el algoritmo de barrido, obtenemos el siguiente recorrido.
 
 ![Barrido](./Graficas/ulysses16-b.png)
 
+La solución más óptima proporcionada es la siguiente.
+
+![Óptima](./Graficas/ulysses16_sol.png)
+
 #### ulysses22
+
+La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
 
 <img src="./Graficas/ulysses22.png" width="800">
 
+Al aplicarle el algoritmo de inserción, obtenemos el siguiente recorrido.
+
 ![Inserción](./Graficas/ulysses22-i.png)
+
+Al aplicarle el algoritmo de cercanía, obtenemos el siguiente recorrido.
 
 ![Cercanía](./Graficas/ulysses22-c.png)
 
+Al aplicarle el algoritmo de barrido, obtenemos el siguiente recorrido.
+
 ![Barrido](./Graficas/ulysses22-b.png)
+
+La solución más óptima proporcionada es la siguiente.
+
+![Óptima](./Graficas/ulysses22_sol.png)
 
 <div style="page-break-after: always;"></div>
 
