@@ -203,7 +203,11 @@ Se cogen las tres ciudades que forman el triángulo más grande. Se van añadien
 
 ---
 
-<img src="./Graficas/Insercion.png" width="850">
+<img src="./Graficas/Insercion1.png" width="850">
+
+---
+
+<img src="./Graficas/Insercion2.png" width="850">
 
 ---
 

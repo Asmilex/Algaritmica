@@ -273,9 +273,9 @@ Veamos las soluciones que han generado nuestros algoritmos:
 
 A continuación, se presenta un cuadro resumen con todas las distancias generadas por los algoritmos en los 4 archivos propuestos:
 
-| Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
+| **Algoritmo** | **a280** | **att48** | **ulysses16** | **ulysses22** |
 |-----------|------|-------|-----------|-----------|
-| **Inserción**  |`3123` |`36529` |`71` |`75` |
+| **Inserción** |`3123` |`36529` |`71` |`75` |
 | **Cercanía** |`3157` |`40583` |`103` |`93` |
 | **Barrido** |`12664` |`107713` |`89` |`95` |
 
