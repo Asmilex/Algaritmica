@@ -110,7 +110,7 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
                 if (incremento < incrementoMin){
                     incrementoMin = incremento;
                     nextCity      = candidatos[i];
-                    posicion      = j;
+                    posicion      = j+1;
                 }
             }
         }
