@@ -254,7 +254,7 @@ A continuación, se presenta un cuadro resumen con todas las distancias generada
 | Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
 |-----------|------|-------|-----------|-----------|
 | **Inserción**  |`2180` |`29861` |`71` |`71` |
-| **Cercanía** |`3157` |`405783` |`103` |`93` |
+| **Cercanía** |`3157` |`40583` |`103` |`93` |
 | **Barrido** |`12664` |`107713` |`89` |`95` |
 
 
