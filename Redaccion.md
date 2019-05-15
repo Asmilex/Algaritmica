@@ -147,7 +147,7 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
     /*
         Hacemos un barrido de abajo hacia arriba, buscando las ciudades por orden de altura.
         Si hay varias ciudades donde coinciden la misma altura, se barre desde izquierda a derecha
-    */
+    * /
     size_t n = y.size();
 
     orden.resize(n);
