@@ -24,6 +24,8 @@ Al problema se le puede aplicar el enfoque **Greedy** : La cuestión es seleccio
 - Una **función de selección**: El siguiente candidato más prometedor es la ciudad que aumente la distancia recorrida lo menos posible.
 - Una **función objetivo**: El objetivo es recorrer todas las ciudades minimizando la distancia total recorrido.
 
+Una vez sabemos que podemos aplicar este enfoque presentamos tres diferentes soluciones aplicando diferentes criterios:
+
 ### Resolución por cercanía
 
 Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
@@ -494,4 +496,5 @@ Finalmente, concluimos lo siguiente del problema de los contenedores:
 - Maximizar el peso cargado requiere menos contenedores generados que maximizar los contenedores cargados.
 - La implementación es sencilla.
 - Se consigue el algoritmo más óptimo de forma fácil.
+- La clase `set` facilita mucho las implementaciones.
 - Nuestras soluciones son considerablemente eficientes.
