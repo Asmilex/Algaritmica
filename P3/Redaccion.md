@@ -124,54 +124,6 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
 }
 ```
 
-### Resultados
-
-Estos son las ciudades de los 3 archivos proporcionados
-
-<img src="./Graficas/a280.png" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/att48.png" style="float: right; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-
-<p style="clear: both;">
-
-<img src="./Graficas/ulysses16.png" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/ulysses22.png" style="float: right; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-
-Y estas, las soluciones más óptimas proporcionadas:
-
-
-Veamos las nuestras
-
-#### Inserción
-
-![](./Graficas/a280-i.png)
-![](./Graficas/att48-i.png)
-![](./Graficas/ulysses16-i.png)
-![](./Graficas/ulysses22-i.png)
-
-#### Cercanía
-
-![](./Graficas/a280-c.png)
-![](./Graficas/att48-c.png)
-![](./Graficas/ulysses16-c.png)
-![](./Graficas/ulysses22-c.png)
-
-#### Barrido
-
-![](./Graficas/a280-b.png)
-![](./Graficas/att48-b.png)
-![](./Graficas/ulysses16-b.png)
-![](./Graficas/ulysses22-b.png)
-
-#### Distancias totales
-
-A continuación, se presenta un cuadro resumen con todas las distancias generadas por los algoritmos en los 4 archivos propuestos:
-
-| Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
-|-----------|------|-------|-----------|-----------|
-| Inserción  |2180 |29861 |71 |71 |
-| Cercanía |3157 |405783 |103 |93 |
-| Barrido |12664 |107713 |89 |95 |
-
 ### Algoritmo propio
 
 Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x​$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
@@ -256,6 +208,55 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
     return distancia_total;
 }
 ```
+
+### Resultados
+
+Estos son las ciudades de los 3 archivos proporcionados
+
+<img src="./Graficas/a280.png" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/att48.png" style="float: right; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
+
+<p style="clear: both;">
+
+<img src="./Graficas/ulysses16.png" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/ulysses22.png" style="float: right; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
+
+Y estas, las soluciones más óptimas proporcionadas:
+
+
+Veamos las nuestras
+
+#### Inserción
+
+![](./Graficas/a280-i.png)
+![](./Graficas/att48-i.png)
+![](./Graficas/ulysses16-i.png)
+![](./Graficas/ulysses22-i.png)
+
+#### Cercanía
+
+![](./Graficas/a280-c.png)
+![](./Graficas/att48-c.png)
+![](./Graficas/ulysses16-c.png)
+![](./Graficas/ulysses22-c.png)
+
+#### Barrido
+
+![](./Graficas/a280-b.png)
+![](./Graficas/att48-b.png)
+![](./Graficas/ulysses16-b.png)
+![](./Graficas/ulysses22-b.png)
+
+#### Distancias totales
+
+A continuación, se presenta un cuadro resumen con todas las distancias generadas por los algoritmos en los 4 archivos propuestos:
+
+| Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
+|-----------|------|-------|-----------|-----------|
+| **Inserción**  |`2180` |`29861` |`71` |`71` |
+| **Cercanía** |`3157` |`405783` |`103` |`93` |
+| **Barrido** |`12664` |`107713` |`89` |`95` |
+
 
 ## Problema asignado: Contenedores en un barco
 

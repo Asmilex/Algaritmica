@@ -189,7 +189,9 @@ Variamos la cantidad generada de contenedores $N$ y observamos cómo se comporta
 
 ### Resolución por cercanía
 
-Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada será aquella que esté más cerca, y, una vez visitadas todas las ciudades, se vuelve a la ciudad de partida.
+Se viajará a la ciudad más cercana. Una vez estén todas las ciudades visitadas, se vuelve a la de partida.
+
+---
 
 ![](./Graficas/Cercania.png)
 
@@ -197,17 +199,96 @@ Esta resolución se basa en dada una ciudad inicial la siguiente ciudad visitada
 
 ### Resolución por inserción
 
-Se parte de un recorrido que solo contiene algunas de las ciudades, en este caso, se cogen las tres ciudades que forman el triángulo más grande y se van añadiendo ciudades al circuito, por ejemplo la que menor incremento de la longitud del recorrido provoque.
+Se cogen las tres ciudades que forman el triángulo más grande. Se van añadiendo ciudades al circuito la que menor incremento de la longitud del recorrido provoque
 
-![](./Graficas/Insercion.png)
+---
+
+<img src="./Graficas/Insercion.png" width="850">
 
 ---
 
 ### Algoritmo propio
 
-Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
+Dada una ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras:
 
-![](./Graficas/Barrido1.png)
+Visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor
 
-![](./Graficas/Barrido2.png)
+---
 
+<img src="./Graficas/Barrido1.png" width="850">
+
+---
+
+<img src="./Graficas/Barrido2.png" width="700">
+
+---
+
+### Comparativa
+
+---
+
+#### Recorridos
+
+##### Inserción
+
+<img src="./Graficas/a280-i.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/att48-i.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### Recorridos
+
+##### Inserción
+
+<img src="./Graficas/ulysses16-i.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/ulysses22-i.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### Recorridos
+
+##### Cercanía
+
+<img src="./Graficas/a280-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/att48-c.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### Recorridos
+
+##### Cercanía
+
+<img src="./Graficas/ulysses16-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/ulysses22-c.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### Recorridos
+
+##### Barrido
+
+<img src="./Graficas/a280-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/att48-b.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### Recorridos
+
+##### Barrido
+
+<img src="./Graficas/ulysses16-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/ulysses22-b.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### Resultados de distancias
+
+---
+
+##### Tabla comparativa
+
+| Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
+|-----------|------|-------|-----------|-----------|
+| **Inserción**  |`2180` |`29861` |`71` |`71` |
+| **Cercanía** |`3157` |`405783` |`103` |`93` |
+| **Barrido** |`12664` |`107713` |`89` |`95` |
