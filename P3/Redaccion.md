@@ -248,7 +248,7 @@ La solución más óptima proporcionada es la siguiente.
 
 #### att48
 
-La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
+La siguiente imagen muestra el archivo proporcionado `att48.tsp`.
 
 <img src="./Graficas/att48.png" width="800">
 
@@ -270,7 +270,7 @@ La solución más óptima proporcionada es la siguiente.
 
 #### ulysses16
 
-La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
+La siguiente imagen muestra el archivo proporcionado `ulysses16.tsp`.
 
 <img src="./Graficas/ulysses16.png" width="800">
 
@@ -292,7 +292,7 @@ La solución más óptima proporcionada es la siguiente.
 
 #### ulysses22
 
-La siguiente imagen muestra el archivo proporcionado `a280.tsp`.
+La siguiente imagen muestra el archivo proporcionado `ulysses22.tsp`.
 
 <img src="./Graficas/ulysses22.png" width="800">
 
