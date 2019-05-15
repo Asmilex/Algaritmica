@@ -231,57 +231,118 @@ Visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ci
 
 ---
 
-#### Recorridos
+#### a280
 
-##### Inserción
+##### Ciudad
 
-<img src="./Graficas/a280-i.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/a280.png" style="float: ; width: 70%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### a280
+
+##### Cercanía | Inserción
+
+<img src="./Graficas/a280-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+<img src="./Graficas/a280-i.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### a280
+
+##### Barrido | Óptima
+
+<img src="./Graficas/a280-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+<img src="./Graficas/a280_sol.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### att48
+
+##### Ciudad
+
+<img src="./Graficas/att48.png" style="float: ; width: 70%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### att48
+
+##### Cercanía | Inserción
+
+<img src="./Graficas/att48-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+
 <img src="./Graficas/att48-i.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
 
 ---
 
-#### Recorridos
+#### att48
 
-##### Inserción
+##### Barrido | Óptima
 
-<img src="./Graficas/ulysses16-i.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/att48-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+
+<img src="./Graficas/att48_sol.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### ulysses16
+
+##### Ciudad
+
+<img src="./Graficas/ulysses16.png" style="float: ; width: 70%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### ulysses16
+
+##### Cercanía | Inserción
+
+<img src="./Graficas/ulysses16-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+<img src="./Graficas/ulysses16-i.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### ulysses16
+
+##### Barrido | Óptima
+
+<img src="./Graficas/ulysses16-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+<img src="./Graficas/ulysses16_sol.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### ulysses22
+
+##### Ciudad
+
+<img src="./Graficas/ulysses22.png" style="float: ; width: 70%; margin-right: 1%; margin-bottom: 0.5em;">
+
+---
+
+#### ulysses22
+
+##### Cercanía | Inserción
+
+<img src="./Graficas/ulysses22-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+
 <img src="./Graficas/ulysses22-i.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
 
 ---
 
-#### Recorridos
+#### ulysses22
 
-##### Cercanía
+##### Barrido | Óptima
 
-<img src="./Graficas/a280-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/att48-c.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/ulysses22-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
 
----
+<img src="./Graficas/ulysses22_sol.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
 
-#### Recorridos
-
-##### Cercanía
-
-<img src="./Graficas/ulysses16-c.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/ulysses22-c.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
-
----
-
-#### Recorridos
-
-##### Barrido
-
-<img src="./Graficas/a280-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/att48-b.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
-
----
-
-#### Recorridos
-
-##### Barrido
-
-<img src="./Graficas/ulysses16-b.png" style="float: left; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/ulysses22-b.png" style="float: right; width: 47%; margin-right: 1%; margin-bottom: 0.5em;">
 
 ---
 
@@ -296,3 +357,23 @@ Visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ci
 | **Inserción**  |`3123` |`36529` |`71` |`75` |
 | **Cercanía** |`3157` |`40583` |`103` |`93` |
 | **Barrido** |`12664` |`107713` |`89` |`95` |
+
+---
+
+#### Conclusiones
+
+- Problema de los contenedores:
+    - Implementación sencilla.
+    - Se consigue l algoritmo más óptimo de forma fácil.
+    - La clase `set` facilita mucho las implementaciones.
+    - Nuestras soluciones son considerablemente eficientes.
+
+---
+
+#### Conclusiones
+
+- Viajante del comercio:
+    - Inserción es más eficiente.
+    - Barrido y cercanía tendrían problemas si crece el tamaño de las ciudades.
+    - Ningún algoritmo proporciona la solución más óptima.
+    - La implementación no es trivial.
