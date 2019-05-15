@@ -126,7 +126,7 @@ int insercion (const vector<T> &x, const vector<T> &y, const vector<vector<int>>
 
 ### Algoritmo propio
 
-Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x​$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
+Nuestro algoritmo se basa en, dada la ciudad inicial, ir visitando ciudades realizando barridos en altura y de izquierda a derecha de forma secuencial. En otras palabras, visita primero las ciudades con coordenada $y$ menor, y, en caso de haber dos ciudades con la misma altura, se visita primero aquella con coordenada $x$ menor. Esto puede visualizar como ir visitando las ciudades de abajo a arriba y de izquierda a derecha, regresando finalmente a la ciudad inicial.
 
 Para ello el código utilizado ha sido:
 
@@ -213,39 +213,50 @@ long int barrido (vector<T> x, vector<T> y, const vector<vector<int>> &matriz_ad
 
 Estos son las ciudades de los 3 archivos proporcionados
 
-<img src="./Graficas/a280.png" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/att48.png" style="float: right; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="./Graficas/a280.png" width="800">
+<img src="./Graficas/att48.png" width="800">
+<img src="./Graficas/ulysses16.png" width="800">
+<img src="./Graficas/ulysses22.png" width="800">
 
-<p style="clear: both;">
+Veamos las soluciones que han generado nuestros algoritmos:
 
-<img src="./Graficas/ulysses16.png" style="float: left; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="./Graficas/ulysses22.png" style="float: right; width: 49%; margin-right: 1%; margin-bottom: 0.5em;">
-
-Y estas, las soluciones más óptimas proporcionadas:
-
-
-Veamos las nuestras
+<div style="page-break-after: always;"></div>
 
 #### Inserción
 
 ![](./Graficas/a280-i.png)
+
 ![](./Graficas/att48-i.png)
+
 ![](./Graficas/ulysses16-i.png)
+
 ![](./Graficas/ulysses22-i.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Cercanía
 
 ![](./Graficas/a280-c.png)
+
 ![](./Graficas/att48-c.png)
+
 ![](./Graficas/ulysses16-c.png)
+
 ![](./Graficas/ulysses22-c.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Barrido
 
 ![](./Graficas/a280-b.png)
+
 ![](./Graficas/att48-b.png)
+
 ![](./Graficas/ulysses16-b.png)
+
 ![](./Graficas/ulysses22-b.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Distancias totales
 
@@ -254,7 +265,7 @@ A continuación, se presenta un cuadro resumen con todas las distancias generada
 | Algoritmo | a280 | att48 | ulysses16 | ulysses22 |
 |-----------|------|-------|-----------|-----------|
 | **Inserción**  |`2180` |`29861` |`71` |`71` |
-| **Cercanía** |`3157` |`405783` |`103` |`93` |
+| **Cercanía** |`3157` |`40583` |`103` |`93` |
 | **Barrido** |`12664` |`107713` |`89` |`95` |
 
 
@@ -319,7 +330,7 @@ void generarContenedores (mySet &contenedores, const size_t tamano, const int ma
 
 Lo que hace es rellenar el `contenedores` con `tamano` elementos (contenedores) de entre 0 y `max` toneladas de peso.
 
-El valor de la constante de Masa Máxima Autorizada (MMA) $K​$ lo hemos definido como una variable global:
+El valor de la constante de Masa Máxima Autorizada (MMA) $K$ lo hemos definido como una variable global:
 
 ```c++
 #define K 10000
@@ -456,5 +467,22 @@ Podemos que si optimizamos el número de contenedores cargados, el peso de la ca
 
 ![](./Graficas/Optimizar_contenedores_contenedores.png)
 
-Lo más significativo se produce en la anterior gráfica.
+El resultado más significativo se produce en esta gráfica
+
 Usando el algoritmo que le da más importancia a los contenedores cargados, observamos que el algoritmo se beneficia claramente de una mayor cantidad de contenedores generados. Esto es debido a que hay más probabilidades de encontrar contenedores con una masa menor.
+
+## Conclusiones
+
+Con respecto al problema del viajante de comercio:
+
+- El algoritmo de inserción ha proporcionado la solución más eficiente de las 3 comparadas.
+- Barrido y cercanía pueden llegar a tener serios problemas si crece el tamaño de las ciudades.
+- Ninguna de las 3 proporciona la solución más óptima.
+- La implementación de los algoritmos no es trivial.
+
+Finalmente, concluimos lo siguiente del problema de los contenedores:
+
+- Maximizar el peso cargado requiere menos contenedores generados que maximizar los contenedores cargados.
+- La implementación es sencilla.
+- Se consigue el algoritmo más óptimo de forma fácil.
+- Nuestras soluciones son considerablemente eficientes.
