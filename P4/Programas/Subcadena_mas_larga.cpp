@@ -3,7 +3,7 @@
 #include <random>
 using namespace std;
 
-#define MAX 10
+#define MAX 5
 
 int costos[MAX][MAX];
 
@@ -41,8 +41,7 @@ string LCS (string X, string Y, int m, int n) {
 	if (X[m - 1] == Y[n - 1])
 		return LCS(X, Y, m - 1, n - 1) + X[m - 1];
 
-
-	if (costos[m - 1][n] > costos[m][n - 1])
+	if (costos[m - 1][n] >= costos[m][n - 1])
 		return LCS(X, Y, m - 1, n);
 	else
 		return LCS(X, Y, m, n - 1);
