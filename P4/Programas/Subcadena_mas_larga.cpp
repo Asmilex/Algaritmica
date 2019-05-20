@@ -3,7 +3,7 @@
 #include <random>
 using namespace std;
 
-#define MAX 5
+#define MAX 10
 
 int costos[MAX][MAX];
 

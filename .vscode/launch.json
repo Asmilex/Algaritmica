@@ -8,7 +8,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Documentación/codigo/pivotajo",
+            "program": "${workspaceFolder}/P4/Programas/Subcadena_mas_larga",
             "args": ["5000"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
