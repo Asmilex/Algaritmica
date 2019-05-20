@@ -15,8 +15,10 @@ Grupo: Las Algas
 ---
 
 ## Objetivos
-
-- Encontrar la máxima subsecuencia de caracteres común que aparecen en ambas cadenas de izquierda a derecha.
+- Comprender el enfoque de la P.D.
+- Identificar los elementos de la P.D. en un problema concreto.
+- Resolver dicho problema aplicando P.D.
+- Encontrar la subsecuencia de caracteres común más larga.
 
 ---
 
@@ -30,11 +32,11 @@ Grupo: Las Algas
 
 ## Código
 ```c++
-cadena LCS ( cadena X, cadena Y, entero m, entero n) {
+cadena LCS (cadena X, cadena Y, entero m, entero n) {
     si alguna cadena esta vacía:
         devolver cadenavacía
     si coincide el último carácter:
-        devolver LCS (X,Y,m-1,n-1)
+        devolver LCS(X,Y,m-1,n-1) + último carácter
     si costos[m-1][n] >= costos[m][n-1]
         devolver LCS(X,Y,m-1;n)
     si no:
@@ -47,12 +49,13 @@ cadena LCS ( cadena X, cadena Y, entero m, entero n) {
 ## Código
 ```c++
 LCS_coste (cadena X, cadena Y, entero m, entero n) {
-    para cada 0<=i<=m
-        para cada 0<=j<=n
-            si coincide el caracter:
+    para cada 0<=i<m
+        para cada 0<=j<n
+            si coincide el carácter:
                 costos[i+1][j+1] = costos[i][j]+1
             si no:
-                costos[i+1][j+1] = max(costos[i][j+1], costos[i+1][j])
+                costos[i+1][j+1] = max(costos[i][j+1],
+                                       costos[i+1][j])
 }
 ```
 
