@@ -7,8 +7,7 @@ using namespace std;
 
 int costos[MAX][MAX];
 
-std::string random_string(std::string::size_type length)
-{
+std::string random_string(std::string::size_type length) {
     static auto& chrs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     thread_local static std::mt19937 rg{std::random_device{}()};
@@ -58,8 +57,16 @@ void LCS_coste (string X, string Y, int m, int n) {
 }
 
 int main (int argc, char const *argv[]) {
-	string X = random_string(MAX), Y = random_string(MAX);
+	string X, Y;
 
+	if (argc != 3) {
+		X = random_string(MAX-1);
+		Y = random_string(MAX-1);
+	}
+	else {
+		X = argv[1];
+		Y = argv[2];
+	}
 	int m = X.length(), n = Y.length();
 
 	LCS_coste(X, Y, m, n);
