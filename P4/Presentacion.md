@@ -33,7 +33,7 @@ Grupo: Las Algas
 ## Código
 ```c++
 cadena LCS (cadena X, cadena Y, entero m, entero n) {
-    si alguna cadena esta vacía:
+    si alguna cadena está vacía:
         devolver cadenavacía
     si coincide el último carácter:
         devolver LCS(X,Y,m-1,n-1) + último carácter
