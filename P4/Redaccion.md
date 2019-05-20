@@ -1,19 +1,20 @@
-# Práctica 4: Programación dinámica
+# Práctica 4. Programación dinámica
 
+Grupo: Las Algas
 > Ana Buendía, Andrés Millán, Paula Villanueva, Juan Antonio Villegas
 
 ## Objetivos
 
 * Comprender el enfoque de la Programación Dinámica.
 * Identificar los elementos de la Programación Dinámica en un problema concreto.
-* Calcular la subsecuencia común más larga dadas dos cadenas.
+* Calcular la subsecuencia de caracteres común más larga dadas dos cadenas.
 * Resolver dicho problema aplicando Programación Dinámica.
 
 ## Subsecuencia de caracteres más larga
 
 ### Enunciado
 
-Sean dos secuencias de caracteres $X= (x_1, x_2, \dots , x_m)$ e $Y= (y_1, y_2, \dots , y_n)$, de longitudes $m$ y $n$ respectivamente. El problema consiste en encontrar la máxima subsecuencia de caracteres común que aparecen en ambas cadenas de izquierda a derecha (no necesariamente de forma contigua). Por ejemplo, para  lascadenas `S= "ABAZDC"` y `T= "BACBAD"`, la máxima subsecuencia común tiene longitud 4 y es `"ABAD"`, siendo localizadas en `S= "ABAZDC"` y en `T= "BACBAD"`. 
+Sean dos secuencias de caracteres $X= (x_1, x_2, \dots , x_m)$ e $Y= (y_1, y_2, \dots , y_n)$, de longitudes $m$ y $n$ respectivamente. El problema consiste en encontrar la máxima subsecuencia de caracteres común que aparecen en ambas cadenas de izquierda a derecha (no necesariamente de forma contigua). Por ejemplo, para  lascadenas `S= "ABAZDC"` y `T= "BACBAD"`, la máxima subsecuencia común tiene longitud 4 y es `"ABAD"`, siendo localizadas en `S= "ABAZDC"` y en `T= "BACBAD"`.
 
 ### Solución
 
@@ -39,7 +40,7 @@ Por tanto, la recurrencia que define nuestro algoritmo si tenemos $X[0..n]$ e $Y
 >
 > $LCS(X[0..n],Y[0..m])=max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1]))$
 
-Para agilizar los cálculos, hemos tratado con una matriz de costos $M$ que contiene la longitud de la mayor subsecuencia común entre los prefijos de $X$ e $Y$. El elemento $m_{ij}$ representa la longitud de la subsecuencia común más larga de $X[0..i-1]$ e $Y[0..j-1]$. 
+Para agilizar los cálculos, hemos tratado con una matriz de costos $M$ que contiene la longitud de la mayor subsecuencia común entre los prefijos de $X$ e $Y$. El elemento $m_{ij}$ representa la longitud de la subsecuencia común más larga de $X[0..i-1]$ e $Y[0..j-1]$.
 
 En el ejemplo de $X$="casa"​ e $Y$="cosa" tenemos la matriz:
 
@@ -155,4 +156,3 @@ De nuevo, podemos comprobar que la matriz es correcta y que la subsecuencia com�
 * El cálculo de la matriz de costos nos ahorra muchas operaciones repetidas, por lo que ayuda a mejorar la eficiencia.
 * La matriz de costos además ayuda a que la resolución del problema se reduzca a un simple recorrido por la matriz añadiendo a la solución los caracteres correctos.
 * La recurrencia puede resultar compleja cuando el tamaño de las cadenas es grande y tienen pocos elementos en común.
-
