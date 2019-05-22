@@ -196,6 +196,4 @@ El array se ha declarado en un scope global, por lo que se aloja en la sección 
 
 Un tamaño $50000$ no es descabellado si el problema es lo suficientemente grande. Es una cantidad relativamente pequeña. No obstante, el array no se ha declarado como se debe. Se puede cambiar la zona donde se alamcena (Heap, stack o data section). Lo más sensato en este caso sería heap, y tener cuidado con cómo crece la zona de memoria.
 
-Si nuestro objetivo es calcular únicamente la óptima, y olvidarnos del resto entre ejecuciones, sería mejor un enfoque mediante otra metodología. Calcular la matriz para después desalojarla es un coste considerable.
-
-Aún así, este problema es un muy buen ejemplo de cómo esta metodología puede ser usada, y proporciona una serie de casos dignos de estudios. La implementación es elegante, la solución eficaz, y pone de manifiesto aquellas partes importantes de la materia a analizar.
+Aún así, este problema es un muy buen ejemplo de cómo esta metodología puede ser usada, y proporciona una serie de casos dignos de estudio. La implementación es elegante, la solución eficaz, y pone de manifiesto aquellas partes importantes de la materia a analizar.
