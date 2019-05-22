@@ -3,7 +3,7 @@
 #include <random>
 using namespace std;
 
-#define MAX 8
+#define MAX 50000
 
 int costos[MAX][MAX];
 
@@ -71,10 +71,10 @@ int main (int argc, char const *argv[]) {
 
 	LCS_coste(X, Y, m, n);
 
-	cout << "Palabras:\n\t" << X << "\n\t" << Y << endl;
-	cout << "Subsecuencia más larga:\n\t" << LCS(X, Y, m, n) << endl << endl;
+	//cout << "Palabras:\n\t" << X << "\n\t" << Y << endl;
+	//cout << "Subsecuencia más larga:\n\t" << LCS(X, Y, m, n) << endl << endl;
 
-	print_matrix();
+	//print_matrix();
 
 	return 0;
 }

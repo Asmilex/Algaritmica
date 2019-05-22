@@ -14,11 +14,13 @@ Grupo: Las Algas
 
 ### Enunciado
 
-Sean dos secuencias de caracteres $X= (x_1, x_2, \dots , x_m)$ e $Y= (y_1, y_2, \dots , y_n)$, de longitudes $m$ y $n$ respectivamente. El problema consiste en encontrar la máxima subsecuencia de caracteres común que aparecen en ambas cadenas de izquierda a derecha (no necesariamente de forma contigua). Por ejemplo, para  las cadenas `S= "ABAZDC"` y `T= "BACBAD"`, la máxima subsecuencia común tiene longitud 4 y es `"ABAD"`, siendo localizadas en `S= "ABAZDC"` y en `T= "BACBAD"`.
+Sean dos secuencias de caracteres $X= (x_1, x_2, \dots , x_m)$ e $Y= (y_1, y_2, \dots , y_n)$, de longitudes $m$ y $n$ respectivamente. El problema consiste en encontrar la máxima subsecuencia de caracteres común que aparecen en ambas cadenas de izquierda a derecha (no necesariamente de forma contigua). Por ejemplo, para  las cadenas `S = "ABAZDC"` y `T = "BACBAD"`, la máxima subsecuencia común tiene longitud 4 y es `"ABAD"`, siendo localizadas en `S = "ABAZDC"` y en `T = "BACBAD"`.
 
 ### Solución
 
-La solución que proponemos se basa en examinar el último carácter de ambas cadenas, si coincide lo añadimos a la solución, si no, lo descartamos primero de una cadena y luego de la otra, dividiendo el problema en dos ramas y buscamos una cadena común en cada una de ellas repitiendo el proceso. Por ejemplo, sean X="casa" e Y="cosa". Tenemos:
+La solución que proponemos se basa en examinar el último carácter de ambas cadenas. Si coincide lo añadimos a la solución; de lo contrario, lo descartamos primero de una cadena y luego de la otra, dividiendo el problema en dos ramas. Buscamos una cadena común en cada una de ellas repitiendo el proceso. Pongamos un ejemplo:
+
+Sean `X = "casa"` e `Y ="cosa"`. Tenemos:
 
 `LCS("casa", "cosa") = LCS("cas","cos")+a`​, ya que ambas tienen la última letra, calculamos ahora:
 
@@ -30,11 +32,15 @@ La solución que proponemos se basa en examinar el último carácter de ambas ca
 
 `LCS("ca","c") = max(LCS("c","c"), LCS("ca"," "))="c"​`
 
-Recomponiendo las sucesivas recursiones obtenemos que el resultado es "csa​".
+Recomponiendo las sucesivas recursiones obtenemos que el resultado es `"csa​"`.
 
-Por tanto, la recurrencia que define nuestro algoritmo si tenemos $X[0..n]$ e $Y[0..m]$ es:
+---
 
-$$LCS(X[0..n],Y[0..m])=\begin{cases}LCS(X[0..n-1],Y[0..m-1])+X[m-1] \quad\quad\quad\quad\quad\quad\quad\quad\quad \text{si }X[n-1]=Y[m-1] \\\max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1])) \quad \text{  en otro caso}\end{cases}$$
+Analicemos la recurrencia que define nuestro algoritmo.
+
+Si tenemos $X[0..n]$ e $Y[0..m]$, donde $n$ y $m$ son las dimensiones de nuestros strings, y $X$ e $Y$ son las cadenas de caracteres (los cuales tienen por componentes desde $0$ hasta $n$ o $m$), obtenemos...
+
+$$LCS\big(X[0..n],Y[0..m]\big)=\begin{cases}LCS\big(X[0..n-1],Y[0..m-1]\big) + X[m-1] \quad\quad\quad\quad\quad\quad\quad\quad\quad \text{ si }X[n-1]=Y[m-1] \\\\\max\Big(LCS\big(X[0..n-1],Y[0..m]\big),LCS\big(X[0..n],Y[0..m-1]\big)\Big) \quad \text{en otro caso}\end{cases}$$
 
 Para agilizar los cálculos hemos tratado con una matriz de costos $M​$ que contiene la longitud de la mayor subsecuencia común entre los prefijos de $X​$ e $Y​$. El elemento $m_{ij}​$ representa la longitud de la subsecuencia común más larga de $X[0..i-1]​$ e $Y[0..j-1]​$.
 
@@ -49,29 +55,30 @@ Señalamos en negrita las entradas en las que $X[i-1]=Y[j-1]​$. Para realizar 
 Consideramos la matriz de costos como global, y diseñamos una función que inicialice la matriz de acuerdo al criterio que describimos en el párrafo anterior, el pseudocódigo es el siguiente:
 
 ```py
-LCS_coste (cadena X, cadena Y, entero m, entero n) {
-    para cada 0 <= i < m
-        para cada 0 <= j < n
+LCS_coste (cadena X, cadena Y, entero m, entero n):
+    para cada 0 <= i < m:
+        para cada 0 <= j < n:
             si coincide el carácter:
                 costos[i+1][j+1] = costos[i][j]+1
             si no:
                 costos[i+1][j+1] = max(costos[i][j+1], costos[i+1][j])
-}
 ```
 
 Y una vez tenemos la matriz de costos completa, entonces podemos llamar a la función que calcula la subsecuencia común más larga, de acuerdo al algoritmo propuesto:
 
 ```py
-cadena LCS ( cadena X, cadena Y, entero m, entero n) {
+cadena LCS ( cadena X, cadena Y, entero m, entero n):
     si alguna cadena esta vacía:
-        devolver cadenavacía
+        devolver cadena vacía
+
     si coincide el último carácter:
-        devolver LCS (X,Y,m-1,n-1)+último carácter
+        devolver LCS (X, Y, m-1, n-1) + último carácter
+
     si costos[m-1][n] >= costos[m][n-1]
-        devolver LCS(X,Y,m-1;n)
+        devolver LCS(X, Y, m-1, n)
+
     si no:
-        devolver LCS(X,Y,m,n-1)
-}
+        devolver LCS(X, Y, m, n-1)
 ```
 
 #### Implementación en C++
@@ -82,7 +89,7 @@ Si implementamos nuestro pseudocódigo en C++, empleamos una constante `MAX` que
 int costos[MAX][MAX];
 ```
 
-Diseñamos también una función que genere cadenas de forma aleatoria:
+Diseñamos también una función que genere cadenas de forma aleatoria de longitud exacta `length`
 
 ```c++
 string random_string(string::size_type length) {
@@ -153,3 +160,42 @@ De nuevo, podemos comprobar que la matriz es correcta y que la subsecuencia com�
 * El cálculo de la matriz de costos nos ahorra muchas operaciones repetidas, por lo que ayuda a mejorar la eficiencia.
 * La matriz de costos además ayuda a que la resolución del problema se reduzca a un simple recorrido por la matriz añadiendo a la solución los caracteres correctos.
 * La recurrencia puede resultar compleja cuando el tamaño de las cadenas es grande y tienen pocos elementos en común.
+
+---
+
+### ¿Tiene sentido la programación dinámica aquí?
+
+Habiendo analizado pertinentemente el problema, observamos que el algoritmo no es difícil de programar. Ni el cálculo de la matriz, ni el del núcleo del problema. No obstante, podemos encontrarnos varios problemas que nos hacen plantearnos si merece la pena aplicar esta metodología.
+
+> Aquellos que olvidan el pasado están condenados a repetirlo
+> "*Programación dinámica*"
+
+El principal fuerte de este método es tener la capacidad de recuperar lo que se ha calculado con anterioridad. Si unos cálculos se efectúan habitualmente, es un desperdicio de tiempo de CPU hacerlos. Si existe en el sistema suficiente RAM y/o la E/S es más rápida que el tiempo que se tarda en calcularlo, la P.D. solventa el obstáculo de manera elegante.
+
+Sin embargo, este es un problema en el que los cálculos se hacen nada más que una vez, para unos strings determinados. En la siguiente ejecución del fichero, las strings serán diferentes y la matriz deberá ser calculada de nuevo.
+
+Esta matriz no es difícil para nada hallarla. No obstante, cuesta tiempo de CPU. Además, es necesaria almacenarla en RAM. Una vez se aloje y se rellene, se desaloja en cuanto termina el programa. Para strings de tamaño considerable, estaremos usando $4 \cdot MAX \cdot MAX$ bytes de RAM, por almacenar enteros.
+
+Pongamos un ejemplo práctico en el que veamos cuánto tarda en ejecutarse. No mediremos el uso de RAM
+
+Se han eliminado las salidas a pantalla, y se ha compilado con `-O2`.
+
+- Para tamaño $MAX = 50$, `time ./programa` arroja un tiempo de CPU 89% y 0.002s en total.
+- Para tamaño $500$, 0.01s sistema, 96% CPU y 0.005s total.
+- Para tamaño $5000$, 0.21s usuario 0.02s sistema 99% CPU y 0.226s total.
+- Para tamaño $50000$, no se puede compilar
+
+```
+Subcadena_mas_larga.cpp:(.text+0xa56): reubicación truncada para ajustar: R_X86_64_PC32 contra `.bss'
+Subcadena_mas_larga.cpp:(.text+0xa69): reubicación truncada para ajustar: R_X86_64_PC32 contra `.bss'
+collect2: error: ld devolvió el estado de salida 1
+make: *** [<integrado>: Subcadena_mas_larga] Error 1
+```
+
+El array se ha declarado en un scope global, por lo que se aloja en la sección de datos. Esta tiene un tamaño limitado, y se mantiene constante entre ejecuciones. Se determina en tiempo de compilación.
+
+Un tamaño $50000$ no es descabellado si el problema es lo suficientemente grande. Es una cantidad relativamente pequeña. No obstante, el array no se ha declarado como se debe. Se puede cambiar la zona donde se alamcena (Heap, stack o data section). Lo más sensato en este caso sería heap, y tener cuidado con cómo crece la zona de memoria.
+
+Si nuestro objetivo es calcular únicamente la óptima, y olvidarnos del resto entre ejecuciones, sería mejor un enfoque mediante otra metodología. Calcular la matriz para después desalojarla es un coste considerable.
+
+Aún así, este problema es un muy buen ejemplo de cómo esta metodología puede ser usada, y proporciona una serie de casos dignos de estudios. La implementación es elegante, la solución eficaz, y pone de manifiesto aquellas partes importantes de la materia a analizar.

@@ -57,7 +57,7 @@ Sean $X[0..n]$ e $Y[0..m]$, entonces
 
 $$LCS(X[0..n],Y[0..m])=$$
 
-<p style="text-align:center;">$$\begin{cases}LCS(X[0..n-1],Y[0..m-1])+X[m-1] \\\ \quad\quad \text{si }X[n-1]=Y[m-1] \\\\\\\ \max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1]))\end{cases}$$</p>
+<p style="text-align:center;">$$\begin{cases}LCS\big(X[0..n-1],Y[0..m-1]\big)+X[m-1] \\\ \quad\quad \text{si }X[n-1]=Y[m-1] \\\\\\\ \max\Big(LCS\big(X[0..n-1],Y[0..m]\big),LCS\big(X[0..n],Y[0..m-1]\big)\Big)\end{cases}$$</p>
 
 
 ---
