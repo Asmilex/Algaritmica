@@ -34,19 +34,15 @@ Recomponiendo las sucesivas recursiones obtenemos que el resultado es "csa​".
 
 Por tanto, la recurrencia que define nuestro algoritmo si tenemos $X[0..n]$ e $Y[0..m]$ es:
 
-> $LCS(X[0..n],Y[0..m])=LCS(X[0..n-1],Y[0..m-1])+X[m-1]$    si    $X[n-1]=Y[m-1]$
->
-> En otro caso:
->
-> $LCS(X[0..n],Y[0..m]) = \max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1]))$
+$$LCS(X[0..n],Y[0..m])=\begin{cases}LCS(X[0..n-1],Y[0..m-1])+X[m-1] \quad\quad\quad\quad\quad\quad\quad\quad\quad \text{si }X[n-1]=Y[m-1] \\\max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1])) \quad \text{  en otro caso}\end{cases}$$
 
-Para agilizar los cálculos hemos tratado con una matriz de costos $M$ que contiene la longitud de la mayor subsecuencia común entre los prefijos de $X$ e $Y$. El elemento $m_{ij}$ representa la longitud de la subsecuencia común más larga de $X[0..i-1]$ e $Y[0..j-1]$.
+Para agilizar los cálculos hemos tratado con una matriz de costos $M​$ que contiene la longitud de la mayor subsecuencia común entre los prefijos de $X​$ e $Y​$. El elemento $m_{ij}​$ representa la longitud de la subsecuencia común más larga de $X[0..i-1]​$ e $Y[0..j-1]​$.
 
-En el ejemplo de $X$="casa"​ e $Y$="cosa" tenemos la matriz:
+En el ejemplo de $X​$="casa"​ e $Y​$="cosa" tenemos la matriz:
 
-$A=\begin{pmatrix}\mathbf{1} & 1 & 1 & 1 \\ 1 & 1 & 1 & \mathbf{2} \\ 1 & 1 & \mathbf{2} & 2 \\ 1 & 1 & 2 & \mathbf{3} \end{pmatrix}$
+$A=\begin{pmatrix}\mathbf{1} & 1 & 1 & 1 \\ 1 & 1 & 1 & \mathbf{2} \\ 1 & 1 & \mathbf{2} & 2 \\ 1 & 1 & 2 & \mathbf{3} \end{pmatrix}​$
 
-Señalamos en negrita las entradas en las que $X[i-1]=Y[j-1]$. Para realizar el algoritmo, comenzamos a recorrer la matriz por la esquina inferior derecha. Si $X[i-1]=Y[j-1]$, se añade a la solución este carácter, y si no lo son, nos movemos hacia arriba o hacia la izquierda, dependiendo de qué entrada sea mayor.
+Señalamos en negrita las entradas en las que $X[i-1]=Y[j-1]​$. Para realizar el algoritmo, comenzamos a recorrer la matriz por la esquina inferior derecha. Si $X[i-1]=Y[j-1]​$, se añade a la solución este carácter, y si no lo son, nos movemos hacia arriba o hacia la izquierda, dependiendo de qué entrada sea mayor.
 
 ### Implementación
 
