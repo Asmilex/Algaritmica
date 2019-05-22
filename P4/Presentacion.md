@@ -118,7 +118,7 @@ LCS_coste (cadena X, cadena Y, entero m, entero n):
 
 - ¡Solución óptima de forma sencilla!
 
-- Metodología similara a Divide y Vencerás en este problema.
+- Metodología similar a Divide y Vencerás en este problema.
 
 ---
 
