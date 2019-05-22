@@ -5,10 +5,10 @@ Grupo: Las Algas
 
 ## Objetivos
 
-* Comprender el enfoque de la Programación Dinámica.
-* Identificar los elementos de la Programación Dinámica en un problema concreto.
-* Calcular la subsecuencia de caracteres común más larga dadas dos cadenas.
-* Resolver dicho problema aplicando Programación Dinámica.
+- Comprender el enfoque de la programación dinámica
+- Identificar los elementos característicos en un problema concreto.
+- Calcular la subsecuencia de caracteres común más larga dadas dos cadenas.
+- Resolver dicho problema aplicando este método de programación
 
 ## Subsecuencia de caracteres más larga
 
@@ -52,10 +52,10 @@ Señalamos en negrita las entradas en las que $X[i-1]=Y[j-1]$. Para realizar el 
 
 Consideramos la matriz de costos como global, y diseñamos una función que inicialice la matriz de acuerdo al criterio que describimos en el párrafo anterior, el pseudocódigo es el siguiente:
 
-```
+```py
 LCS_coste (cadena X, cadena Y, entero m, entero n) {
-    para cada 0<=i<m
-        para cada 0<=j<n
+    para cada 0 <= i < m
+        para cada 0 <= j < n
             si coincide el carácter:
                 costos[i+1][j+1] = costos[i][j]+1
             si no:
@@ -65,7 +65,7 @@ LCS_coste (cadena X, cadena Y, entero m, entero n) {
 
 Y una vez tenemos la matriz de costos completa, entonces podemos llamar a la función que calcula la subsecuencia común más larga, de acuerdo al algoritmo propuesto:
 
-```
+```py
 cadena LCS ( cadena X, cadena Y, entero m, entero n) {
     si alguna cadena esta vacía:
         devolver cadenavacía
@@ -140,13 +140,14 @@ string LCS (string X, string Y, int m, int n) {
 
 Veamos cómo reacciona el programa al ejecutar nuestro ejemplo: `X="casa"`, `Y="cosa"`.
 
-![CasaCosaEjecucion](./Imagen/CasaCosaEjecucion.png)
+<p style="text-align:center;"><img src="./Imagen/CasaCosaEjecucion.png" alt="Casa cosa ejecución"></p>
+
 
 Como vemos, la matriz de costos coincide totalmente con la matriz planteada anteriormente, así como el resultado de la ejecución.
 
 Si tomamos un ejemplo de longitud mayor, por ejemplo, con dos cadenas generadas aleatoriamente con 16 caracteres cada una, el resultado que obtenemos es el siguiente:
 
-![EjemploGrande](./Imagen/EjemploGrande.png)
+<p style="text-align:center;"><img src="./Imagen/EjemploGrande.png" alt="Matriz"></p>
 
 De nuevo, podemos comprobar que la matriz es correcta y que la subsecuencia común más larga es la indicada como resultado.
 

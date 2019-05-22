@@ -15,10 +15,11 @@ Grupo: Las Algas
 ---
 
 ## Objetivos
-- Comprender el enfoque de la P.D.
-- Identificar los elementos de la P.D. en un problema concreto.
+
+- Comprender el enfoque de la programación dinámica
+- Identificar los elementos característicos en un problema concreto.
 - Calcular la subsecuencia de caracteres común más larga dadas dos cadenas.
-- Resolver dicho problema aplicando P.D.
+- Resolver dicho problema aplicando este método de programación
 
 ---
 
