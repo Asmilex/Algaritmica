@@ -32,7 +32,18 @@ Grupo: Las Algas
 
 ---
 
+## Por qué aplicamos Programación Dinámica
+
+- Los subproblemas comparten subproblemas.
+
+- La matriz de costos nos ahorra operaciones repetidas.
+
+- Se optiene la solución óptima.
+
+---
+
 ## Método de la P.D.
+
 - **Naturaleza N-etápica**.
 - **Cumplimiento del POB**.
 - **Ecuación de recurrencia**.
@@ -45,44 +56,44 @@ Sean $X[0..n]$ e $Y[0..m]$, entonces
 
 - Si $X[n-1]=Y[m-1]$:
 
-      LCS(X[0..n],Y[0..m])=
-      =LCS(X[0..n-1],Y[0..m-1])+
-       +X[m-1]
+`LCS (X[0..n], Y[0..m]) = LCS (X[0..n-1], Y[0..m-1]) + X[m-1]`
 
 - En otro caso:
 
-      LCS(X[0..n],Y[0..m])=
-      =max(LCS(X[0..n-1],Y[0..m]),
-           LCS(X[0..n],Y[0..m-1]))
+`LCS(X[0..n],Y[0..m]) = max( LCS(X[0..n-1], Y[0..m]), LCS(X[0..n],Y[0..m-1]) )`
+
 ---
 
 ### Código I
-```c++
-cadena LCS (cadena X, cadena Y, entero m, entero n) {
+
+```py
+cadena LCS (cadena X, cadena Y, entero m, entero n):
     si alguna cadena está vacía:
         devolver cadenavacía
+
     si coincide el último carácter:
         devolver LCS(X,Y,m-1,n-1) + último carácter
-    si costos[m-1][n] >= costos[m][n-1]
+
+    si costos[m-1][n] >= costos[m][n-1]:
         devolver LCS(X,Y,m-1;n)
+
     si no:
         devolver LCS(X,Y,m,n-1)
-}
 ```
 
 ---
 
 ### Código II
-```c++
-LCS_coste (cadena X, cadena Y, entero m, entero n) {
-    para cada 0<=i<m
-        para cada 0<=j<n
+
+```py
+LCS_coste (cadena X, cadena Y, entero m, entero n):
+    para cada 0 <= i < m:
+        para cada 0 <= j < n:
             si coincide el carácter:
                 costos[i+1][j+1] = costos[i][j]+1
+
             si no:
-                costos[i+1][j+1] = max(costos[i][j+1],
-                                       costos[i+1][j])
-}
+                costos[i+1][j+1] = max( costos[i][j+1], costos[i+1][j] )
 ```
 
 ---
@@ -105,17 +116,16 @@ LCS_coste (cadena X, cadena Y, entero m, entero n) {
 
 ---
 
-### Conclusiones I
+### Conclusiones
 
-- En este problema la P.D. tiene cosas en común con DyV.
-- Usamos PD porque los subproblemas comparten subproblemas.
-- Se optiene la solución optimal.
-- Gran uso de recursos (memoria).
+- ¡Solución óptima de forma sencilla!
+
+- Metodología similara a Divide y Vencerás en este problema.
 
 ---
 
-### Conclusiones II
+### Problemas encontrados
 
-- La matriz de costos nos ahorra operaciones repetidas.
-- Se progresa etapa por etapa con subproblemas que se diferencian entre si en una unidad en sus tamaños.
 - La recurrencia puede ser compleja si el tamaño de las cadenas es grande y tienen pocos elementos en común.
+
+- Gran uso de recursos (memoria).
