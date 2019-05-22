@@ -54,7 +54,11 @@ Grupo: Las Algas
 ### Ecuación recurrente
 Sean $X[0..n]$ e $Y[0..m]$, entonces
 
-$$LCS(X[0..n],Y[0..m])=\begin{cases}LCS(X[0..n-1],Y[0..m-1])+X[m-1] \quad\quad\quad\quad\quad\quad\quad\quad\quad \text{si }X[n-1]=Y[m-1] \\\max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1])) \quad \text{  en otro caso}\end{cases}$$
+
+$$LCS(X[0..n],Y[0..m])=$$
+
+<p style="text-align:center;">$$\begin{cases}LCS(X[0..n-1],Y[0..m-1])+X[m-1] \\\ \quad\quad \text{si }X[n-1]=Y[m-1] \\\\\\\ \max(LCS(X[0..n-1],Y[0..m]),LCS(X[0..n],Y[0..m-1]))\end{cases}$$</p>
+
 
 ---
 
